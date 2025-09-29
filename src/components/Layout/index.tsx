@@ -1,9 +1,18 @@
-import React from 'react';
-import { Layout as AntLayout, Menu, Button, Switch } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined, SunOutlined, MoonOutlined, HomeOutlined, DatabaseOutlined, LockOutlined, CodeOutlined } from '@ant-design/icons';
-import { Outlet, Link } from 'react-router-dom';
-import { observer } from 'mobx-react-lite';
-import { themeStore } from '../../store';
+import React from "react";
+import { Layout as AntLayout, Menu, Button, Switch } from "antd";
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  SunOutlined,
+  MoonOutlined,
+  HomeOutlined,
+  DatabaseOutlined,
+  LockOutlined,
+  CodeOutlined,
+} from "@ant-design/icons";
+import { Outlet, Link } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import { themeStore } from "../../store";
 
 const { Header, Sider, Content, Footer } = AntLayout;
 
@@ -27,31 +36,33 @@ const AppLayout: React.FC = () => {
         className="bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800"
       >
         <div className="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-800">
-          <h1 className={`text-xl font-bold ${collapsed ? 'hidden' : 'block'}`}>ToolHub</h1>
-          {collapsed && <CodeOutlined size={24} />}
+          <h1 className={`logo text-xl font-bold ${collapsed ? "hidden" : "block"}`}>
+           ToolHub
+          </h1>
+          {collapsed && <div className="logo collapsed"/>}
         </div>
         <Menu
           mode="inline"
-          defaultSelectedKeys={['home']}
+          defaultSelectedKeys={["home"]}
           className="h-[calc(100vh-4rem)] border-0"
           items={[
             {
-              key: 'home',
+              key: "home",
               icon: <HomeOutlined />,
               label: <Link to="/">首页</Link>,
             },
             {
-              key: 'data-tools',
+              key: "data-tools",
               icon: <DatabaseOutlined />,
               label: <Link to="/data-tools">数据处理</Link>,
             },
             {
-              key: 'encryption-tools',
+              key: "encryption-tools",
               icon: <LockOutlined />,
               label: <Link to="/encryption-tools">编码加密</Link>,
             },
             {
-              key: 'dev-tools',
+              key: "dev-tools",
               icon: <CodeOutlined />,
               label: <Link to="/dev-tools">开发辅助</Link>,
             },
@@ -66,7 +77,9 @@ const AppLayout: React.FC = () => {
             onClick={toggleCollapsed}
             className="mr-2"
           />
-          <div className="text-lg font-medium">ToolHub</div>
+          <div className="text-lg font-medium">
+            <img src="" alt="" />
+          </div>
           <div className="flex items-center">
             <Switch
               checked={themeStore.isDarkMode}

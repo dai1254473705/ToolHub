@@ -6,8 +6,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -32,7 +32,18 @@ body {
 .dark .tool-card:hover {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
-
+.logo {
+  background: url(/src/assets/toolhub.png) no-repeat center center;
+  background-size: 40px;
+  width: 40px;
+  height: 40px;
+  padding-left: 45px;
+  line-height: 40px;
+  margin-right: 60px;
+  &.collapsed {
+    margin: 0;
+  }
+}
 /* 加载动画 */
 @keyframes spin {
   from {
