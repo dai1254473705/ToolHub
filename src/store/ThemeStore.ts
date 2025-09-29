@@ -1,7 +1,7 @@
 /*
- * @Author: daiyunzhou daiyunz@chanjet.com
+ * @Author: daiyunzhou daiyunz@qq.com
  * @Date: 2025-09-29 20:28:17
- * @LastEditors: daiyunzhou daiyunz@chanjet.com
+ * @LastEditors: daiyunzhou daiyunz@qq.com
  * @LastEditTime: 2025-09-29 20:28:47
  * @Description: 主题状态管理
  */

@@ -1,7 +1,7 @@
 /*
- * @Author: daiyunzhou daiyunz@chanjet.com
+ * @Author: daiyunzhou daiyunz@qq.com
  * @Date: 2025-09-29 20:29:32
- * @LastEditors: daiyunzhou daiyunz@chanjet.com
+ * @LastEditors: daiyunzhou daiyunz@qq.com
  * @LastEditTime: 2025-09-29 20:29:49
  * @Description: 工具使用历史记录管理
  */

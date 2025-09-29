@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-const Loading = () => {
+const Loading = ({ className }: { className?: string }) => {
   return (
-    <StyledWrapper>
+    <StyledWrapper className={className}>
       <div aria-label="Orange and tan hamster running in a metal wheel" role="img" className="wheel-and-hamster">
         <div className="wheel" />
         <div className="hamster">

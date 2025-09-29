@@ -4,6 +4,7 @@ import NotFound from '../pages/NotFound';
 import DataTools from '../pages/tools/DataTools';
 import EncryptionTools from '../pages/tools/EncryptionTools';
 import DevTools from '../pages/tools/DevTools';
+import FaviconGenerator from '../pages/tools/FaviconGenerator';
 import Layout from '../components/Layout';
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: '/dev-tools',
         element: <DevTools />,
+      },
+      {
+        path: '/favicon-generator',
+        element: <FaviconGenerator />,
       },
       {
         path: '*',

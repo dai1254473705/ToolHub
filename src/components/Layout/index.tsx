@@ -9,10 +9,13 @@ import {
   DatabaseOutlined,
   LockOutlined,
   CodeOutlined,
+  PictureOutlined,
 } from "@ant-design/icons";
 import { Outlet, Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { themeStore } from "../../store";
+import Loading from "../Loading";
+import 'src/components/Layout/index.less';
 
 const { Header, Sider, Content, Footer } = AntLayout;
 
@@ -66,6 +69,11 @@ const AppLayout: React.FC = () => {
               icon: <CodeOutlined />,
               label: <Link to="/dev-tools">开发辅助</Link>,
             },
+            {
+              key: "favicon-generator",
+              icon: <PictureOutlined />,
+              label: <Link to="/favicon-generator">Favicon生成</Link>,
+            },
           ]}
         />
       </Sider>
@@ -78,7 +86,7 @@ const AppLayout: React.FC = () => {
             className="mr-2"
           />
           <div className="text-lg font-medium">
-            <img src="" alt="" />
+            <Loading className="top-loading"/>
           </div>
           <div className="flex items-center">
             <Switch
