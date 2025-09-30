@@ -80,6 +80,11 @@ const AppLayout: React.FC = () => {
               label: <Link to="/favicon-generator">Favicon生成</Link>,
             },
             {
+              key: "json-diff",
+              icon: <CodeOutlined />,
+              label: <Link to="/tools/json-diff">JSON对比</Link>,
+            },
+            {
               key: "json-editor",
               icon: <CodeOutlined />,
               label: <Link to="/tools/json-editor">JSON格式化</Link>,

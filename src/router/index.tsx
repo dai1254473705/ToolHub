@@ -8,6 +8,7 @@ import FaviconGenerator from '../pages/tools/FaviconGenerator';
 import TodoList from '../pages/tools/TodoList';
 import Layout from '../components/Layout';
 import JSONEditor from '../pages/tools/JSONEditor';
+import JSONDiff from '../pages/tools/JSONDiff';
 
 const router = createBrowserRouter([
   { 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
        {
         path: '/tools/json-editor',
         element: <JSONEditor />,
+      },
+      {
+        path: '/tools/json-diff',
+        element: <JSONDiff />,
       },
       { 
         path: '*',

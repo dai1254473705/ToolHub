@@ -1,0 +1,129 @@
+.json-diff-container {
+  padding: 20px;
+  height: 100%;
+  overflow: hidden;
+}
+
+.json-diff-controls {
+  margin-bottom: 20px;
+}
+
+.json-diff-grid {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  height: 50vh;
+}
+
+.json-diff-results {
+  margin-top: 30px;
+}
+
+.json-diff-results-grid {
+  display: flex;
+  gap: 20px;
+  height: 40vh;
+}
+
+.json-diff-grid > .ant-card,
+.json-diff-results-grid > .ant-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.divider {
+  background-color: #f0f0f0;
+  height: auto;
+  margin: 0;
+}
+
+.json-input {
+  width: 100%;
+  height: 300px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 12px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  resize: none;
+  outline: none;
+}
+
+.json-input:focus {
+  border-color: #1890ff;
+}
+
+.error-card {
+  border-color: #ff4d4f;
+}
+
+.error-message {
+  color: #ff4d4f;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.diff-result-card {
+  position: relative;
+}
+
+.diff-result-content {
+  height: 300px;
+  overflow-y: auto;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  background-color: #fafafa;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+}
+
+.diff-line {
+  display: flex;
+  padding: 4px 8px;
+  border-bottom: 1px solid #f0f0f0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.diff-line:last-child {
+  border-bottom: none;
+}
+
+.diff-same {
+  background-color: #ffffff;
+}
+
+.diff-different {
+  background-color: #fff1f0;
+  color: #ff4d4f;
+}
+
+.line-number {
+  display: inline-block;
+  width: 40px;
+  text-align: right;
+  margin-right: 16px;
+  color: #999;
+  font-size: 12px;
+  user-select: none;
+}
+
+.line-content {
+  flex: 1;
+}
+
+/* 适配不同屏幕尺寸 */
+@media (max-width: 768px) {
+  .json-diff-grid,
+  .json-diff-results-grid {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .divider {
+    width: 100%;
+    height: 1px;
+  }
+}
