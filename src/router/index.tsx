@@ -7,6 +7,7 @@ import DevTools from '../pages/tools/DevTools';
 import FaviconGenerator from '../pages/tools/FaviconGenerator';
 import TodoList from '../pages/tools/TodoList';
 import Layout from '../components/Layout';
+import JSONEditor from '../pages/tools/JSONEditor';
 
 const router = createBrowserRouter([
   { 
@@ -37,10 +38,15 @@ const router = createBrowserRouter([
         path: '/todo-list',
         element: <TodoList />
       },
+       {
+        path: '/tools/json-editor',
+        element: <JSONEditor />,
+      },
       { 
         path: '*',
         element: <NotFound />
-      }
+      },
+     
     ]
   }
 ]);

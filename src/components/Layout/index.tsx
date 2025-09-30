@@ -10,13 +10,13 @@ import {
   LockOutlined,
   CodeOutlined,
   PictureOutlined,
-  CheckCircleOutlined
+  CheckCircleOutlined,
 } from "@ant-design/icons";
 import { Outlet, Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { themeStore } from "../../store";
 import Loading from "../Loading";
-import 'src/components/Layout/index.less';
+import "src/components/Layout/index.less";
 
 const { Header, Sider, Content, Footer } = AntLayout;
 
@@ -40,10 +40,14 @@ const AppLayout: React.FC = () => {
         className="bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800"
       >
         <div className="flex items-center justify-center h-16 border-b border-gray-200 dark:border-gray-800">
-          <h1 className={`logo text-xl font-bold ${collapsed ? "hidden" : "block"}`}>
-           ToolHub
+          <h1
+            className={`logo text-xl font-bold ${
+              collapsed ? "hidden" : "block"
+            }`}
+          >
+            ToolHub
           </h1>
-          {collapsed && <div className="logo collapsed"/>}
+          {collapsed && <div className="logo collapsed" />}
         </div>
         <Menu
           mode="inline"
@@ -75,10 +79,13 @@ const AppLayout: React.FC = () => {
               icon: <PictureOutlined />,
               label: <Link to="/favicon-generator">Favicon生成</Link>,
             },
-            // 移除错误的导入语句
-            
+            {
+              key: "json-editor",
+              icon: <CodeOutlined />,
+              label: <Link to="/tools/json-editor">JSON格式化</Link>,
+            },
             // 在Menu的items数组中添加
-            {              
+            {
               key: "todo-list",
               icon: <CheckCircleOutlined />,
               label: <Link to="/todo-list">任务管理</Link>,
@@ -95,7 +102,7 @@ const AppLayout: React.FC = () => {
             className="mr-2"
           />
           <div className="text-lg font-medium">
-            <Loading className="top-loading"/>
+            <Loading className="top-loading" />
           </div>
           <div className="flex items-center">
             <Switch
