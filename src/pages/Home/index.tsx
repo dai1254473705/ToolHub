@@ -13,7 +13,6 @@ const Home: React.FC = () => {
         <Title level={1}>欢迎使用 ToolHub</Title>
         <Paragraph>一站式在线工具集合，为开发者和数据处理人员提供便捷服务</Paragraph>
       </div>
-      <Loader/>
       <Row gutter={[16, 16]}>
         <Col xs={24} sm={12} md={8}>
           <Card className="tool-card h-full" bordered={false} hoverable>

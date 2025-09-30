@@ -10,6 +10,7 @@ import {
   LockOutlined,
   CodeOutlined,
   PictureOutlined,
+  CheckCircleOutlined
 } from "@ant-design/icons";
 import { Outlet, Link } from "react-router-dom";
 import { observer } from "mobx-react-lite";
@@ -73,6 +74,14 @@ const AppLayout: React.FC = () => {
               key: "favicon-generator",
               icon: <PictureOutlined />,
               label: <Link to="/favicon-generator">Favicon生成</Link>,
+            },
+            // 移除错误的导入语句
+            
+            // 在Menu的items数组中添加
+            {              
+              key: "todo-list",
+              icon: <CheckCircleOutlined />,
+              label: <Link to="/todo-list">任务管理</Link>,
             },
           ]}
         />
