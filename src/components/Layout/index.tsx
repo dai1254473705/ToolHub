@@ -72,7 +72,7 @@ const AppLayout: React.FC = () => {
             {
               key: "dev-tools",
               icon: <CodeOutlined />,
-              label: <Link to="/dev-tools">开发辅助</Link>,
+              label: <Link to="/dev-tools">开发工具</Link>,
             },
             {
               key: "favicon-generator",

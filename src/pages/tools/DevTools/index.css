@@ -1,0 +1,82 @@
+.dev-tools-container {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.dev-tools-tabs {
+  margin-top: 20px;
+}
+
+.dev-tools-tabs .ant-tabs-content {
+  margin-top: 16px;
+}
+
+.dev-tools-tabs .ant-card {
+  margin-bottom: 20px;
+}
+
+/* 颜色转换工具样式 */
+.color-converter-container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.color-preview {
+  width: 200px;
+  height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.color-inputs {
+  flex: 1;
+}
+
+/* 时间戳转换工具样式 */
+.timestamp-converter-container {
+  padding: 10px 0;
+}
+
+/* Base64编解码工具样式 */
+.base64-converter-container {
+  padding: 10px 0;
+}
+
+/* JSON格式化工具样式 */
+.json-formatter-container {
+  padding: 10px 0;
+}
+
+.error-input {
+  border-color: #ff4d4f;
+}
+
+.error-input:focus {
+  border-color: #ff4d4f;
+  box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+}
+
+.error-message {
+  color: #ff4d4f;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.monospace {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+}
+
+/* 适配不同屏幕尺寸 */
+@media (max-width: 768px) {
+  .color-converter-container {
+    flex-direction: column;
+  }
+  
+  .color-preview {
+    width: 100%;
+    height: 100px;
+  }
+}
