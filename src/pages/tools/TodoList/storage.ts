@@ -1,5 +1,5 @@
 import localforage from 'localforage';
-import type { TodoItem } from './types';
+import type { TodoItemType } from './types';
 
 // 配置localforage
 localforage.config({
@@ -11,9 +11,9 @@ localforage.config({
 const TODO_ITEMS_KEY = 'todo_items';
 
 // 获取所有任务项
-export const getAllTodos = async (): Promise<TodoItem[]> => {
+export const getAllTodos = async (): Promise<TodoItemType[]> => {
   try {
-    const todos = await localforage.getItem<TodoItem[]>(TODO_ITEMS_KEY);
+    const todos = await localforage.getItem<TodoItemType[]>(TODO_ITEMS_KEY);
     return todos || [];
   } catch (error) {
     console.error('Error getting todos:', error);
@@ -22,10 +22,10 @@ export const getAllTodos = async (): Promise<TodoItem[]> => {
 };
 
 // 添加任务项
-export const addTodo = async (todo: Omit<TodoItem, 'id' | 'createdAt' | 'updatedAt' | 'completed'>): Promise<TodoItem> => {
+export const addTodo = async (todo: Omit<TodoItemType, 'id' | 'createdAt' | 'updatedAt' | 'completed'>): Promise<TodoItemType> => {
   try {
     const todos = await getAllTodos();
-    const newTodo: TodoItem = {
+    const newTodo: TodoItemType = {
       ...todo,
       id: Date.now().toString(),
       completed: false,
@@ -42,18 +42,18 @@ export const addTodo = async (todo: Omit<TodoItem, 'id' | 'createdAt' | 'updated
 };
 
 // 更新任务项
-export const updateTodo = async (id: string, updates: Partial<TodoItem>): Promise<TodoItem | null> => {
+export const updateTodo = async (id: string, updates: Partial<TodoItemType>): Promise<TodoItemType | null> => {
   try {
     const todos = await getAllTodos();
     const index = todos.findIndex(todo => todo.id === id);
     if (index === -1) return null;
-    
+
     todos[index] = {
       ...todos[index],
       ...updates,
       updatedAt: new Date(),
     };
-    
+
     await localforage.setItem(TODO_ITEMS_KEY, todos);
     return todos[index];
   } catch (error) {
@@ -68,7 +68,7 @@ export const deleteTodo = async (id: string): Promise<boolean> => {
     const todos = await getAllTodos();
     const filteredTodos = todos.filter(todo => todo.id !== id);
     if (todos.length === filteredTodos.length) return false;
-    
+
     await localforage.setItem(TODO_ITEMS_KEY, filteredTodos);
     return true;
   } catch (error) {

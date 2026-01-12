@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Card, Divider, Typography, Button, message, Space } from 'antd';
-import { CopyOutlined, ClearOutlined, DownloadOutlined, UploadOutlined, FileSyncOutlined } from '@ant-design/icons';
+import { ClearOutlined, DownloadOutlined, UploadOutlined, FileSyncOutlined } from '@ant-design/icons';
 import './index.css';
 
 const { Title } = Typography;
@@ -128,15 +128,6 @@ const JSONDiff: React.FC = () => {
     }
   };
 
-  // 复制功能
-  const handleCopy = (text: string) => {
-    if (text) {
-      navigator.clipboard.writeText(text).then(() => {
-        message.success('已复制到剪贴板');
-      });
-    }
-  };
-
   // 下载功能
   const handleDownload = (text: string, fileName: string) => {
     if (!text) return;
@@ -171,7 +162,7 @@ const JSONDiff: React.FC = () => {
   };
 
   // 触发上传按钮点击
-  const handleUploadClick = (fileInputRef: React.RefObject<HTMLInputElement>) => {
+  const handleUploadClick = (fileInputRef: React.RefObject<HTMLInputElement | null>) => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }

@@ -1,59 +1,29 @@
+/**
+ * 路由配置
+ */
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from '../pages/Home';
-import NotFound from '../pages/NotFound';
-import DataTools from '../pages/tools/DataTools';
-import EncryptionTools from '../pages/tools/EncryptionTools';
-import DevTools from '../pages/tools/DevTools';
-import FaviconGenerator from '../pages/tools/FaviconGenerator';
-import TodoList from '../pages/tools/TodoList';
-import Layout from '../components/Layout';
-import JSONEditor from '../pages/tools/JSONEditor';
-import JSONDiff from '../pages/tools/JSONDiff';
+import { Suspense } from 'react';
+import { Spin } from 'antd';
+import Layout from '@/components/Layout';
+import { routes } from './routes';
 
+// 构建完整路由（包含 Layout）
 const router = createBrowserRouter([
-  { 
+  {
     path: '/',
-    element: <Layout />,
-    children: [
-      { 
-        path: '/',
-        element: <Home />
-      },
-      { 
-        path: '/data-tools',
-        element: <DataTools />
-      },
-      { 
-        path: '/encryption-tools',
-        element: <EncryptionTools />
-      },
-      { 
-        path: '/dev-tools',
-        element: <DevTools />
-      },
-      { 
-        path: '/favicon-generator',
-        element: <FaviconGenerator />
-      },
-      { 
-        path: '/todo-list',
-        element: <TodoList />
-      },
-       {
-        path: '/tools/json-editor',
-        element: <JSONEditor />,
-      },
-      {
-        path: '/tools/json-diff',
-        element: <JSONDiff />,
-      },
-      { 
-        path: '*',
-        element: <NotFound />
-      },
-     
-    ]
-  }
+    element: (
+      <Suspense
+        fallback={
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+            <Spin size="large" />
+          </div>
+        }
+      >
+        <Layout />
+      </Suspense>
+    ),
+    children: routes,
+  },
 ]);
 
 export default function AppRouter() {

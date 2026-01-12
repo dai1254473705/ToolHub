@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Typography, Upload, Button, Card, Row, Col, Empty, Spin, message } from 'antd';
 import { UploadOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
-import type { UploadProps } from 'antd';
+import type { UploadProps, UploadFile } from 'antd';
 
 const { Title, Text } = Typography;
 const { Dragger } = Upload;
@@ -219,7 +219,7 @@ const FaviconGenerator: React.FC = () => {
                   {SIZES.map(size => (
                     <div key={size} className="text-center">
                       <img
-                        src={generatedIcons[size] || null} 
+                        src={generatedIcons[size] || undefined}
                         alt={`${size}x${size}`}
                         className="border border-gray-300 rounded mx-auto"
                         width={size * 2}

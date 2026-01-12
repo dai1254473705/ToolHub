@@ -1,0 +1,68 @@
+.color-converter {
+  max-width: 1000px;
+  margin: 0 auto;
+
+  .preview-card {
+    margin-top: 24px;
+
+    .color-preview {
+      height: 120px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #f0f0f0;
+      transition: all 0.3s;
+
+      .dark & {
+        border-color: #303030;
+      }
+
+      &:hover {
+        transform: scale(1.02);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
+  .tool-card {
+    margin-top: 24px;
+
+    .color-input {
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+
+      .dark & {
+        border-bottom-color: #303030;
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  .info-card {
+    margin-top: 24px;
+
+    .format-info {
+      > div {
+        margin-bottom: 12px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .color-converter {
+    .color-input {
+      .ant-col {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

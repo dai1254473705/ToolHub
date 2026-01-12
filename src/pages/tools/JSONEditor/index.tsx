@@ -14,10 +14,11 @@ const JSONEditor: React.FC = () => {
   // 添加文件输入框的 ref
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // 处理JSON格式化
-  const handleFormat = () => {
+  // 处理JSON输入变化
+  useEffect(() => {
     if (!jsonInput.trim()) {
-      message.warning('请输入JSON内容');
+      setIsValidJson(null);
+      setFormattedJson('');
       return;
     }
 
@@ -26,12 +27,11 @@ const JSONEditor: React.FC = () => {
       const formatted = JSON.stringify(parsedJson, null, 2);
       setFormattedJson(formatted);
       setIsValidJson(true);
-      message.success('JSON格式化成功');
     } catch (error) {
       setIsValidJson(false);
       message.error(`JSON解析错误: ${error instanceof Error ? error.message : '未知错误'}`);
     }
-  };
+  }, [jsonInput]);
 
   // 清除输入
   const handleClear = () => {

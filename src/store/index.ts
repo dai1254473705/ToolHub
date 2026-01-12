@@ -5,13 +5,14 @@
  * @LastEditTime: 2025-09-29 20:30:43
  * @Description: 导出所有store
  */
-import {HistoryStore} from './HistoryStore';
-import {ThemeStore} from './ThemeStore';
-
+import { ThemeStore } from './ThemeStore';
+import { HistoryStore } from './HistoryStore';
+import { favoriteStore } from './FavoriteStore';
+import { recentStore } from './RecentStore';
 
 // 创建store实例
 const themeStore = new ThemeStore();
 const historyStore = new HistoryStore();
 
 // 导出所有store
-export { themeStore, historyStore };
+export { themeStore, historyStore, favoriteStore, recentStore };

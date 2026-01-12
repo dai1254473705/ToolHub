@@ -1,0 +1,49 @@
+.base64-tool {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .tool-card {
+    margin-top: 24px;
+  }
+
+  .info-card {
+    margin-top: 24px;
+
+    ul {
+      padding-left: 20px;
+
+      li {
+        margin-bottom: 8px;
+        color: #595959;
+
+        .dark & {
+          color: #ffffffa6;
+        }
+      }
+    }
+  }
+
+  .input-section,
+  .output-section {
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+  }
+
+  .action-section {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .base64-tool {
+    .section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+  }
+}

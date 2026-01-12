@@ -535,7 +535,6 @@ const Base64Converter: React.FC = () => {
           readOnly
           placeholder={isEncode ? "Base64编码结果" : "解码结果"}
           rows={4}
-          type={showPassword ? "text" : "password"}
         />
         <Button 
           onClick={() => copyToClipboard(output)}
