@@ -1,0 +1,14 @@
+# robots.txt for ToolHub
+
+User-agent: *
+Allow: /
+
+# Disallow specific paths if needed
+# Disallow: /admin/
+# Disallow: /api/
+
+# Sitemap
+Sitemap: https://dai1254473705.github.io/ToolHub/sitemap.xml
+
+# Crawl delay (optional)
+# Crawl-delay: 1

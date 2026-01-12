@@ -1,0 +1,78 @@
+/**
+ * Unicode 转换工具样式
+ */
+.unicode-tool {
+  .tool-card {
+    margin-bottom: 24px;
+  }
+
+  .input-section,
+  .output-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .unicode-output {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    word-break: break-all;
+  }
+
+  .char-info {
+    margin-top: 16px;
+    padding: 12px;
+    background: rgba(59, 130, 246, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+
+    .char-item {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      padding: 4px 8px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+
+      .dark & {
+        background: #0f172a;
+        border-color: #334155;
+      }
+    }
+  }
+
+  .info-card {
+    h4 {
+      margin-bottom: 8px;
+      color: #1e293b;
+
+      .dark & {
+        color: #f1f5f9;
+      }
+    }
+
+    ul {
+      padding-left: 20px;
+
+      li {
+        margin-bottom: 8px;
+        line-height: 1.6;
+        color: #64748b;
+        font-family: 'JetBrains Mono', monospace;
+
+        .dark & {
+          color: #94a3b8;
+        }
+      }
+    }
+  }
+}

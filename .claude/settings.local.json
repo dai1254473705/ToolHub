@@ -6,7 +6,8 @@
       "Bash(git push:*)",
       "Skill(ui-ux-pro-max)",
       "Bash(python3:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(pnpm add:*)"
     ]
   }
 }

@@ -35,6 +35,16 @@ export const TOOLS: Tool[] = [
     icon: 'DiffOutlined',
     tags: ['JSON', '对比', '差异'],
   },
+  {
+    id: 'regex-tester',
+    name: '正则表达式测试',
+    description: '实时测试正则表达式，高亮匹配结果',
+    category: 'code',
+    path: '/tools/regex-tester',
+    icon: 'SearchOutlined',
+    tags: ['正则', 'Regex', '测试'],
+    isHot: true,
+  },
 
   // ========== 转换工具 ==========
   {
@@ -48,6 +58,15 @@ export const TOOLS: Tool[] = [
     isHot: true,
   },
   {
+    id: 'url-encode',
+    name: 'URL 编解码',
+    description: 'URL 编码和解码',
+    category: 'convert',
+    path: '/tools/url-encode',
+    icon: 'LinkOutlined',
+    tags: ['URL', '编码', '解码'],
+  },
+  {
     id: 'timestamp',
     name: '时间戳转换',
     description: 'Unix 时间戳与日期时间互相转换',
@@ -56,6 +75,37 @@ export const TOOLS: Tool[] = [
     icon: 'ClockCircleOutlined',
     tags: ['时间戳', '日期', '时间'],
     isHot: true,
+  },
+  {
+    id: 'unicode',
+    name: 'Unicode 转换',
+    description: '中文和 Unicode 互相转换',
+    category: 'convert',
+    path: '/tools/unicode',
+    icon: 'FontColorsOutlined',
+    tags: ['Unicode', '中文', '转换'],
+  },
+
+  // ========== 加密解密 ==========
+  {
+    id: 'hash',
+    name: '哈希计算',
+    description: '计算 MD5、SHA-1、SHA-256 等哈希值',
+    category: 'crypto',
+    path: '/tools/hash',
+    icon: 'SafetyOutlined',
+    tags: ['MD5', 'SHA', '哈希'],
+    isHot: true,
+  },
+  {
+    id: 'uuid-generator',
+    name: 'UUID 生成器',
+    description: '生成 UUID v1 和 v4',
+    category: 'crypto',
+    path: '/tools/uuid-generator',
+    icon: 'BlockOutlined',
+    tags: ['UUID', '生成器', '唯一标识'],
+    isNew: true,
   },
 
   // ========== 图片处理 ==========
@@ -68,6 +118,44 @@ export const TOOLS: Tool[] = [
     icon: 'PictureOutlined',
     tags: ['Favicon', '图标', '生成'],
     isHot: true,
+  },
+  {
+    id: 'image-base64',
+    name: '图片转 Base64',
+    description: '将图片转换为 Base64 编码',
+    category: 'image',
+    path: '/tools/image-base64',
+    icon: 'FileImageOutlined',
+    tags: ['Base64', '图片', '编码'],
+  },
+
+  // ========== 文本处理 ==========
+  {
+    id: 'text-diff',
+    name: '文本对比',
+    description: '对比两段文本的差异',
+    category: 'text',
+    path: '/tools/text-diff',
+    icon: 'DiffOutlined',
+    tags: ['对比', '差异', '文本'],
+  },
+  {
+    id: 'text-dedup',
+    name: '文本去重',
+    description: '去除文本中的重复行',
+    category: 'text',
+    path: '/tools/text-dedup',
+    icon: 'DeleteOutlined',
+    tags: ['去重', '文本', '清理'],
+  },
+  {
+    id: 'markdown-editor',
+    name: 'Markdown 编辑器',
+    description: 'Markdown 实时预览编辑器',
+    category: 'text',
+    path: '/tools/markdown-editor',
+    icon: 'EditOutlined',
+    tags: ['Markdown', '编辑器', '预览'],
   },
 
   // ========== 颜色工具 ==========
@@ -91,6 +179,16 @@ export const TOOLS: Tool[] = [
     path: '/tools/todo-list',
     icon: 'CheckCircleOutlined',
     tags: ['Todo', '任务', '管理'],
+    isHot: true,
+  },
+  {
+    id: 'qrcode-generator',
+    name: '二维码生成',
+    description: '生成二维码图片',
+    category: 'productivity',
+    path: '/tools/qrcode-generator',
+    icon: 'QrcodeOutlined',
+    tags: ['二维码', 'QR Code', '生成'],
     isHot: true,
   },
 ];
