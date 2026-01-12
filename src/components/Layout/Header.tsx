@@ -1,38 +1,25 @@
 /**
- * Header 组件
+ * Header 组件 - 简洁的顶部导航
  */
 import React from 'react';
-import { Layout, Input, Switch, Button, Space } from 'antd';
+import { Layout, Button, Space } from 'antd';
 import {
   MoonOutlined,
   SunOutlined,
-  SearchOutlined,
-  HomeOutlined,
   GithubOutlined,
 } from '@ant-design/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { themeStore } from '@/store';
 import './Header.less';
 
 const { Header } = Layout;
-const { Search } = Input;
 
 interface AppHeaderProps {
   showSearch?: boolean;
 }
 
-const AppHeader: React.FC<AppHeaderProps> = ({ showSearch = true }) => {
-  const navigate = useNavigate();
-  const [searchValue, setSearchValue] = React.useState('');
-
-  const handleSearch = (value: string) => {
-    if (value.trim()) {
-      // 跳转到首页并传递搜索参数
-      navigate(`/?search=${encodeURIComponent(value.trim())}`);
-    }
-  };
-
+const AppHeader: React.FC<AppHeaderProps> = () => {
   const handleThemeToggle = () => {
     themeStore.toggleDarkMode();
   };
@@ -47,40 +34,20 @@ const AppHeader: React.FC<AppHeaderProps> = ({ showSearch = true }) => {
           </Link>
         </div>
 
-        {showSearch && (
-          <div className="header-center">
-            <Search
-              placeholder="搜索工具..."
-              allowClear
-              enterButton={<SearchOutlined />}
-              size="large"
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              onSearch={handleSearch}
-              className="search-bar"
-              style={{ width: 400 }}
-            />
-          </div>
-        )}
-
         <div className="header-right">
           <Space size="middle">
-            <Link to="/">
-              <Button type="text" icon={<HomeOutlined />}>
-                首页
-              </Button>
-            </Link>
-            <Switch
-              checked={themeStore.isDarkMode}
-              onChange={handleThemeToggle}
-              checkedChildren={<MoonOutlined />}
-              unCheckedChildren={<SunOutlined />}
+            <Button
+              type="text"
+              icon={themeStore.isDarkMode ? <SunOutlined /> : <MoonOutlined />}
+              onClick={handleThemeToggle}
+              className="theme-toggle"
             />
             <Button
               type="text"
               icon={<GithubOutlined />}
               href="https://github.com/yourusername/ToolHub"
               target="_blank"
+              className="github-link"
             />
           </Space>
         </div>

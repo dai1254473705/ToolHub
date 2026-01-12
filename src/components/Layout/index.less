@@ -1,34 +1,80 @@
+/**
+ * 主布局样式 - 现代玻璃拟态设计
+ */
+
 .app-layout {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--color-bg-base, #ffffff);
+  transition: background 0.3s ease;
 
-  .app-content {
-    flex: 1;
-    background: #f5f5f5;
-    padding: 24px 0;
+  // 深色模式
+  &.dark {
+    background: #0f172a;
+  }
+}
 
-    .dark & {
-      background: #0a0a0a;
-    }
+// 顶部导航栏包装器
+.header-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s ease;
 
-    .content-wrapper {
-      max-width: 1600px;
-      margin: 0 auto;
-      padding: 0 24px;
-      min-height: calc(100vh - 64px - 70px);
+  .dark & {
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+  }
+}
+
+// 主内容区域
+.app-content {
+  flex: 1;
+  background: transparent;
+  overflow-x: hidden;
+
+  .dark & {
+    background: transparent;
+  }
+}
+
+.content-wrapper {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 24px;
+  min-height: calc(100vh - 64px - 70px);
+
+  @media (max-width: 768px) {
+    padding: 16px;
+  }
+}
+
+// 响应式设计
+@media (max-width: 1024px) {
+  .app-layout {
+    .app-content {
+      margin-left: 0;
     }
   }
 }
 
-@media (max-width: 768px) {
-  .app-layout {
-    .app-content {
-      padding: 16px 0;
+// 动画和过渡
+@media (prefers-reduced-motion: no-preference) {
+  .app-layout,
+  .header-wrapper,
+  .app-content {
+    transition: all 0.3s ease;
+  }
+}
 
-      .content-wrapper {
-        padding: 0 16px;
-      }
-    }
+@media (prefers-reduced-motion: reduce) {
+  .app-layout,
+  .header-wrapper,
+  .app-content {
+    transition: none;
   }
 }

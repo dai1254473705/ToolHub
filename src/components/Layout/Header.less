@@ -1,54 +1,52 @@
+/**
+ * Header 样式 - 玻璃拟态设计
+ */
+
 .app-header {
-  background: #fff;
-  border-bottom: 1px solid #f0f0f0;
+  background: transparent;
   padding: 0;
   height: 64px;
   line-height: 64px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-
-  .dark & {
-    background: #141414;
-    border-bottom-color: #303030;
-  }
+  display: flex;
+  align-items: center;
+  box-shadow: none;
 
   .header-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    padding: 0 24px;
-    max-width: 1600px;
+    padding: 0 32px;
+    max-width: 100%;
     margin: 0 auto;
   }
 
   .header-left {
     display: flex;
     align-items: center;
-    min-width: 200px;
 
     .logo {
       display: flex;
       align-items: center;
+      gap: 10px;
       text-decoration: none;
-      font-size: 24px;
-      font-weight: 700;
-      color: #1677ff;
-      transition: all 0.3s;
+      transition: all 0.2s ease;
 
       &:hover {
-        transform: scale(1.05);
+        opacity: 0.85;
+        transform: scale(1.02);
       }
 
       .logo-icon {
         font-size: 28px;
-        margin-right: 8px;
+        line-height: 1;
       }
 
       .logo-text {
-        background: linear-gradient(135deg, #1677ff 0%, #52c41a 100%);
+        font-size: 22px;
+        font-weight: 700;
+        font-family: 'Space Grotesk', sans-serif;
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -56,62 +54,116 @@
     }
   }
 
-  .header-center {
-    flex: 1;
+  .header-right {
     display: flex;
-    justify-content: center;
-    max-width: 600px;
+    align-items: center;
+    gap: 8px;
 
-    .search-bar {
-      .ant-input-search {
-        .ant-input {
-          border-radius: 20px;
+    .theme-toggle,
+    .github-link {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #64748b;
+      transition: all 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(59, 130, 246, 0.1);
+        color: #3b82f6;
+        transform: scale(1.05);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .github-link {
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+        color: #0f172a;
+      }
+    }
+  }
+}
+
+// 深色模式
+.dark {
+  .app-header {
+    .header-right {
+      .theme-toggle,
+      .github-link {
+        color: #94a3b8;
+
+        &:hover {
+          background: rgba(59, 130, 246, 0.15);
+          color: #f1f5f9;
         }
+      }
 
-        .ant-input-search-button {
-          border-radius: 0 20px 20px 0;
+      .github-link {
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
         }
       }
     }
   }
-
-  .header-right {
-    display: flex;
-    align-items: center;
-    min-width: 200px;
-    justify-content: flex-end;
-  }
 }
 
+// 响应式设计
 @media (max-width: 768px) {
   .app-header {
     .header-content {
       padding: 0 16px;
     }
 
-    .header-center {
-      display: none;
-    }
-
     .header-left {
-      min-width: auto;
-
       .logo {
-        font-size: 20px;
+        .logo-text {
+          font-size: 18px;
+        }
 
         .logo-icon {
           font-size: 24px;
-          margin-right: 4px;
-        }
-
-        .logo-text {
-          display: none;
         }
       }
     }
 
     .header-right {
-      min-width: auto;
+      gap: 4px;
+
+      .theme-toggle,
+      .github-link {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+// 动画和过渡
+@media (prefers-reduced-motion: no-preference) {
+  .app-header {
+    .logo,
+    .theme-toggle,
+    .github-link {
+      transition: all 0.2s ease;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-header {
+    .logo,
+    .theme-toggle,
+    .github-link {
+      transition: none;
     }
   }
 }
