@@ -1,0 +1,113 @@
+{
+  "app": {
+    "name": "ToolHub",
+    "slogan": "Developer Tools Collection",
+    "description": "Full-featured online development tools for developers and data processors"
+  },
+  "nav": {
+    "home": "Home",
+    "tools": "Tools",
+    "categories": {
+      "code": "Code Processing",
+      "convert": "Converters",
+      "encrypt": "Encryption",
+      "image": "Image Processing",
+      "text": "Text Processing",
+      "color": "Color Tools",
+      "efficiency": "Productivity"
+    }
+  },
+  "tools": {
+    "jsonEditor": {
+      "title": "JSON Editor",
+      "description": "Online JSON editor with formatting, validation, and syntax highlighting"
+    },
+    "jsonDiff": {
+      "title": "JSON Diff",
+      "description": "Compare differences between two JSON files"
+    },
+    "faviconGenerator": {
+      "title": "Favicon Generator",
+      "description": "Generate website favicons online"
+    },
+    "todoList": {
+      "title": "Todo List",
+      "description": "Manage your tasks and todos"
+    },
+    "base64": {
+      "title": "Base64 Encoder/Decoder",
+      "description": "Base64 encoding and decoding tool"
+    },
+    "timestamp": {
+      "title": "Timestamp Converter",
+      "description": "Convert between timestamp and datetime"
+    },
+    "colorConverter": {
+      "title": "Color Converter",
+      "description": "Convert between RGB, HEX, HSL and other color formats"
+    },
+    "uuidGenerator": {
+      "title": "UUID Generator",
+      "description": "Generate various versions of UUID"
+    },
+    "hash": {
+      "title": "Hash Calculator",
+      "description": "Calculate MD5, SHA1, SHA256 and other hash values"
+    },
+    "urlEncode": {
+      "title": "URL Encoder/Decoder",
+      "description": "URL encoding and decoding tool"
+    },
+    "qrcodeGenerator": {
+      "title": "QR Code Generator",
+      "description": "Generate QR codes online"
+    },
+    "regexTester": {
+      "title": "Regex Tester",
+      "description": "Test and validate regular expressions"
+    },
+    "textDedup": {
+      "title": "Text Deduplication",
+      "description": "Remove duplicate lines from text"
+    },
+    "unicode": {
+      "title": "Unicode Converter",
+      "description": "Unicode encoding and decoding tool"
+    },
+    "imageBase64": {
+      "title": "Image to Base64",
+      "description": "Convert images to Base64 encoding"
+    }
+  },
+  "common": {
+    "search": "Search tools...",
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "language": "Language",
+    "settings": "Settings",
+    "about": "About",
+    "copy": "Copy",
+    "copied": "Copied",
+    "clear": "Clear",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "favorite": "Favorite",
+    "recent": "Recent",
+    "allTools": "All Tools",
+    "noResults": "No tools found",
+    "hot": "Hot Tools",
+    "new": "New Tools",
+    "adSpace": "Advertisement"
+  },
+  "footer": {
+    "copyright": "© 2025 ToolHub. All rights reserved.",
+    "github": "GitHub",
+    "about": "About Us",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}

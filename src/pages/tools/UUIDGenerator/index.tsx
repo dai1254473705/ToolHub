@@ -7,7 +7,6 @@ import { CopyOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import './index.less';
 
 const { Title, Text } = Typography;
-const { TextArea } = Input;
 
 const UUIDGenerator: React.FC = () => {
   const [uuids, setUuids] = useState<string[]>([]);
@@ -28,12 +27,6 @@ const UUIDGenerator: React.FC = () => {
     const newUuids = Array.from({ length: count }, () => generateUUIDv4());
     setUuids(newUuids);
     message.success(`已生成 ${count} 个 UUID`);
-  };
-
-  // 复制单个 UUID
-  const handleCopyOne = (uuid: string) => {
-    navigator.clipboard.writeText(uuid);
-    message.success('已复制到剪贴板');
   };
 
   // 复制所有 UUID

@@ -7,7 +7,9 @@
       "Skill(ui-ux-pro-max)",
       "Bash(python3:*)",
       "Bash(npm run build:*)",
-      "Bash(pnpm add:*)"
+      "Bash(pnpm add:*)",
+      "Bash(timeout:*)",
+      "Bash(chmod:*)"
     ]
   }
 }

@@ -3,7 +3,7 @@
  */
 import React, { useState, useRef } from 'react';
 import { Card, Typography, Upload, Button, message, Space, Input, Radio } from 'antd';
-import { UploadOutlined, CopyOutlined, ClearOutlined, FileImageOutlined } from '@ant-design/icons';
+import { UploadOutlined, CopyOutlined, ClearOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
 import './index.less';
 
@@ -122,7 +122,7 @@ const ImageBase64: React.FC = () => {
                     <Button size="small" icon={<CopyOutlined />} onClick={handleCopy}>
                       复制
                     </Button>
-                    <Button size="small} icon={<ClearOutlined />} onClick={handleClear}>
+                    <Button size="small" icon={<ClearOutlined />} onClick={handleClear}>
                       清空
                     </Button>
                   </Space>
@@ -150,11 +150,12 @@ const ImageBase64: React.FC = () => {
         </Title>
         <ul>
           <li>
-            <Text strong>Data URL:</Text> 完整格式，包含
-            <Text code>data:image/png;base64,</Text> 前缀，可直接用于 &lt;img&gt; 标签
+            <Text strong>Data URL: </Text>
+            完整格式，包含<Text code>data:image/png;base64,</Text>前缀，可直接用于 &lt;img&gt; 标签
           </li>
           <li>
-            <Text strong>纯 Base64:</Text> 只包含编码数据，不包含前缀
+            <Text strong>纯 Base64: </Text>
+            只包含编码数据，不包含前缀
           </li>
         </ul>
         <Title level={4} style={{ marginTop: 16 }}>

@@ -2,7 +2,7 @@
  * 正则表达式测试器
  */
 import React, { useState, useMemo, useEffect } from 'react';
-import { Card, Row, Col, Typography, Input, Checkbox, message, Space } from 'antd';
+import { Card, Row, Col, Typography, Input, Checkbox, Space } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import './index.less';
 
@@ -55,12 +55,12 @@ const RegexTester: React.FC = () => {
       } else {
         // 单次匹配
         const match = regex.exec(testStr);
-        if (match) {
+        if (match && match[0]) {
           setMatches([{
             index: 0,
-            match: match[0] || '',
+            match: match[0],
             start: match.index || 0,
-            end: (match.index || 0) + (match[0]?.length || 0),
+            end: (match.index || 0) + match[0].length,
           }]);
         } else {
           setMatches([]);
@@ -89,7 +89,7 @@ const RegexTester: React.FC = () => {
     let result = testString;
     let offset = 0;
 
-    matches.forEach(({ match, start, end }) => {
+    matches.forEach(({ start, end }) => {
       const before = result.slice(0, start + offset);
       const matched = result.slice(start + offset, end + offset);
       const after = result.slice(end + offset);
@@ -213,10 +213,10 @@ const RegexTester: React.FC = () => {
           实用示例
         </Title>
         <ul>
-          <li>邮箱: <Text code>^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</Text></li>
-          <li>手机号: <Text code>^1[3-9]\d{9}$</Text></li>
-          <li>IP地址: <Text code>^(\d{1,3}\.){3}\d{1,3}$</Text></li>
-          <li>URL: <Text code>^https?://[^\s]+$</Text></li>
+          <li>邮箱: <Text code>{`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$`}</Text></li>
+          <li>手机号: <Text code>{`^1[3-9]\\d{9}$`}</Text></li>
+          <li>IP地址: <Text code>{`^(\\d{1,3}\\.){3}\\d{1,3}$`}</Text></li>
+          <li>URL: <Text code>{`^https?://[^\\s]+$`}</Text></li>
         </ul>
       </Card>
     </div>

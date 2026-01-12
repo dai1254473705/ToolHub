@@ -1,14 +1,15 @@
 /**
  * 路由配置
  */
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Spin } from 'antd';
 import Layout from '@/components/Layout';
 import { routes } from './routes';
 
-// 构建完整路由（包含 Layout）
-const router = createBrowserRouter([
+// 使用 HashRouter 以支持 GitHub Pages
+// URL 格式：https://dai1254473705.github.io/ToolHub/#/tools/json-editor
+const router = createHashRouter([
   {
     path: '/',
     element: (

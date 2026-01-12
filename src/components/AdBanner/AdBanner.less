@@ -1,0 +1,91 @@
+.ad-banner {
+  width: 100%;
+  margin: 16px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.ad-banner-horizontal {
+    height: 90px;
+    max-width: 728px;
+  }
+
+  &.ad-banner-vertical {
+    height: 250px;
+    max-width: 300px;
+  }
+
+  &.ad-banner-square {
+    height: 300px;
+    max-width: 300px;
+  }
+
+  .ad-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    border: 2px dashed #d9d9d9;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #1890ff;
+      background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
+    }
+
+    .ad-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #8c8c8c;
+
+      .ad-icon {
+        font-size: 24px;
+      }
+
+      .ad-text {
+        .ad-title {
+          font-weight: 500;
+          font-size: 14px;
+          color: #595959;
+        }
+
+        .ad-desc {
+          font-size: 12px;
+          color: #8c8c8c;
+          margin-top: 4px;
+        }
+      }
+    }
+  }
+}
+
+// 深色模式适配
+.dark .ad-banner {
+  .ad-placeholder {
+    background: linear-gradient(135deg, #1f1f1f 0%, #3a3a3a 100%);
+    border-color: #434343;
+
+    &:hover {
+      border-color: #177ddc;
+      background: linear-gradient(135deg, #111b26 0%, #002c4e 100%);
+    }
+
+    .ad-content {
+      color: #b8b8b8;
+
+      .ad-text {
+        .ad-title {
+          color: #d9d9d9;
+        }
+
+        .ad-desc {
+          color: #b8b8b8;
+        }
+      }
+    }
+  }
+}

@@ -10,7 +10,9 @@ import {
 } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
+import { useTranslation } from 'react-i18next';
 import { themeStore } from '@/store';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import './Header.less';
 
 const { Header } = Layout;
@@ -20,6 +22,7 @@ interface AppHeaderProps {
 }
 
 const AppHeader: React.FC<AppHeaderProps> = () => {
+  const { t } = useTranslation();
   const handleThemeToggle = () => {
     themeStore.toggleDarkMode();
   };
@@ -30,12 +33,13 @@ const AppHeader: React.FC<AppHeaderProps> = () => {
         <div className="header-left">
           <Link to="/" className="logo">
             <span className="logo-icon">⚡</span>
-            <span className="logo-text">ToolHub</span>
+            <span className="logo-text">{t('app.name')}</span>
           </Link>
         </div>
 
         <div className="header-right">
           <Space size="middle">
+            <LanguageSwitcher />
             <Button
               type="text"
               icon={themeStore.isDarkMode ? <SunOutlined /> : <MoonOutlined />}
@@ -45,7 +49,7 @@ const AppHeader: React.FC<AppHeaderProps> = () => {
             <Button
               type="text"
               icon={<GithubOutlined />}
-              href="https://github.com/yourusername/ToolHub"
+              href="https://github.com/dai1254473705/ToolHub"
               target="_blank"
               className="github-link"
             />

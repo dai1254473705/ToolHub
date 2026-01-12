@@ -1,0 +1,113 @@
+{
+  "app": {
+    "name": "ToolHub",
+    "slogan": "开发者工具集合",
+    "description": "全功能在线开发工具集合，为开发者和数据处理人员提供便捷服务"
+  },
+  "nav": {
+    "home": "首页",
+    "tools": "工具",
+    "categories": {
+      "code": "代码处理",
+      "convert": "转换工具",
+      "encrypt": "加密解密",
+      "image": "图片处理",
+      "text": "文本处理",
+      "color": "颜色工具",
+      "efficiency": "效率工具"
+    }
+  },
+  "tools": {
+    "jsonEditor": {
+      "title": "JSON 编辑器",
+      "description": "在线 JSON 编辑器，支持格式化、验证和高亮显示"
+    },
+    "jsonDiff": {
+      "title": "JSON 对比",
+      "description": "对比两个 JSON 文件的差异"
+    },
+    "faviconGenerator": {
+      "title": "Favicon 生成器",
+      "description": "在线生成网站图标"
+    },
+    "todoList": {
+      "title": "待办事项",
+      "description": "管理您的任务和待办事项"
+    },
+    "base64": {
+      "title": "Base64 编解码",
+      "description": "Base64 编码和解码工具"
+    },
+    "timestamp": {
+      "title": "时间戳转换",
+      "description": "时间戳与日期时间相互转换"
+    },
+    "colorConverter": {
+      "title": "颜色转换器",
+      "description": "RGB、HEX、HSL 等颜色格式转换"
+    },
+    "uuidGenerator": {
+      "title": "UUID 生成器",
+      "description": "生成各种版本的 UUID"
+    },
+    "hash": {
+      "title": "哈希计算",
+      "description": "计算 MD5、SHA1、SHA256 等哈希值"
+    },
+    "urlEncode": {
+      "title": "URL 编解码",
+      "description": "URL 编码和解码工具"
+    },
+    "qrcodeGenerator": {
+      "title": "二维码生成器",
+      "description": "在线生成二维码"
+    },
+    "regexTester": {
+      "title": "正则表达式测试",
+      "description": "测试和验证正则表达式"
+    },
+    "textDedup": {
+      "title": "文本去重",
+      "description": "去除文本中的重复行"
+    },
+    "unicode": {
+      "title": "Unicode 转换",
+      "description": "Unicode 编码和解码工具"
+    },
+    "imageBase64": {
+      "title": "图片转 Base64",
+      "description": "将图片转换为 Base64 编码"
+    }
+  },
+  "common": {
+    "search": "搜索工具...",
+    "darkMode": "深色模式",
+    "lightMode": "浅色模式",
+    "language": "语言",
+    "settings": "设置",
+    "about": "关于",
+    "copy": "复制",
+    "copied": "已复制",
+    "clear": "清空",
+    "submit": "提交",
+    "cancel": "取消",
+    "confirm": "确认",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "favorite": "收藏",
+    "recent": "最近使用",
+    "allTools": "所有工具",
+    "noResults": "未找到相关工具",
+    "hot": "热门工具",
+    "new": "最新工具",
+    "adSpace": "广告位"
+  },
+  "footer": {
+    "copyright": "© 2025 ToolHub. All rights reserved.",
+    "github": "GitHub",
+    "about": "关于我们",
+    "privacy": "隐私政策",
+    "terms": "使用条款"
+  }
+}
