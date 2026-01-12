@@ -11,7 +11,7 @@ const LanguageSwitcher: React.FC = () => {
 
   const languages = [
     { key: 'zh-CN', label: '简体中文', icon: '🇨🇳' },
-    { key: 'en-US', label: 'English', icon: '🇺🇸' },
+    { key: 'en', label: 'English', icon: '🇺🇸' },
   ];
 
   const currentLanguage = languages.find((lang) => lang.key === i18n.language) || languages[0];
@@ -19,7 +19,7 @@ const LanguageSwitcher: React.FC = () => {
   const handleLanguageChange = (langKey: string) => {
     i18n.changeLanguage(langKey);
     // 更新 HTML lang 属性
-    document.documentElement.lang = langKey;
+    document.documentElement.lang = langKey === 'zh-CN' ? 'zh-CN' : 'en';
   };
 
   const items = languages.map((lang) => ({
