@@ -3,7 +3,8 @@
  */
 
 .app-layout {
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background: var(--color-bg-base, #ffffff);
@@ -13,6 +14,11 @@
   &.dark {
     background: #0f172a;
   }
+}
+
+// 内部布局容器
+.main-layout {
+  overflow: hidden;
 }
 
 // 顶部导航栏包装器
@@ -35,7 +41,9 @@
 .app-content {
   flex: 1;
   background: transparent;
+  overflow-y: auto;
   overflow-x: hidden;
+  height: 100%;
 
   .dark & {
     background: transparent;
@@ -46,7 +54,7 @@
   max-width: 1600px;
   margin: 0 auto;
   padding: 24px;
-  min-height: calc(100vh - 64px - 70px);
+  min-height: 100%;
 
   @media (max-width: 768px) {
     padding: 16px;

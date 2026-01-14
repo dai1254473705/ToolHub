@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Typography, Space, Empty, Tabs, Spin, Badge } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import TodoItem from './TodoItem';
 import TodoForm from './TodoForm';
 import type { TodoItemType } from './types';
@@ -11,6 +12,7 @@ const { Title } = Typography;
 const { TabPane } = Tabs;
 
 const TodoList: React.FC = () => {
+  const { t } = useTranslation();
   const [todos, setTodos] = useState<TodoItemType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [formVisible, setFormVisible] = useState<boolean>(false);
@@ -107,43 +109,43 @@ const TodoList: React.FC = () => {
     <div className="todo-list-page">
       <div className="mb-6">
         <div className="flex items-center justify-between mb-4">
-          <Title level={2}>任务管理</Title>
+          <Title level={2}>{t('tools.todoList.title')}</Title>
           <Button
             type="primary"
             icon={<PlusOutlined />}
             onClick={() => setFormVisible(true)}
           >
-            添加任务
+            {t('tools.todoList.add')}
           </Button>
         </div>
         
         <Space className="mb-4">
           <Badge count={totalCount}>
             <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-800">
-              总任务数
+              {t('tools.todoList.total')}
             </span>
           </Badge>
           <Badge count={pendingCount} color="blue">
             <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-800">
-              待完成
+              {t('tools.todoList.pending')}
             </span>
           </Badge>
           <Badge count={completedCount} color="green">
             <span className="px-2 py-1 rounded bg-gray-100 dark:bg-gray-800">
-              已完成
+              {t('tools.todoList.completed')}
             </span>
           </Badge>
         </Space>
       </div>
 
       <Tabs activeKey={activeTab} onChange={setActiveTab} className="mb-4">
-        <TabPane tab="全部任务" key="all">
+        <TabPane tab={t('tools.todoList.tabs.all')} key="all">
           {loading ? (
             <div className="text-center py-10">
               <Spin size="large" />
             </div>
           ) : filteredTodos.length === 0 ? (
-            <Empty description="暂无任务" />
+            <Empty description={t('tools.todoList.empty.all')} />
           ) : (
             <div className="todo-items-list">
               {filteredTodos.map(todo => (
@@ -158,13 +160,13 @@ const TodoList: React.FC = () => {
             </div>
           )}
         </TabPane>
-        <TabPane tab="待完成" key="pending">
+        <TabPane tab={t('tools.todoList.tabs.pending')} key="pending">
           {loading ? (
             <div className="text-center py-10">
               <Spin size="large" />
             </div>
           ) : filteredTodos.length === 0 ? (
-            <Empty description="暂无待完成任务" />
+            <Empty description={t('tools.todoList.empty.pending')} />
           ) : (
             <div className="todo-items-list">
               {filteredTodos.map(todo => (
@@ -179,13 +181,13 @@ const TodoList: React.FC = () => {
             </div>
           )}
         </TabPane>
-        <TabPane tab="已完成" key="completed">
+        <TabPane tab={t('tools.todoList.tabs.completed')} key="completed">
           {loading ? (
             <div className="text-center py-10">
               <Spin size="large" />
             </div>
           ) : filteredTodos.length === 0 ? (
-            <Empty description="暂无已完成任务" />
+            <Empty description={t('tools.todoList.empty.completed')} />
           ) : (
             <div className="todo-items-list">
               {filteredTodos.map(todo => (

@@ -1,0 +1,166 @@
+/**
+ * Markdown 编辑器样式
+ */
+.markdown-editor-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: calc(100vh - 88px);
+  display: flex;
+  flex-direction: column;
+
+  .header-section {
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .header-left {
+      h1 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 600;
+      }
+      p {
+        margin: 4px 0 0;
+        color: var(--text-secondary);
+      }
+    }
+
+    .header-right {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      
+      .desktop-layout-switcher {
+        margin-right: 12px;
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .editor-wrapper {
+    flex: 1;
+    display: flex;
+    gap: 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    background: var(--bg-container);
+    height: 100%;
+    transition: all 0.3s ease;
+    
+    // 布局模式控制
+    &.layout-split {
+      .pane {
+        width: 50%;
+        display: block;
+      }
+    }
+    
+    &.layout-edit {
+      .editor-pane {
+        width: 100%;
+        display: block;
+        border-right: none;
+      }
+      .preview-pane {
+        width: 0;
+        display: none;
+        padding: 0;
+      }
+    }
+    
+    &.layout-preview {
+      .editor-pane {
+        width: 0;
+        display: none;
+      }
+      .preview-pane {
+        width: 100%;
+        display: block;
+      }
+    }
+    
+    // 移动端/小屏幕样式 - 强制覆盖上面的布局逻辑
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 0;
+      
+      .pane {
+        width: 100% !important;
+        height: 100% !important;
+        display: none !important; // 默认隐藏
+        border-right: none !important;
+        
+        &.active {
+          display: block !important; // 激活显示
+        }
+      }
+    }
+    
+    // 桌面端默认样式
+    @media (min-width: 769px) {
+      .pane {
+        height: 100%;
+        overflow: hidden;
+        
+        &:first-child {
+          border-right: 1px solid var(--border-color);
+        }
+      }
+    }
+    
+    .editor-pane {
+      position: relative;
+    }
+
+    .preview-pane {
+      padding: 24px;
+      overflow-y: auto;
+      background: #ffffff;
+      
+      .dark & {
+        background: #0d1117; // GitHub Dark Dimmed background
+      }
+    }
+  }
+  
+  // 移动端切换 Tab
+  .mobile-tabs {
+    display: none;
+    margin-bottom: 12px;
+    
+    @media (max-width: 768px) {
+      display: flex;
+    }
+  }
+}
+
+// 帮助弹窗样式
+.markdown-help-content {
+  max-height: 60vh;
+  overflow-y: auto;
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    
+    th, td {
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: var(--bg-layout);
+      font-weight: 600;
+    }
+    
+    tr:nth-child(even) {
+      background-color: var(--bg-container);
+    }
+  }
+}

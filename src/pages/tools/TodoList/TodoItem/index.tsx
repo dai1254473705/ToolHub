@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Tag, Button, Typography, Space, Popconfirm } from 'antd';
 import { DeleteOutlined, EditOutlined, CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import  { type TodoItemType, Priority } from '../types';
 
 const { Text, Paragraph } = Typography;
@@ -13,6 +14,8 @@ interface TodoItemProps {
 }
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggleComplete, onEdit, onDelete }) => {
+  const { t } = useTranslation();
+
   const getPriorityColor = (priority: Priority) => {
     switch (priority) {
       case Priority.HIGH:
@@ -29,13 +32,13 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggleComplete, onEdit, onD
   const getPriorityText = (priority: Priority) => {
     switch (priority) {
       case Priority.HIGH:
-        return '高优先级';
+        return t('tools.todoList.form.priorities.high');
       case Priority.MEDIUM:
-        return '中优先级';
+        return t('tools.todoList.form.priorities.medium');
       case Priority.LOW:
-        return '低优先级';
+        return t('tools.todoList.form.priorities.low');
       default:
-        return '普通';
+        return t('tools.todoList.form.priorities.medium');
     }
   };
 
@@ -48,16 +51,16 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggleComplete, onEdit, onD
             type="text"
             icon={todo.completed ? <CloseCircleOutlined /> : <CheckCircleOutlined />}
             onClick={() => onToggleComplete(todo.id)}
-            title={todo.completed ? '标记为未完成' : '标记为已完成'}
+            title={todo.completed ? t('tools.todoList.item.markUncomplete') : t('tools.todoList.item.markComplete')}
           />
-          <Button type="text" icon={<EditOutlined />} onClick={() => onEdit(todo)} title="编辑任务" />
+          <Button type="text" icon={<EditOutlined />} onClick={() => onEdit(todo)} title={t('tools.todoList.item.edit')} />
           <Popconfirm
-            title="确定要删除这个任务吗？"
+            title={t('tools.todoList.item.deleteConfirm')}
             onConfirm={() => onDelete(todo.id)}
-            okText="确定"
-            cancelText="取消"
+            okText={t('common.confirm')}
+            cancelText={t('common.cancel')}
           >
-            <Button type="text" danger icon={<DeleteOutlined />} title="删除任务" />
+            <Button type="text" danger icon={<DeleteOutlined />} title={t('tools.todoList.item.delete')} />
           </Popconfirm>
         </Space>
       }
@@ -78,11 +81,11 @@ const TodoItem: React.FC<TodoItemProps> = ({ todo, onToggleComplete, onEdit, onD
             </Paragraph>
           )}
           <Text type="secondary" className="text-xs">
-            创建时间：{new Date(todo.createdAt).toLocaleString()}
+            {t('tools.todoList.item.created')}{new Date(todo.createdAt).toLocaleString()}
           </Text>
           {todo.updatedAt !== todo.createdAt && (
             <Text type="secondary" className="text-xs ml-2">
-              更新时间：{new Date(todo.updatedAt).toLocaleString()}
+              {t('tools.todoList.item.updated')}{new Date(todo.updatedAt).toLocaleString()}
             </Text>
           )}
         </div>

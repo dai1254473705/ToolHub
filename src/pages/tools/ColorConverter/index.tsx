@@ -4,6 +4,7 @@
 import React, { useState } from 'react';
 import { Card, Row, Col, Typography, Input, Button, message, Space } from 'antd';
 import { CopyOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import './index.less';
 
 const { Title, Text } = Typography;
@@ -16,6 +17,7 @@ interface ColorValues {
 }
 
 const ColorConverter: React.FC = () => {
+  const { t } = useTranslation();
   const [color, setColor] = useState<ColorValues>({
     hex: '#1677ff',
     rgb: 'rgb(22, 119, 255)',
@@ -84,9 +86,9 @@ const ColorConverter: React.FC = () => {
   const rgbToHsv = (rgb: string): string => {
     const result = rgb.match(/\d+/g);
     if (!result || result.length < 3) return 'hsv(0, 0%, 0%)';
-    let r = parseInt(result[0]) / 255;
-    let g = parseInt(result[1]) / 255;
-    let b = parseInt(result[2]) / 255;
+    const r = parseInt(result[0]) / 255;
+    const g = parseInt(result[1]) / 255;
+    const b = parseInt(result[2]) / 255;
 
     const max = Math.max(r, g, b);
     const min = Math.min(r, g, b);
@@ -141,14 +143,14 @@ const ColorConverter: React.FC = () => {
   // 复制到剪贴板
   const handleCopy = (text: string, label: string) => {
     navigator.clipboard.writeText(text).then(() => {
-      message.success(`已复制 ${label}`);
+      message.success(t('tools.colorConverter.messages.copySuccess', { label }));
     });
   };
 
   return (
     <div className="color-converter">
-      <Title level={2}>颜色转换</Title>
-      <Text type="secondary">HEX、RGB、HSL、HSV 颜色格式互相转换</Text>
+      <Title level={2}>{t('tools.colorConverter.title')}</Title>
+      <Text type="secondary">{t('tools.colorConverter.description')}</Text>
 
       {/* 颜色预览 */}
       <Card className="preview-card" bordered={false}>
@@ -166,7 +168,7 @@ const ColorConverter: React.FC = () => {
           <div className="color-input">
             <Row gutter={[16, 16]} align="middle">
               <Col xs={24} sm={4}>
-                <Text strong>HEX</Text>
+                <Text strong>{t('tools.colorConverter.formats.hex')}</Text>
               </Col>
               <Col xs={24} sm={16}>
                 <Input
@@ -179,10 +181,10 @@ const ColorConverter: React.FC = () => {
               <Col xs={24} sm={4}>
                 <Button
                   icon={<CopyOutlined />}
-                  onClick={() => handleCopy(color.hex, 'HEX')}
+                  onClick={() => handleCopy(color.hex, t('tools.colorConverter.formats.hex'))}
                   block
                 >
-                  复制
+                  {t('common.copy')}
                 </Button>
               </Col>
             </Row>
@@ -192,7 +194,7 @@ const ColorConverter: React.FC = () => {
           <div className="color-input">
             <Row gutter={[16, 16]} align="middle">
               <Col xs={24} sm={4}>
-                <Text strong>RGB</Text>
+                <Text strong>{t('tools.colorConverter.formats.rgb')}</Text>
               </Col>
               <Col xs={24} sm={16}>
                 <Input
@@ -205,10 +207,10 @@ const ColorConverter: React.FC = () => {
               <Col xs={24} sm={4}>
                 <Button
                   icon={<CopyOutlined />}
-                  onClick={() => handleCopy(color.rgb, 'RGB')}
+                  onClick={() => handleCopy(color.rgb, t('tools.colorConverter.formats.rgb'))}
                   block
                 >
-                  复制
+                  {t('common.copy')}
                 </Button>
               </Col>
             </Row>
@@ -218,7 +220,7 @@ const ColorConverter: React.FC = () => {
           <div className="color-input">
             <Row gutter={[16, 16]} align="middle">
               <Col xs={24} sm={4}>
-                <Text strong>HSL</Text>
+                <Text strong>{t('tools.colorConverter.formats.hsl')}</Text>
               </Col>
               <Col xs={24} sm={16}>
                 <Input
@@ -231,10 +233,10 @@ const ColorConverter: React.FC = () => {
               <Col xs={24} sm={4}>
                 <Button
                   icon={<CopyOutlined />}
-                  onClick={() => handleCopy(color.hsl, 'HSL')}
+                  onClick={() => handleCopy(color.hsl, t('tools.colorConverter.formats.hsl'))}
                   block
                 >
-                  复制
+                  {t('common.copy')}
                 </Button>
               </Col>
             </Row>
@@ -244,7 +246,7 @@ const ColorConverter: React.FC = () => {
           <div className="color-input">
             <Row gutter={[16, 16]} align="middle">
               <Col xs={24} sm={4}>
-                <Text strong>HSV</Text>
+                <Text strong>{t('tools.colorConverter.formats.hsv')}</Text>
               </Col>
               <Col xs={24} sm={16}>
                 <Input
@@ -257,10 +259,10 @@ const ColorConverter: React.FC = () => {
               <Col xs={24} sm={4}>
                 <Button
                   icon={<CopyOutlined />}
-                  onClick={() => handleCopy(color.hsv, 'HSV')}
+                  onClick={() => handleCopy(color.hsv, t('tools.colorConverter.formats.hsv'))}
                   block
                 >
-                  复制
+                  {t('common.copy')}
                 </Button>
               </Col>
             </Row>
@@ -270,23 +272,23 @@ const ColorConverter: React.FC = () => {
 
       {/* 使用说明 */}
       <Card className="info-card" bordered={false}>
-        <Title level={4}>颜色格式说明</Title>
+        <Title level={4}>{t('tools.colorConverter.info.title')}</Title>
         <div className="format-info">
           <div>
-            <Text strong>HEX：</Text>
-            <Text>十六进制颜色码，如 #1677ff</Text>
+            <Text strong>{t('tools.colorConverter.info.hex.label')}</Text>
+            <Text>{t('tools.colorConverter.info.hex.desc')}</Text>
           </div>
           <div>
-            <Text strong>RGB：</Text>
-            <Text>红绿蓝颜色模式，如 rgb(22, 119, 255)</Text>
+            <Text strong>{t('tools.colorConverter.info.rgb.label')}</Text>
+            <Text>{t('tools.colorConverter.info.rgb.desc')}</Text>
           </div>
           <div>
-            <Text strong>HSL：</Text>
-            <Text>色相、饱和度、亮度，如 hsl(211, 100%, 54%)</Text>
+            <Text strong>{t('tools.colorConverter.info.hsl.label')}</Text>
+            <Text>{t('tools.colorConverter.info.hsl.desc')}</Text>
           </div>
           <div>
-            <Text strong>HSV：</Text>
-            <Text>色相、饱和度、明度，如 hsv(211, 91%, 100%)</Text>
+            <Text strong>{t('tools.colorConverter.info.hsv.label')}</Text>
+            <Text>{t('tools.colorConverter.info.hsv.desc')}</Text>
           </div>
         </div>
       </Card>

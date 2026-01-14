@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Select, Button, Modal } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { type TodoItemType, Priority } from '../types';
 
 const { TextArea } = Input;
@@ -13,6 +14,7 @@ interface TodoFormProps {
 }
 
 const TodoForm: React.FC<TodoFormProps> = ({ visible, todo, onCancel, onSubmit }) => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
 
   React.useEffect(() => {
@@ -38,7 +40,7 @@ const TodoForm: React.FC<TodoFormProps> = ({ visible, todo, onCancel, onSubmit }
 
   return (
     <Modal
-      title={todo ? '编辑任务' : '添加任务'}
+      title={todo ? t('tools.todoList.edit') : t('tools.todoList.add')}
       open={visible}
       onCancel={onCancel}
       footer={null}
@@ -50,35 +52,35 @@ const TodoForm: React.FC<TodoFormProps> = ({ visible, todo, onCancel, onSubmit }
       >
         <Form.Item
           name="title"
-          label="任务标题"
-          rules={[{ required: true, message: '请输入任务标题' }]}
+          label={t('tools.todoList.form.title')}
+          rules={[{ required: true, message: t('tools.todoList.form.required') }]}
         >
-          <Input placeholder="请输入任务标题" />
+          <Input placeholder={t('tools.todoList.form.titlePlaceholder')} />
         </Form.Item>
         <Form.Item
           name="description"
-          label="任务详情"
+          label={t('tools.todoList.form.desc')}
         >
-          <TextArea rows={4} placeholder="请输入任务详情（可选）" />
+          <TextArea rows={4} placeholder={t('tools.todoList.form.descPlaceholder')} />
         </Form.Item>
         <Form.Item
           name="priority"
-          label="优先级"
+          label={t('tools.todoList.form.priority')}
           initialValue={Priority.MEDIUM}
-          rules={[{ required: true, message: '请选择优先级' }]}
+          rules={[{ required: true, message: t('tools.todoList.form.priorityPlaceholder') }]}
         >
-          <Select placeholder="请选择优先级">
-            <Option value={Priority.LOW}>低优先级</Option>
-            <Option value={Priority.MEDIUM}>中优先级</Option>
-            <Option value={Priority.HIGH}>高优先级</Option>
+          <Select placeholder={t('tools.todoList.form.priorityPlaceholder')}>
+            <Option value={Priority.LOW}>{t('tools.todoList.form.priorities.low')}</Option>
+            <Option value={Priority.MEDIUM}>{t('tools.todoList.form.priorities.medium')}</Option>
+            <Option value={Priority.HIGH}>{t('tools.todoList.form.priorities.high')}</Option>
           </Select>
         </Form.Item>
         <Form.Item className="text-right">
           <Button onClick={onCancel} className="mr-2">
-            取消
+            {t('common.cancel')}
           </Button>
           <Button type="primary" onClick={handleSubmit}>
-            {todo ? '更新' : '添加'}
+            {todo ? t('tools.todoList.update') : t('tools.todoList.add')}
           </Button>
         </Form.Item>
       </Form>

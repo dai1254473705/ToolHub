@@ -8,7 +8,7 @@ echo "🚀 开始部署..."
 
 # 构建项目
 echo "📦 构建项目..."
-pnpm build
+yarn build
 
 # 添加 docs 目录到 git（即使它在 .gitignore 中）
 echo "📝 添加构建文件..."

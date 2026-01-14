@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Typography, Upload, Button, Card, Row, Col, Empty, Spin, message } from 'antd';
 import { UploadOutlined, DownloadOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { UploadProps, UploadFile } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const { Title, Text } = Typography;
 const { Dragger } = Upload;
@@ -12,6 +13,7 @@ const SUPPORTED_FORMATS = ['image/png', 'image/jpeg', 'image/gif', 'image/x-icon
 const SIZES = [16, 32, 48, 64, 128, 256];
 
 const FaviconGenerator: React.FC = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [generatedIcons, setGeneratedIcons] = useState<Record<number, string>>({});
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -21,7 +23,7 @@ const FaviconGenerator: React.FC = () => {
   const beforeUpload: UploadProps['beforeUpload'] = (file) => {
     const isValidType = SUPPORTED_FORMATS.includes(file.type);
     if (!isValidType) {
-      message.error('只支持PNG、JPG、JPEG、GIF和ICO格式的图片！');
+      message.error(t('tools.faviconGenerator.messages.invalidFormat'));
       return Upload.LIST_IGNORE;
     }
     
@@ -51,7 +53,7 @@ const FaviconGenerator: React.FC = () => {
   // 生成favicon图标
   const generateFavicons = () => {
     if (fileList.length === 0 || !canvasRef.current) {
-      message.warning('请先上传一张图片');
+      message.warning(t('tools.faviconGenerator.messages.uploadFirst'));
       return;
     }
 
@@ -101,11 +103,11 @@ const FaviconGenerator: React.FC = () => {
       
       setGeneratedIcons(icons);
       setLoading(false);
-      message.success('图标生成成功！');
+      message.success(t('tools.faviconGenerator.messages.success'));
     };
     img.onerror = () => {
       setLoading(false);
-      message.error('图片加载失败，请重试');
+      message.error(t('tools.faviconGenerator.messages.loadError'));
     };
     img.src = file.url || '';
   };
@@ -126,7 +128,7 @@ const FaviconGenerator: React.FC = () => {
   const downloadAllIcons = () => {
     if (Object.keys(generatedIcons).length === 0) return;
     
-    message.info('开始下载所有图标...');
+    message.info(t('tools.faviconGenerator.messages.downloadStart'));
     SIZES.forEach(size => {
       setTimeout(() => downloadIcon(size), 100 * SIZES.indexOf(size));
     });
@@ -155,20 +157,20 @@ const FaviconGenerator: React.FC = () => {
 
   return (
     <div className="page-transition">
-      <Title level={2}>Favicon 生成器</Title>
-      <div className="text-gray-500 mb-6">拖拽上传图片，一键生成不同尺寸的favicon图标</div>
+      <Title level={2}>{t('tools.faviconGenerator.title')}</Title>
+      <div className="text-gray-500 mb-6">{t('tools.faviconGenerator.subtitle')}</div>
       
       <Row gutter={[16, 16]}>
         <Col xs={24} lg={12}>
-          <Card title="图片上传" className="h-full">
+          <Card title={t('tools.faviconGenerator.upload.title')} className="h-full">
             {fileList.length === 0 ? (
               <Dragger {...uploadProps}>
                 <p className="ant-upload-drag-icon">
                   <UploadOutlined />
                 </p>
-                <p className="ant-upload-text">点击或拖拽图片到此处上传</p>
+                <p className="ant-upload-text">{t('tools.faviconGenerator.upload.dragText')}</p>
                 <p className="ant-upload-hint">
-                  支持PNG、JPG、JPEG、GIF和ICO格式的图片文件
+                  {t('tools.faviconGenerator.upload.hint')}
                 </p>
               </Dragger>
             ) : (
@@ -176,7 +178,7 @@ const FaviconGenerator: React.FC = () => {
                 <div className="flex flex-col items-center justify-center p-4">
                   <img 
                     src={fileList[0].url || undefined} 
-                    alt="预览图" 
+                    alt={t('tools.faviconGenerator.upload.preview')} 
                     className="max-w-full max-h-[250px] object-contain rounded border border-gray-200"
                   />
                   <Text className="mt-2 text-gray-600">{fileList[0].name}</Text>
@@ -187,7 +189,7 @@ const FaviconGenerator: React.FC = () => {
                     onClick={handleRemove}
                     className="mt-1"
                   >
-                    移除图片
+                    {t('tools.faviconGenerator.upload.remove')}
                   </Button>
                 </div>
               </div>
@@ -200,18 +202,18 @@ const FaviconGenerator: React.FC = () => {
                 loading={loading}
                 disabled={fileList.length === 0}
               >
-                生成Favicon图标
+                {t('tools.faviconGenerator.upload.generate')}
               </Button>
             </div>
           </Card>
         </Col>
         
         <Col xs={24} lg={12}>
-          <Card title="生成的图标" className="h-full">
+          <Card title={t('tools.faviconGenerator.generated.title')} className="h-full">
             {loading ? (
               <div className="flex items-center justify-center h-80">
                 <Spin />
-                <Text className="ml-2">正在生成图标...</Text>
+                <Text className="ml-2">{t('tools.faviconGenerator.generated.loading')}</Text>
               </div>
             ) : Object.keys(generatedIcons).length > 0 ? (
               <>
@@ -232,20 +234,20 @@ const FaviconGenerator: React.FC = () => {
                         className="mt-1"
                         onClick={() => downloadIcon(size)}
                       >
-                        下载
+                        {t('tools.faviconGenerator.generated.download')}
                       </Button>
                     </div>
                   ))}
                 </div>
                 <div className="text-center">
                   <Button type="primary" onClick={downloadAllIcons}>
-                    下载所有图标
+                    {t('tools.faviconGenerator.generated.downloadAll')}
                   </Button>
                 </div>
               </>
             ) : (
               <div className="flex flex-col items-center justify-center h-80">
-                <Empty description="请先上传图片并生成图标" />
+                <Empty description={t('tools.faviconGenerator.generated.empty')} />
               </div>
             )}
           </Card>

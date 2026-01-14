@@ -5,16 +5,17 @@
 .sidebar {
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  z-index: 100; /* 确保在其他内容之上 */
 
   &.light {
     .sidebar-logo {
       border-bottom: 1px solid rgba(226, 232, 240, 0.8);
     }
-
-    .collapse-button {
-      &:hover {
-        background: rgba(59, 130, 246, 0.1);
-      }
+    
+    .ant-layout-sider-trigger {
+        background: #fff;
+        color: #64748b;
+        border-top: 1px solid rgba(226, 232, 240, 0.8);
     }
   }
 
@@ -22,14 +23,11 @@
     .sidebar-logo {
       border-bottom: 1px solid rgba(51, 65, 85, 0.5);
     }
-
-    .collapse-button {
-      color: #94a3b8;
-
-      &:hover {
-        background: rgba(59, 130, 246, 0.15);
-        color: #f1f5f9;
-      }
+    
+    .ant-layout-sider-trigger {
+        background: #0f172a;
+        color: #94a3b8;
+        border-top: 1px solid rgba(51, 65, 85, 0.5);
     }
   }
 }
@@ -39,8 +37,10 @@
   height: 64px;
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  justify-content: center; /* 居中对齐 */
+  padding: 0 16px;
   transition: all 0.3s ease;
+  overflow: hidden; /* 防止内容溢出 */
 
   .logo {
     display: flex;
@@ -48,6 +48,7 @@
     gap: 12px;
     text-decoration: none;
     transition: all 0.2s ease;
+    white-space: nowrap; /* 防止文字换行 */
 
     &:hover {
       opacity: 0.8;
@@ -56,6 +57,9 @@
     .logo-icon {
       font-size: 24px;
       line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .logo-text {
@@ -75,109 +79,119 @@
   }
 }
 
-// 菜单样式
-.sidebar-menu {
-  padding: 16px 8px;
-  border: none !important;
-  background: transparent !important;
+// 菜单样式 - 移除 :global，直接覆盖 antd 样式（如果需要，使用更高权重的选择器）
+.sidebar-menu.ant-menu {
+  background: transparent;
+  border-inline-end: none !important; /* 移除右侧边框 */
+  padding: 8px;
 
-  :global {
-    .ant-menu-item,
-    .ant-menu-submenu {
-      margin: 4px 0;
-      border-radius: 8px;
-      transition: all 0.2s ease;
-
-      &:hover {
-        background: rgba(59, 130, 246, 0.08);
-      }
-    }
-
-    .ant-menu-submenu-selected {
-      background: rgba(59, 130, 246, 0.12);
-
-      > .ant-menu-submenu-title {
-        color: #3b82f6 !important;
-        font-weight: 600;
-      }
-    }
-
-    .ant-menu-item-selected {
-      background: rgba(59, 130, 246, 0.15) !important;
-      color: #3b82f6 !important;
-      font-weight: 600;
-
-      &::after {
-        display: none;
-      }
-    }
-
-    .ant-menu-item-icon {
-      font-size: 16px;
-    }
-
-    .ant-menu-submenu-title {
-      font-weight: 500;
-      padding: 0 16px !important;
-      height: 44px;
-      line-height: 44px;
-
-      .ant-menu-submenu-arrow {
-        color: inherit;
-      }
-    }
-
-    .ant-menu-item {
-      padding: 0 16px !important;
-      height: 40px;
-      line-height: 40px;
-      margin: 2px 0;
-    }
-
-    .ant-menu-sub {
-      background: transparent !important;
-      padding: 4px 0;
-
-      .ant-menu-item {
-        padding-left: 48px !important;
-      }
+  .ant-menu-item,
+  .ant-menu-submenu-title {
+    border-radius: 8px;
+    margin-bottom: 4px;
+    width: calc(100% - 16px) !important; /* 留出边距 */
+    margin-left: 8px !important;
+    
+    &:hover {
+        color: #8b5cf6 !important;
     }
   }
-
-  // 激活的菜单项样式
-  .sidebar-menu-link {
-    color: inherit;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-
-    &.active-menu-item {
-      color: #3b82f6;
+  
+  .ant-menu-item-selected {
+      background-color: rgba(139, 92, 246, 0.1) !important;
+      color: #8b5cf6 !important;
       font-weight: 600;
+  }
+  
+  .ant-menu-submenu-selected > .ant-menu-submenu-title {
+      color: #8b5cf6 !important;
+  }
+
+  /* 收缩状态下的样式调整 */
+  &.ant-menu-inline-collapsed {
+      width: 80px;
+      padding: 8px 0;
+      
+      .ant-menu-item,
+      .ant-menu-submenu-title {
+          width: 48px !important;
+          margin-left: 16px !important; /* 居中 */
+          padding: 0 !important;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          
+          .anticon {
+              min-width: 14px;
+              margin-right: 0;
+              font-size: 18px;
+          }
+      }
+  }
+}
+
+// 侧边栏内容容器
+.sidebar-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+// 菜单包裹层
+.sidebar-menu-wrapper {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-top: 16px;
+  
+  /* 自定义滚动条样式 */
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    
+    .dark & {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  &:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.1);
+    
+    .dark & {
+      background-color: rgba(255, 255, 255, 0.1);
     }
   }
 }
 
 // 折叠触发按钮
 .sidebar-collapse-trigger {
-  position: absolute;
-  bottom: 16px;
-  left: 0;
-  right: 0;
+  height: 48px;
+  flex-shrink: 0; /* 防止被压缩 */
   display: flex;
+  align-items: center;
   justify-content: center;
-  padding: 0 16px;
-
-  .collapse-button {
-    width: 100%;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    color: #64748b;
-    font-size: 16px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: all 0.3s;
+  
+  &:hover {
+      color: #8b5cf6;
+      background: rgba(0,0,0,0.02);
+  }
+  
+  .dark & {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      &:hover {
+          background: rgba(255,255,255,0.02);
+      }
   }
 }
 
@@ -206,88 +220,9 @@
   }
 }
 
-// 移动端抽屉
-.sidebar-drawer {
-  :global {
-    .ant-drawer-body {
-      background: #0f172a;
-      padding: 0;
-    }
-
-    .ant-drawer-close {
-      color: #94a3b8;
-      font-size: 18px;
-
-      &:hover {
-        color: #f1f5f9;
-      }
-    }
-  }
-
-  .sidebar-drawer-content {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-
-    .sidebar-header {
-      height: 64px;
-      display: flex;
-      align-items: center;
-      padding: 0 24px;
-      border-bottom: 1px solid rgba(51, 65, 85, 0.5);
-
-      .logo {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        text-decoration: none;
-
-        .logo-icon {
-          font-size: 24px;
-          line-height: 1;
-        }
-
-        .logo-text {
-          font-size: 20px;
-          font-weight: 700;
-          font-family: 'Space Grotesk', sans-serif;
-          background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-        }
-      }
-    }
-
-    .sidebar-menu {
-      flex: 1;
-      overflow-y: auto;
-    }
-  }
-}
-
 // 响应式设计
 @media (max-width: 1024px) {
   .sidebar {
-    display: none;
-  }
-}
-
-// 动画和过渡
-@media (prefers-reduced-motion: no-preference) {
-  .sidebar,
-  .sidebar-menu,
-  .mobile-menu-button,
-  .collapse-button {
-    transition: all 0.2s ease;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .sidebar,
-  .sidebar-menu,
-  .mobile-menu-button,
-  .collapse-button {
-    transition: none;
+    display: none !important; /* 强制隐藏 */
   }
 }

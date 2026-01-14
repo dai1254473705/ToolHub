@@ -4,12 +4,14 @@
 import React, { useState } from 'react';
 import { Card, Row, Col, Typography, Input, Button, message, Space, Tabs } from 'antd';
 import { CopyOutlined, SwapOutlined, ClearOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import './index.less';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
 const URLEncode: React.FC = () => {
+  const { t } = useTranslation();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
@@ -80,8 +82,8 @@ const URLEncode: React.FC = () => {
 
   return (
     <div className="url-encode-tool">
-      <Title level={2}>URL 编解码</Title>
-      <Text type="secondary">URL 编码和解码，处理特殊字符和中文</Text>
+      <Title level={2}>{t('tools.urlEncode.title')}</Title>
+      <Text type="secondary">{t('tools.urlEncode.description')}</Text>
 
       <Card className="tool-card" bordered={false}>
         <Tabs
@@ -90,11 +92,11 @@ const URLEncode: React.FC = () => {
           items={[
             {
               key: 'encode',
-              label: '编码',
+              label: t('tools.urlEncode.encode'),
             },
             {
               key: 'decode',
-              label: '解码',
+              label: t('tools.urlEncode.decode'),
             },
           ]}
         />
@@ -103,15 +105,15 @@ const URLEncode: React.FC = () => {
           <Col xs={24} md={12}>
             <div className="input-section">
               <div className="section-header">
-                <Text strong>输入内容</Text>
+                <Text strong>{t('tools.urlEncode.input')}</Text>
                 <Button size="small" icon={<ClearOutlined />} onClick={handleClear}>
-                  清空
+                  {t('common.clear')}
                 </Button>
               </div>
               <TextArea
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={mode === 'encode' ? '请输入要编码的文本' : '请输入 URL 编码字符串'}
+                placeholder={mode === 'encode' ? t('tools.urlEncode.inputPlaceholder.encode') : t('tools.urlEncode.inputPlaceholder.decode')}
                 rows={10}
                 allowClear
               />
@@ -121,20 +123,20 @@ const URLEncode: React.FC = () => {
           <Col xs={24} md={12}>
             <div className="output-section">
               <div className="section-header">
-                <Text strong>输出结果</Text>
+                <Text strong>{t('tools.urlEncode.output')}</Text>
                 <Space>
                   <Button size="small" icon={<SwapOutlined />} onClick={handleSwap}>
-                    交换
+                    {t('common.swap')}
                   </Button>
                   <Button size="small" icon={<CopyOutlined />} onClick={handleCopy}>
-                    复制
+                    {t('common.copy')}
                   </Button>
                 </Space>
               </div>
               <TextArea
                 value={output}
                 readOnly
-                placeholder={mode === 'encode' ? 'URL 编码结果' : '解码结果'}
+                placeholder={mode === 'encode' ? t('tools.urlEncode.outputPlaceholder.encode') : t('tools.urlEncode.outputPlaceholder.decode')}
                 rows={10}
                 className="url-output"
               />
@@ -144,43 +146,42 @@ const URLEncode: React.FC = () => {
 
         <div className="action-section">
           <Button type="primary" size="large" onClick={handleProcess} block>
-            {mode === 'encode' ? '编码' : '解码'}
+            {mode === 'encode' ? t('tools.urlEncode.encode') : t('tools.urlEncode.decode')}
           </Button>
         </div>
       </Card>
 
       <Card className="info-card" bordered={false}>
-        <Title level={4}>什么是 URL 编码？</Title>
+        <Title level={4}>{t('tools.urlEncode.info.what.title')}</Title>
         <Text>
-          URL 编码（URL Encoding）是一种将字符转换为 URL 安全格式的编码方式。
-          它使用 % 后跟两位十六进制数来表示特殊字符。
+          {t('tools.urlEncode.info.what.content')}
         </Text>
         <Title level={4} style={{ marginTop: 16 }}>
-          为什么需要 URL 编码？
+          {t('tools.urlEncode.info.why.title')}
         </Title>
         <ul>
-          <li>URL 只能包含 ASCII 字符（0-127）</li>
-          <li>某些字符在 URL 中有特殊含义（如 ?、&、= 等）</li>
-          <li>中文等非 ASCII 字符需要编码才能在 URL 中传输</li>
+          <li>{t('tools.urlEncode.info.why.list.0')}</li>
+          <li>{t('tools.urlEncode.info.why.list.1')}</li>
+          <li>{t('tools.urlEncode.info.why.list.2')}</li>
         </ul>
         <Title level={4} style={{ marginTop: 16 }}>
-          常见编码示例
+          {t('tools.urlEncode.info.examples.title')}
         </Title>
         <ul>
-          <li>空格 → %20 或 +</li>
-          <li>中文"你好" → %E4%BD%A0%E5%A5%BD</li>
-          <li>& → %26</li>
-          <li>= → %3D</li>
-          <li>? → %3F</li>
+          <li>{t('tools.urlEncode.info.examples.list.0')}</li>
+          <li>{t('tools.urlEncode.info.examples.list.1')}</li>
+          <li>{t('tools.urlEncode.info.examples.list.2')}</li>
+          <li>{t('tools.urlEncode.info.examples.list.3')}</li>
+          <li>{t('tools.urlEncode.info.examples.list.4')}</li>
         </ul>
         <Title level={4} style={{ marginTop: 16 }}>
-          使用场景
+          {t('tools.urlEncode.info.usage.title')}
         </Title>
         <ul>
-          <li>URL 参数传递</li>
-          <li>表单数据提交</li>
-          <li>AJAX 请求</li>
-          <li>处理包含特殊字符的文件名</li>
+          <li>{t('tools.urlEncode.info.usage.list.0')}</li>
+          <li>{t('tools.urlEncode.info.usage.list.1')}</li>
+          <li>{t('tools.urlEncode.info.usage.list.2')}</li>
+          <li>{t('tools.urlEncode.info.usage.list.3')}</li>
         </ul>
       </Card>
     </div>

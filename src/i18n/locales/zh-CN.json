@@ -11,24 +11,302 @@
       "code": "代码处理",
       "convert": "转换工具",
       "encrypt": "加密解密",
+      "crypto": "加密解密",
       "image": "图片处理",
       "text": "文本处理",
       "color": "颜色工具",
-      "efficiency": "效率工具"
+      "efficiency": "效率工具",
+      "productivity": "效率工具",
+      "desc": {
+        "code": "JSON 编辑器、正则表达式测试等工具",
+        "convert": "Base64、URL 编码、时间戳、Unicode 转换等",
+        "crypto": "哈希算法、UUID 生成等",
+        "image": "Favicon 图标生成、图片转 Base64 等",
+        "text": "文本对比、去重、Markdown 编辑器等",
+        "color": "颜色格式转换、调色板等",
+        "productivity": "待办事项管理、二维码生成等"
+      }
     }
   },
   "tools": {
-    "jsonEditor": {
-      "title": "JSON 编辑器",
-      "description": "在线 JSON 编辑器，支持格式化、验证和高亮显示"
+    "todoList": {
+      "title": "待办事项",
+      "description": "管理您的任务和待办事项",
+      "add": "添加任务",
+      "edit": "编辑任务",
+      "update": "更新",
+      "total": "总任务数",
+      "pending": "待完成",
+      "completed": "已完成",
+      "tabs": {
+        "all": "全部任务",
+        "pending": "待完成",
+        "completed": "已完成"
+      },
+      "empty": {
+        "all": "暂无任务",
+        "pending": "暂无待完成任务",
+        "completed": "暂无已完成任务"
+      },
+      "form": {
+        "title": "任务标题",
+        "titlePlaceholder": "请输入任务标题",
+        "desc": "任务详情",
+        "descPlaceholder": "请输入任务详情（可选）",
+        "priority": "优先级",
+        "priorityPlaceholder": "请选择优先级",
+        "priorities": {
+          "high": "高优先级",
+          "medium": "中优先级",
+          "low": "低优先级"
+        },
+        "required": "请输入任务标题"
+      },
+      "item": {
+        "deleteConfirm": "确定要删除这个任务吗？",
+        "markUncomplete": "标记为未完成",
+        "markComplete": "标记为已完成",
+        "edit": "编辑任务",
+        "delete": "删除任务",
+        "created": "创建时间：",
+        "updated": "更新时间："
+      }
+    },
+    "textDedup": {
+      "title": "文本去重",
+      "description": "去除文本中的重复行，支持多种选项",
+      "options": {
+        "title": "选项",
+        "ignoreCase": "忽略大小写",
+        "trim": "去除首尾空格",
+        "removeEmpty": "移除空行",
+        "sort": {
+          "title": "排序：",
+          "none": "不排序",
+          "asc": "升序",
+          "desc": "降序"
+        }
+      },
+      "input": "输入文本",
+      "result": "去重结果",
+      "stats": "去重后 {{result}} 行，移除了 {{removed}} 行重复内容",
+      "placeholder": "请输入文本，每行一条",
+      "messages": {
+        "copyEmpty": "没有可复制的内容",
+        "copySuccess": "已复制到剪贴板"
+      },
+      "info": {
+        "title": "使用说明",
+        "usage": "使用场景",
+        "list": {
+          "0": "清洗数据列表",
+          "1": "去除重复的 URL",
+          "2": "整理关键词列表",
+          "3": "清理配置文件",
+          "4": "去重邮箱列表"
+        }
+      }
+    },
+    "uuidGenerator": {
+      "title": "UUID 生成器",
+      "description": "生成随机 UUID（通用唯一识别码）",
+      "version": "UUID 版本",
+      "count": "生成数量",
+      "generate": "生成",
+      "copyAll": "复制全部",
+      "results": "生成结果",
+      "messages": {
+        "generated": "已生成 {{count}} 个 UUID",
+        "empty": "请先生成 UUID",
+        "copySuccess": "已复制 {{count}} 个 UUID 到剪贴板"
+      },
+      "info": {
+        "what": {
+          "title": "什么是 UUID？",
+          "content": "UUID（Universally Unique Identifier）是通用唯一识别码，是一个 128 位的标识符。在软件开发中，UUID 通常用作唯一的标识符，用于数据库主键、分布式系统中的唯一 ID 等场景。"
+        },
+        "versions": {
+          "title": "UUID 版本",
+          "v4": "UUID v4: 基于随机数生成，是最常用的版本。它使用 122 位随机数和 6 位固定位，几乎不可能重复。",
+          "v1": "UUID v1: 基于时间戳和 MAC 地址生成（已弃用，存在隐私问题）。"
+        },
+        "usage": {
+          "title": "使用场景",
+          "list": {
+            "0": "数据库主键",
+            "1": "分布式系统中的唯一 ID",
+            "2": "会话标识符",
+            "3": "临时文件名",
+            "4": "关联不同系统的数据"
+          }
+        }
+      }
+    },
+    "unicode": {
+      "title": "Unicode 转换",
+      "description": "中文和 Unicode 编码互相转换",
+      "tabs": {
+        "encode": "编码（中文 → Unicode）",
+        "decode": "解码（Unicode → 中文）"
+      },
+      "input": "输入内容",
+      "result": "转换结果",
+      "placeholders": {
+        "encode": "请输入要编码的中文或文本",
+        "decode": "请输入 Unicode 编码，如：\\u4f60\\u597d",
+        "encodeResult": "Unicode 编码结果",
+        "decodeResult": "解码结果"
+      },
+      "analysis": "字符分析：",
+      "messages": {
+        "decodeError": "解码失败：无效的 Unicode 格式",
+        "copyEmpty": "没有可复制的内容",
+        "copySuccess": "已复制到剪贴板"
+      },
+      "info": {
+        "what": {
+          "title": "什么是 Unicode？",
+          "content": "Unicode 是一种字符编码标准，为世界上的每种语言中的每个字符都设定了统一并且唯一的二进制编码。Unicode 编码通常使用 \\u 开头，后跟 4 位十六进制数。"
+        },
+        "examples": {
+          "title": "编码示例"
+        },
+        "usage": {
+          "title": "使用场景",
+          "list": {
+            "0": "JavaScript 字符串中显示中文",
+            "1": "处理包含中文的配置文件",
+            "2": "调试编码问题",
+            "3": "数据传输和存储",
+            "4": "防止乱码"
+          }
+        }
+      }
+    },
+    "timestamp": {
+      "title": "时间戳转换",
+      "description": "Unix 时间戳与日期时间互相转换",
+      "current": {
+        "ms": "当前时间戳（毫秒）",
+        "s": "当前时间戳（秒）",
+        "datetime": "当前时间",
+        "use": "使用当前时间"
+      },
+      "unit": {
+        "label": "时间戳单位：",
+        "ms": "毫秒（13位）",
+        "s": "秒（10位）"
+      },
+      "toDatetime": {
+        "title": "时间戳 → 日期时间",
+        "placeholder": {
+          "ms": "请输入毫秒时间戳，如：1699999999999",
+          "s": "请输入秒时间戳，如：1699999999"
+        },
+        "button": "转换为日期时间"
+      },
+      "toTimestamp": {
+        "title": "日期时间 → 时间戳",
+        "placeholder": "请输入日期时间，如：2024-01-01 12:00:00",
+        "button": "转换为时间戳"
+      },
+      "messages": {
+        "inputTimestamp": "请输入时间戳",
+        "invalidTimestamp": "请输入有效的时间戳",
+        "success": "转换成功",
+        "errorTimestamp": "转换失败，请检查时间戳格式",
+        "inputDatetime": "请输入日期时间",
+        "invalidDatetime": "日期格式不正确",
+        "errorDatetime": "转换失败，请检查日期格式",
+        "copyEmpty": "没有可复制的内容",
+        "copySuccess": "已复制到剪贴板"
+      },
+      "info": {
+        "what": {
+          "title": "什么是时间戳？",
+          "content": "时间戳（Timestamp）是指从 1970 年 1 月 1 日 00:00:00 UTC 到指定时间的总秒数或毫秒数。也称为 Unix 时间戳或 POSIX 时间。"
+        },
+        "formats": {
+          "title": "常见格式",
+          "list": {
+            "0": "秒级时间戳：10位数字，如 1699999999",
+            "1": "毫秒级时间戳：13位数字，如 1699999999999",
+            "2": "JavaScript 使用毫秒级时间戳",
+            "3": "PHP、Python 等语言通常使用秒级时间戳"
+          }
+        },
+        "supported": {
+          "title": "支持的日期格式"
+        }
+      }
     },
     "jsonDiff": {
-      "title": "JSON 对比",
-      "description": "对比两个 JSON 文件的差异"
+      "title": "JSON 对比工具",
+      "controls": {
+        "compare": "对比 JSON"
+      },
+      "left": {
+        "title": "JSON 左侧",
+        "placeholder": "请在此粘贴左侧 JSON 内容..."
+      },
+      "right": {
+        "title": "JSON 右侧",
+        "placeholder": "请在此粘贴右侧 JSON 内容..."
+      },
+      "results": {
+        "title": "对比结果",
+        "leftTitle": "左侧对比结果",
+        "rightTitle": "右侧对比结果"
+      },
+      "messages": {
+        "inputBoth": "请在两侧都输入 JSON 内容",
+        "invalidFormat": "请确保两侧的 JSON 格式正确",
+        "compareSuccess": "JSON 对比完成",
+        "compareError": "对比过程中发生错误: {{error}}",
+        "formatError": "JSON 格式错误，请检查输入内容"
+      }
+    },
+    "jsonEditor": {
+      "title": "JSON 格式化工具",
+      "input": {
+        "title": "JSON 输入",
+        "placeholder": "请在此粘贴 JSON 内容..."
+      },
+      "output": {
+        "title": "格式化结果",
+        "placeholder": "格式化后的 JSON 将显示在这里"
+      },
+      "messages": {
+        "parseError": "JSON 解析错误: {{error}}",
+        "formatError": "JSON 格式错误，请检查输入内容"
+      }
     },
     "faviconGenerator": {
       "title": "Favicon 生成器",
-      "description": "在线生成网站图标"
+      "description": "在线生成网站图标",
+      "subtitle": "拖拽上传图片，一键生成不同尺寸的 favicon 图标",
+      "upload": {
+        "title": "图片上传",
+        "dragText": "点击或拖拽图片到此处上传",
+        "hint": "支持 PNG、JPG、JPEG、GIF 和 ICO 格式的图片文件",
+        "preview": "预览图",
+        "remove": "移除图片",
+        "generate": "生成 Favicon 图标"
+      },
+      "generated": {
+        "title": "生成的图标",
+        "loading": "正在生成图标...",
+        "download": "下载",
+        "downloadAll": "下载所有图标",
+        "empty": "请先上传图片并生成图标"
+      },
+      "messages": {
+        "invalidFormat": "只支持 PNG、JPG、JPEG、GIF 和 ICO 格式的图片！",
+        "uploadFirst": "请先上传一张图片",
+        "success": "图标生成成功！",
+        "loadError": "图片加载失败，请重试",
+        "downloadStart": "开始下载所有图标..."
+      }
     },
     "todoList": {
       "title": "待办事项",
@@ -36,7 +314,47 @@
     },
     "base64": {
       "title": "Base64 编解码",
-      "description": "Base64 编码和解码工具"
+      "description": "支持中文和 Unicode 字符的 Base64 编码和解码",
+      "encode": "编码",
+      "decode": "解码",
+      "input": "输入内容",
+      "output": "输出结果",
+      "inputPlaceholder": {
+        "encode": "请输入要编码的文本",
+        "decode": "请输入 Base64 字符串"
+      },
+      "outputPlaceholder": {
+        "encode": "Base64 编码结果",
+        "decode": "解码结果"
+      },
+      "messages": {
+        "inputEmpty": {
+          "encode": "请输入要编码的内容",
+          "decode": "请输入要解码的内容"
+        },
+        "encodeSuccess": "编码成功",
+        "encodeError": "编码失败: {{error}}",
+        "decodeSuccess": "解码成功",
+        "decodeError": "解码失败: {{error}}",
+        "decodeErrorDefault": "请确保输入的是有效的 Base64 字符串",
+        "copyEmpty": "没有可复制的内容",
+        "copySuccess": "已复制到剪贴板"
+      },
+      "info": {
+        "what": {
+          "title": "什么是 Base64？",
+          "content": "Base64 是一种用 64 个字符来表示任意二进制数据的方法。常用于在 HTTP 环境下传递较长的标识信息。使用 Base64 编码可以将二进制数据转换为文本格式，方便在文本协议中传输。"
+        },
+        "features": {
+          "title": "特点",
+          "list": {
+            "0": "将二进制数据转换为 ASCII 字符串",
+            "1": "编码后的数据大小约为原始数据的 4/3",
+            "2": "可以安全地在文本协议中传输",
+            "3": "支持中文和 Unicode 字符"
+          }
+        }
+      }
     },
     "timestamp": {
       "title": "时间戳转换",
@@ -44,7 +362,35 @@
     },
     "colorConverter": {
       "title": "颜色转换器",
-      "description": "RGB、HEX、HSL 等颜色格式转换"
+      "description": "HEX、RGB、HSL、HSV 颜色格式互相转换",
+      "formats": {
+        "hex": "HEX",
+        "rgb": "RGB",
+        "hsl": "HSL",
+        "hsv": "HSV"
+      },
+      "messages": {
+        "copySuccess": "已复制 {{label}}"
+      },
+      "info": {
+        "title": "颜色格式说明",
+        "hex": {
+          "label": "HEX：",
+          "desc": "十六进制颜色码，如 #1677ff"
+        },
+        "rgb": {
+          "label": "RGB：",
+          "desc": "红绿蓝颜色模式，如 rgb(22, 119, 255)"
+        },
+        "hsl": {
+          "label": "HSL：",
+          "desc": "色相、饱和度、亮度，如 hsl(211, 100%, 54%)"
+        },
+        "hsv": {
+          "label": "HSV：",
+          "desc": "色相、饱和度、明度，如 hsv(211, 91%, 100%)"
+        }
+      }
     },
     "uuidGenerator": {
       "title": "UUID 生成器",
@@ -52,23 +398,246 @@
     },
     "hash": {
       "title": "哈希计算",
-      "description": "计算 MD5、SHA1、SHA256 等哈希值"
+      "description": "计算文本的 MD5、SHA-1、SHA-256、SHA-512 哈希值",
+      "algorithm": "选择算法",
+      "input": "输入内容",
+      "output": "哈希结果",
+      "inputPlaceholder": "请输入要计算哈希值的文本",
+      "outputPlaceholder": "哈希值将显示在这里",
+      "calculate": "计算哈希值",
+      "messages": {
+        "inputEmpty": "请输入要计算哈希值的内容",
+        "success": "哈希值计算成功",
+        "error": "计算失败，请重试",
+        "copyEmpty": "没有可复制的内容",
+        "copySuccess": "已复制到剪贴板"
+      },
+      "info": {
+        "what": {
+          "title": "什么是哈希？",
+          "content": "哈希（Hash）是将任意长度的输入数据通过哈希算法转换为固定长度的输出数据的函数。哈希值具有以下特点："
+        },
+        "features": {
+          "0": "固定长度：无论输入多长，输出长度固定",
+          "1": "确定性：相同输入总是产生相同输出",
+          "2": "快速计算：计算哈希值非常快速",
+          "3": "单向性：无法从哈希值反推原始数据",
+          "4": "雪崩效应：输入微小变化会导致输出巨大变化"
+        },
+        "algorithms": {
+          "title": "常见算法",
+          "0": "MD5: 128 位哈希值，已不推荐用于安全场景（存在碰撞攻击）",
+          "1": "SHA-1: 160 位哈希值，也已不推荐使用（存在碰撞攻击）",
+          "2": "SHA-256: 256 位哈希值，目前广泛使用的安全哈希算法",
+          "3": "SHA-512: 512 位哈希值，安全性更高，适用于高安全要求场景"
+        },
+        "usage": {
+          "title": "使用场景",
+          "list": {
+            "0": "密码存储（加盐哈希）",
+            "1": "数据完整性校验",
+            "2": "数字签名",
+            "3": "文件校验和",
+            "4": "区块链技术"
+          }
+        }
+      }
     },
     "urlEncode": {
       "title": "URL 编解码",
-      "description": "URL 编码和解码工具"
+      "description": "URL 编码和解码工具",
+      "encode": "编码",
+      "decode": "解码",
+      "input": "输入内容",
+      "output": "输出结果",
+      "inputPlaceholder": {
+        "encode": "请输入要编码的文本",
+        "decode": "请输入 URL 编码字符串"
+      },
+      "outputPlaceholder": {
+        "encode": "URL 编码结果",
+        "decode": "解码结果"
+      },
+      "messages": {
+        "inputEmpty": "请输入内容",
+        "encodeSuccess": "编码成功",
+        "encodeError": "编码失败",
+        "decodeSuccess": "解码成功",
+        "decodeError": "解码失败，请确保输入的是有效的 URL 编码字符串",
+        "copyEmpty": "没有可复制的内容",
+        "copySuccess": "已复制到剪贴板"
+      },
+      "info": {
+        "what": {
+          "title": "什么是 URL 编码？",
+          "content": "URL 编码（URL Encoding）是一种将字符转换为 URL 安全格式的编码方式。它使用 % 后跟两位十六进制数来表示特殊字符。"
+        },
+        "why": {
+          "title": "为什么需要 URL 编码？",
+          "list": {
+            "0": "URL 只能包含 ASCII 字符（0-127）",
+            "1": "某些字符在 URL 中有特殊含义（如 ?、&、= 等）",
+            "2": "中文等非 ASCII 字符需要编码才能在 URL 中传输"
+          }
+        },
+        "examples": {
+          "title": "常见编码示例",
+          "list": {
+            "0": "空格 → %20 或 +",
+            "1": "中文\"你好\" → %E4%BD%A0%E5%A5%BD",
+            "2": "& → %26",
+            "3": "= → %3D",
+            "4": "? → %3F"
+          }
+        },
+        "usage": {
+          "title": "使用场景",
+          "list": {
+            "0": "URL 参数传递",
+            "1": "表单数据提交",
+            "2": "AJAX 请求",
+            "3": "处理包含特殊字符的文件名"
+          }
+        }
+      }
     },
-    "qrcodeGenerator": {
+    "qrCodeGenerator": {
       "title": "二维码生成器",
-      "description": "在线生成二维码"
+      "description": "将文本、URL 等内容转换为二维码图片",
+      "input": {
+        "label": "输入内容",
+        "placeholder": "请输入文本或 URL"
+      },
+      "size": "尺寸: {{size}}x{{size}}px",
+      "preview": {
+        "title": "预览",
+        "placeholder": "请输入内容生成二维码"
+      },
+      "download": "下载二维码",
+      "messages": {
+        "inputEmpty": "请输入要生成二维码的内容",
+        "downloadSuccess": "二维码已下载",
+        "downloadError": "下载失败，请重试"
+      },
+      "info": {
+        "what": {
+          "title": "什么是二维码？",
+          "content": "二维码（QR Code）是一种矩阵式二维码符号，由日本 Denso Wave 公司于 1994 年发明。它可以存储更多信息，并且具有快速读取、高容错性等特点。"
+        },
+        "features": {
+          "title": "特点",
+          "list": {
+            "0": "高容量：最多可存储 7089 个数字或 4296 个字母",
+            "1": "容错性：即使部分损坏仍可读取（支持 L/M/Q/H 四级）",
+            "2": "快速读取：全方位识别，从任何角度都能快速扫描",
+            "3": "支持中文：可以使用 UTF-8 编码存储中文"
+          }
+        },
+        "usage": {
+          "title": "使用场景",
+          "list": {
+            "0": "产品溯源和防伪",
+            "1": "移动支付",
+            "2": "电子票务",
+            "3": "网址分享",
+            "4": "电子名片",
+            "5": "WiFi 连接分享"
+          }
+        }
+      }
     },
     "regexTester": {
       "title": "正则表达式测试",
-      "description": "测试和验证正则表达式"
+      "description": "实时测试正则表达式，查看匹配结果",
+      "pattern": {
+        "label": "正则表达式",
+        "placeholder": "例如: \\d+"
+      },
+      "flags": {
+        "label": "标志位",
+        "g": "全局匹配",
+        "i": "忽略大小写",
+        "m": "多行模式",
+        "s": "点号匹配换行符"
+      },
+      "testString": {
+        "label": "测试文本",
+        "placeholder": "输入要测试的文本"
+      },
+      "matches": {
+        "title": "匹配结果 ({{count}})",
+        "match": "匹配 {{index}}",
+        "position": "位置: {{start}} - {{end}}",
+        "empty": "无匹配结果",
+        "emptyPattern": "请输入正则表达式"
+      },
+      "highlight": "高亮预览",
+      "messages": {
+        "invalidRegex": "无效的正则表达式"
+      },
+      "info": {
+        "common": {
+          "title": "常用正则表达式",
+          "list": {
+            "digit": "匹配数字",
+            "word": "匹配字母、数字、下划线",
+            "space": "匹配空白字符",
+            "any": "匹配任意字符（除换行符）",
+            "zeroOrMore": "匹配 0 次或多次",
+            "oneOrMore": "匹配 1 次或多次",
+            "zeroOrOne": "匹配 0 次或 1 次",
+            "range": "匹配 a、b 或 c",
+            "group": "匹配 abc 或 def"
+          }
+        },
+        "examples": {
+          "title": "实用示例",
+          "list": {
+            "email": "邮箱",
+            "phone": "手机号",
+            "ip": "IP地址",
+            "url": "URL"
+          }
+        }
+      }
     },
     "textDedup": {
       "title": "文本去重",
       "description": "去除文本中的重复行"
+    },
+    "markdownEditor": {
+      "title": "Markdown 编辑器",
+      "description": "Markdown 实时预览编辑器",
+      "modes": {
+        "edit": "编辑模式",
+        "split": "分栏模式",
+        "preview": "预览模式"
+      },
+      "help": {
+        "title": "Markdown 语法帮助",
+        "headers": {
+          "feature": "功能",
+          "syntax": "语法"
+        },
+        "rows": {
+          "header": { "feature": "标题", "syntax": "# H1, ## H2, ..." },
+          "bold": { "feature": "粗体", "syntax": "**Bold**" },
+          "italic": { "feature": "斜体", "syntax": "*Italic*" },
+          "quote": { "feature": "引用", "syntax": "> Quote" },
+          "codeBlock": { "feature": "代码块", "syntax": "```lang ... ```" },
+          "inlineCode": { "feature": "行内代码", "syntax": "`code`" },
+          "link": { "feature": "链接", "syntax": "[Title](url)" },
+          "image": { "feature": "图片", "syntax": "![Alt](url)" },
+          "ul": { "feature": "无序列表", "syntax": "- Item" },
+          "ol": { "feature": "有序列表", "syntax": "1. Item" },
+          "task": { "feature": "任务列表", "syntax": "- [x] Task" },
+          "table": { "feature": "表格", "syntax": "| Header |..." }
+        }
+      }
+    },
+    "textDiff": {
+      "title": "文本对比",
+      "description": "对比两段文本的差异"
     },
     "unicode": {
       "title": "Unicode 转换",
@@ -76,7 +645,66 @@
     },
     "imageBase64": {
       "title": "图片转 Base64",
-      "description": "将图片转换为 Base64 编码"
+      "description": "将图片转换为 Base64 编码",
+      "upload": {
+        "title": "选择图片",
+        "button": "选择图片",
+        "hint": "支持 PNG、JPG、GIF、WebP 等格式，最大 5MB"
+      },
+      "format": {
+        "title": "输出格式",
+        "dataUrl": "Data URL (完整)",
+        "raw": "纯 Base64 (无前缀)"
+      },
+      "preview": "图片预览",
+      "output": "Base64 结果 ({{length}} 字符)",
+      "messages": {
+        "selectImage": "请选择图片文件",
+        "invalidType": "请选择图片文件",
+        "sizeLimit": "图片大小不能超过 5MB",
+        "copyEmpty": "没有可复制的内容",
+        "copySuccess": "已复制到剪贴板"
+      },
+      "info": {
+        "what": {
+          "title": "什么是 Base64 图片？",
+          "content": "Base64 是一种用 64 个字符来表示任意二进制数据的方法。将图片转换为 Base64 编码后，可以直接嵌入 HTML、CSS 中，无需额外的 HTTP 请求。"
+        },
+        "formats": {
+          "title": "格式说明",
+          "dataUrl": {
+            "label": "Data URL: ",
+            "desc": "完整格式，包含 data:image/png;base64, 前缀，可直接用于 <img> 标签"
+          },
+          "raw": {
+            "label": "纯 Base64: ",
+            "desc": "只包含编码数据，不包含前缀"
+          }
+        },
+        "example": {
+          "title": "使用示例"
+        },
+        "prosCons": {
+          "title": "优缺点",
+          "pros": {
+            "label": "优点：",
+            "desc": "减少 HTTP 请求、可缓存、简单部署"
+          },
+          "cons": {
+            "label": "缺点：",
+            "desc": "文件体积增大约 33%、不适合大图片"
+          }
+        },
+        "usage": {
+          "title": "适用场景",
+          "list": {
+            "0": "小图标、Logo",
+            "1": "加载动画",
+            "2": "邮件嵌入图片",
+            "3": "单文件应用"
+          }
+        }
+      }
     }
   },
   "common": {
@@ -89,6 +717,9 @@
     "copy": "复制",
     "copied": "已复制",
     "clear": "清空",
+    "upload": "上传",
+    "download": "下载",
+    "swap": "交换",
     "submit": "提交",
     "cancel": "取消",
     "confirm": "确认",
@@ -101,7 +732,9 @@
     "noResults": "未找到相关工具",
     "hot": "热门工具",
     "new": "最新工具",
-    "adSpace": "广告位"
+    "adSpace": "广告位",
+    "toolsCount": "个工具",
+    "moreTools": "还有 {{count}} 个工具..."
   },
   "footer": {
     "copyright": "© 2025 ToolHub. All rights reserved.",

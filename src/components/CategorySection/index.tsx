@@ -4,6 +4,7 @@
 import React from 'react';
 import { Row, Col, Typography, Divider, Space } from 'antd';
 import { LinkOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { getToolsByCategory } from '@/constants/tools';
 import type { Category } from '@/constants/categories';
 import ToolCard from '@/components/ToolCard';
@@ -22,6 +23,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
   showAll = false,
   maxTools = 6,
 }) => {
+  const { t } = useTranslation();
   const tools = getToolsByCategory(category.id);
   const displayTools = showAll ? tools : tools.slice(0, maxTools);
   const hasMore = tools.length > maxTools;
@@ -38,14 +40,14 @@ const CategorySection: React.FC<CategorySectionProps> = ({
             <LinkOutlined />
           </div>
           <Title level={3} className="category-title">
-            {category.name}
+            {t(`nav.categories.${category.id}`)}
           </Title>
           <Text type="secondary" className="category-count">
-            ({tools.length} 个工具)
+            ({tools.length} {t('common.toolsCount')})
           </Text>
         </Space>
         <Text type="secondary" className="category-description">
-          {category.description}
+          {t(`nav.categories.desc.${category.id}`)}
         </Text>
       </div>
 
@@ -61,7 +63,7 @@ const CategorySection: React.FC<CategorySectionProps> = ({
 
       {hasMore && !showAll && (
         <div className="category-footer">
-          <LinkOutlined /> 还有 {tools.length - maxTools} 个工具...
+          <LinkOutlined /> {t('common.moreTools', { count: tools.length - maxTools, defaultValue: `还有 ${tools.length - maxTools} 个工具...` })}
         </div>
       )}
     </div>

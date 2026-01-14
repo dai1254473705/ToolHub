@@ -23,7 +23,9 @@ const Hash = lazy(() => import('@/pages/tools/Hash'));
 const URLEncode = lazy(() => import('@/pages/tools/URLEncode'));
 const QRCodeGenerator = lazy(() => import('@/pages/tools/QRCodeGenerator'));
 const RegexTester = lazy(() => import('@/pages/tools/RegexTester'));
+const MarkdownEditor = lazy(() => import('@/pages/tools/MarkdownEditor'));
 const TextDedup = lazy(() => import('@/pages/tools/TextDedup'));
+const TextDiff = lazy(() => import('@/pages/tools/TextDiff'));
 const Unicode = lazy(() => import('@/pages/tools/Unicode'));
 const ImageBase64 = lazy(() => import('@/pages/tools/ImageBase64'));
 
@@ -85,6 +87,14 @@ function buildToolRoutes(): RouteObject[] {
     },
 
     // 文本处理
+    {
+      path: '/tools/markdown-editor',
+      element: <MarkdownEditor />,
+    },
+    {
+      path: '/tools/text-diff',
+      element: <TextDiff />,
+    },
     {
       path: '/tools/text-dedup',
       element: <TextDedup />,

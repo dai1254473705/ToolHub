@@ -5,12 +5,14 @@ import React, { useState, useRef } from 'react';
 import { Card, Typography, Upload, Button, message, Space, Input, Radio } from 'antd';
 import { UploadOutlined, CopyOutlined, ClearOutlined } from '@ant-design/icons';
 import type { UploadProps } from 'antd';
+import { useTranslation } from 'react-i18next';
 import './index.less';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
 const ImageBase64: React.FC = () => {
+  const { t } = useTranslation();
   const [base64, setBase64] = useState('');
   const [preview, setPreview] = useState('');
   const [format, setFormat] = useState<'data-url' | 'raw'>('data-url');
@@ -53,11 +55,11 @@ const ImageBase64: React.FC = () => {
 
   const handleCopy = () => {
     if (!base64) {
-      message.warning('没有可复制的内容');
+      message.warning(t('tools.imageBase64.messages.copyEmpty'));
       return;
     }
     navigator.clipboard.writeText(base64);
-    message.success('已复制到剪贴板');
+    message.success(t('tools.imageBase64.messages.copySuccess'));
   };
 
   const handleClear = () => {
@@ -70,13 +72,13 @@ const ImageBase64: React.FC = () => {
 
   return (
     <div className="image-base64">
-      <Title level={2}>图片转 Base64</Title>
-      <Text type="secondary">将图片转换为 Base64 编码</Text>
+      <Title level={2}>{t('tools.imageBase64.title')}</Title>
+      <Text type="secondary">{t('tools.imageBase64.description')}</Text>
 
       <Card className="tool-card" bordered={false}>
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
           <div>
-            <Text strong>选择图片</Text>
+            <Text strong>{t('tools.imageBase64.upload.title')}</Text>
             <Upload
               accept="image/*"
               showUploadList={false}
@@ -84,17 +86,17 @@ const ImageBase64: React.FC = () => {
               beforeUpload={() => false}
               customRequest={() => {}}
             >
-              <Button icon={<UploadOutlined />}>选择图片</Button>
+              <Button icon={<UploadOutlined />}>{t('tools.imageBase64.upload.button')}</Button>
             </Upload>
             <Text type="secondary" style={{ marginLeft: 12 }}>
-              支持 PNG、JPG、GIF、WebP 等格式，最大 5MB
+              {t('tools.imageBase64.upload.hint')}
             </Text>
           </div>
 
           {preview && (
             <>
               <div>
-                <Text strong>输出格式</Text>
+                <Text strong>{t('tools.imageBase64.format.title')}</Text>
                 <Radio.Group
                   value={format}
                   onChange={(e) => {
@@ -103,13 +105,13 @@ const ImageBase64: React.FC = () => {
                   }}
                   style={{ marginTop: 8, marginLeft: 16 }}
                 >
-                  <Radio value="data-url">Data URL (完整)</Radio>
-                  <Radio value="raw">纯 Base64 (无前缀)</Radio>
+                  <Radio value="data-url">{t('tools.imageBase64.format.dataUrl')}</Radio>
+                  <Radio value="raw">{t('tools.imageBase64.format.raw')}</Radio>
                 </Radio.Group>
               </div>
 
               <div>
-                <Text strong>图片预览</Text>
+                <Text strong>{t('tools.imageBase64.preview')}</Text>
                 <div className="preview-container">
                   <img src={preview} alt="Preview" className="preview-image" />
                 </div>
@@ -117,13 +119,13 @@ const ImageBase64: React.FC = () => {
 
               <div>
                 <div className="section-header">
-                  <Text strong>Base64 结果 ({base64.length.toLocaleString()} 字符)</Text>
+                  <Text strong>{t('tools.imageBase64.output', { length: base64.length.toLocaleString() })}</Text>
                   <Space>
                     <Button size="small" icon={<CopyOutlined />} onClick={handleCopy}>
-                      复制
+                      {t('common.copy')}
                     </Button>
                     <Button size="small" icon={<ClearOutlined />} onClick={handleClear}>
-                      清空
+                      {t('common.clear')}
                     </Button>
                   </Space>
                 </div>
@@ -140,26 +142,25 @@ const ImageBase64: React.FC = () => {
       </Card>
 
       <Card className="info-card" bordered={false}>
-        <Title level={4}>什么是 Base64 图片？</Title>
+        <Title level={4}>{t('tools.imageBase64.info.what.title')}</Title>
         <Text>
-          Base64 是一种用 64 个字符来表示任意二进制数据的方法。
-          将图片转换为 Base64 编码后，可以直接嵌入 HTML、CSS 中，无需额外的 HTTP 请求。
+          {t('tools.imageBase64.info.what.content')}
         </Text>
         <Title level={4} style={{ marginTop: 16 }}>
-          格式说明
+          {t('tools.imageBase64.info.formats.title')}
         </Title>
         <ul>
           <li>
-            <Text strong>Data URL: </Text>
-            完整格式，包含<Text code>data:image/png;base64,</Text>前缀，可直接用于 &lt;img&gt; 标签
+            <Text strong>{t('tools.imageBase64.info.formats.dataUrl.label')}</Text>
+            {t('tools.imageBase64.info.formats.dataUrl.desc')}
           </li>
           <li>
-            <Text strong>纯 Base64: </Text>
-            只包含编码数据，不包含前缀
+            <Text strong>{t('tools.imageBase64.info.formats.raw.label')}</Text>
+            {t('tools.imageBase64.info.formats.raw.desc')}
           </li>
         </ul>
         <Title level={4} style={{ marginTop: 16 }}>
-          使用示例
+          {t('tools.imageBase64.info.example.title')}
         </Title>
         <div className="code-example">
           <pre>{`<!-- HTML -->
@@ -169,24 +170,24 @@ const ImageBase64: React.FC = () => {
 background-image: url(data:image/png;base64,iVBORwKGgo...);`}</pre>
         </div>
         <Title level={4} style={{ marginTop: 16 }}>
-          优缺点
+          {t('tools.imageBase64.info.prosCons.title')}
         </Title>
         <ul>
           <li>
-            <Text type="success">优点：</Text>减少 HTTP 请求、可缓存、简单部署
+            <Text type="success">{t('tools.imageBase64.info.prosCons.pros.label')}</Text>{t('tools.imageBase64.info.prosCons.pros.desc')}
           </li>
           <li>
-            <Text type="warning">缺点：</Text>文件体积增大约 33%、不适合大图片
+            <Text type="warning">{t('tools.imageBase64.info.prosCons.cons.label')}</Text>{t('tools.imageBase64.info.prosCons.cons.desc')}
           </li>
         </ul>
         <Title level={4} style={{ marginTop: 16 }}>
-          适用场景
+          {t('tools.imageBase64.info.usage.title')}
         </Title>
         <ul>
-          <li>小图标、Logo</li>
-          <li>加载动画</li>
-          <li>邮件嵌入图片</li>
-          <li>单文件应用</li>
+          <li>{t('tools.imageBase64.info.usage.list.0')}</li>
+          <li>{t('tools.imageBase64.info.usage.list.1')}</li>
+          <li>{t('tools.imageBase64.info.usage.list.2')}</li>
+          <li>{t('tools.imageBase64.info.usage.list.3')}</li>
         </ul>
       </Card>
     </div>

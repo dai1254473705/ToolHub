@@ -4,12 +4,14 @@
 import React, { useState } from 'react';
 import { Card, Row, Col, Typography, Input, Button, message, Tabs, Space } from 'antd';
 import { CopyOutlined, SwapOutlined, ClearOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import './index.less';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
 const Base64: React.FC = () => {
+  const { t } = useTranslation();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
@@ -17,7 +19,7 @@ const Base64: React.FC = () => {
   // 编码
   const handleEncode = () => {
     if (!input.trim()) {
-      message.warning('请输入要编码的内容');
+      message.warning(t('tools.base64.messages.inputEmpty.encode'));
       return;
     }
 
@@ -27,16 +29,16 @@ const Base64: React.FC = () => {
       const data = encoder.encode(input);
       const base64 = btoa(String.fromCharCode(...data));
       setOutput(base64);
-      message.success('编码成功');
+      message.success(t('tools.base64.messages.encodeSuccess'));
     } catch (error) {
-      message.error(`编码失败: ${error instanceof Error ? error.message : '未知错误'}`);
+      message.error(t('tools.base64.messages.encodeError', { error: error instanceof Error ? error.message : '未知错误' }));
     }
   };
 
   // 解码
   const handleDecode = () => {
     if (!input.trim()) {
-      message.warning('请输入要解码的内容');
+      message.warning(t('tools.base64.messages.inputEmpty.decode'));
       return;
     }
 
@@ -49,9 +51,9 @@ const Base64: React.FC = () => {
       }
       const decoder = new TextDecoder();
       setOutput(decoder.decode(bytes));
-      message.success('解码成功');
+      message.success(t('tools.base64.messages.decodeSuccess'));
     } catch (error) {
-      message.error(`解码失败: ${error instanceof Error ? error.message : '请确保输入的是有效的 Base64 字符串'}`);
+      message.error(t('tools.base64.messages.decodeError', { error: error instanceof Error ? error.message : t('tools.base64.messages.decodeErrorDefault') }));
     }
   };
 
@@ -64,12 +66,12 @@ const Base64: React.FC = () => {
   // 复制
   const handleCopy = () => {
     if (!output) {
-      message.warning('没有可复制的内容');
+      message.warning(t('tools.base64.messages.copyEmpty'));
       return;
     }
 
     navigator.clipboard.writeText(output).then(() => {
-      message.success('已复制到剪贴板');
+      message.success(t('tools.base64.messages.copySuccess'));
     });
   };
 
@@ -96,8 +98,8 @@ const Base64: React.FC = () => {
 
   return (
     <div className="base64-tool">
-      <Title level={2}>Base64 编解码</Title>
-      <Text type="secondary">支持中文和 Unicode 字符的 Base64 编码和解码</Text>
+      <Title level={2}>{t('tools.base64.title')}</Title>
+      <Text type="secondary">{t('tools.base64.description')}</Text>
 
       <Card className="tool-card" bordered={false}>
         <Tabs
@@ -106,11 +108,11 @@ const Base64: React.FC = () => {
           items={[
             {
               key: 'encode',
-              label: '编码',
+              label: t('tools.base64.encode'),
             },
             {
               key: 'decode',
-              label: '解码',
+              label: t('tools.base64.decode'),
             },
           ]}
         />
@@ -119,15 +121,15 @@ const Base64: React.FC = () => {
           <Col xs={24} md={12}>
             <div className="input-section">
               <div className="section-header">
-                <Text strong>输入内容</Text>
+                <Text strong>{t('tools.base64.input')}</Text>
                 <Button size="small" icon={<ClearOutlined />} onClick={handleClear}>
-                  清空
+                  {t('common.clear')}
                 </Button>
               </div>
               <TextArea
                 value={input}
                 onChange={(e) => handleInputChange(e.target.value)}
-                placeholder={mode === 'encode' ? '请输入要编码的文本' : '请输入 Base64 字符串'}
+                placeholder={mode === 'encode' ? t('tools.base64.inputPlaceholder.encode') : t('tools.base64.inputPlaceholder.decode')}
                 rows={10}
                 allowClear
               />
@@ -137,20 +139,20 @@ const Base64: React.FC = () => {
           <Col xs={24} md={12}>
             <div className="output-section">
               <div className="section-header">
-                <Text strong>输出结果</Text>
+                <Text strong>{t('tools.base64.output')}</Text>
                 <Space>
                   <Button size="small" icon={<SwapOutlined />} onClick={handleSwap}>
-                    交换
+                    {t('common.swap')}
                   </Button>
                   <Button size="small" icon={<CopyOutlined />} onClick={handleCopy}>
-                    复制
+                    {t('common.copy')}
                   </Button>
                 </Space>
               </div>
               <TextArea
                 value={output}
                 readOnly
-                placeholder={mode === 'encode' ? 'Base64 编码结果' : '解码结果'}
+                placeholder={mode === 'encode' ? t('tools.base64.outputPlaceholder.encode') : t('tools.base64.outputPlaceholder.decode')}
                 rows={10}
               />
             </div>
@@ -159,25 +161,24 @@ const Base64: React.FC = () => {
 
         <div className="action-section">
           <Button type="primary" size="large" onClick={handleProcess} block>
-            {mode === 'encode' ? '编码' : '解码'}
+            {mode === 'encode' ? t('tools.base64.encode') : t('tools.base64.decode')}
           </Button>
         </div>
       </Card>
 
       <Card className="info-card" bordered={false}>
-        <Title level={4}>什么是 Base64？</Title>
+        <Title level={4}>{t('tools.base64.info.what.title')}</Title>
         <Text>
-          Base64 是一种用 64 个字符来表示任意二进制数据的方法。常用于在 HTTP 环境下传递较长的标识信息。
-          使用 Base64 编码可以将二进制数据转换为文本格式，方便在文本协议中传输。
+          {t('tools.base64.info.what.content')}
         </Text>
         <Title level={4} style={{ marginTop: 16 }}>
-          特点
+          {t('tools.base64.info.features.title')}
         </Title>
         <ul>
-          <li>将二进制数据转换为 ASCII 字符串</li>
-          <li>编码后的数据大小约为原始数据的 4/3</li>
-          <li>可以安全地在文本协议中传输</li>
-          <li>支持中文和 Unicode 字符</li>
+          <li>{t('tools.base64.info.features.list.0')}</li>
+          <li>{t('tools.base64.info.features.list.1')}</li>
+          <li>{t('tools.base64.info.features.list.2')}</li>
+          <li>{t('tools.base64.info.features.list.3')}</li>
         </ul>
       </Card>
     </div>

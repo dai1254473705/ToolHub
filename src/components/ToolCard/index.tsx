@@ -5,9 +5,11 @@ import React from 'react';
 import { Card, Tag, Badge } from 'antd';
 import { StarOutlined, StarFilled, FireOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import type { Tool } from '@/constants/tools';
 import { favoriteStore } from '@/store';
+import { toCamelCase } from '@/utils/string';
 import './index.less';
 
 interface ToolCardProps {
@@ -16,6 +18,7 @@ interface ToolCardProps {
 }
 
 const ToolCard: React.FC<ToolCardProps> = ({ tool, onFavoriteToggle }) => {
+  const { t } = useTranslation();
   const isFavorite = favoriteStore.isFavorite(tool.id);
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
@@ -51,7 +54,7 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onFavoriteToggle }) => {
           <div className="tool-card-header">
             <div className="tool-icon-wrapper" style={{ backgroundColor: `${tool.iconColor || '#1677ff'}15`, color: tool.iconColor || '#1677ff' }}>
               {/* 这里应该根据 icon 名称渲染对应的图标组件，暂时用文字代替 */}
-              <span className="tool-icon-text">{tool.name.charAt(0)}</span>
+              <span className="tool-icon-text">{t(`tools.${toCamelCase(tool.id)}.title`).charAt(0)}</span>
             </div>
             <button
               className={`favorite-btn ${isFavorite ? 'is-favorite' : ''}`}
@@ -61,8 +64,8 @@ const ToolCard: React.FC<ToolCardProps> = ({ tool, onFavoriteToggle }) => {
             </button>
           </div>
 
-          <h3 className="tool-name">{tool.name}</h3>
-          <p className="tool-description">{tool.description}</p>
+          <h3 className="tool-name">{t(`tools.${toCamelCase(tool.id)}.title`)}</h3>
+          <p className="tool-description">{t(`tools.${toCamelCase(tool.id)}.description`)}</p>
 
           <div className="tool-tags">
             {tool.tags.slice(0, 3).map((tag) => (

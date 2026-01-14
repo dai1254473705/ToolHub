@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Card, Divider, Typography, Button, message, Space } from 'antd';
 import { ClearOutlined, DownloadOutlined, UploadOutlined, FileSyncOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import './index.css';
 
 const { Title } = Typography;
@@ -12,6 +13,7 @@ interface DiffLine {
 }
 
 const JSONDiff: React.FC = () => {
+  const { t } = useTranslation();
   const [jsonLeft, setJsonLeft] = useState<string>('');
   const [jsonRight, setJsonRight] = useState<string>('');
   const [diffLeft, setDiffLeft] = useState<DiffLine[]>([]);
@@ -68,12 +70,12 @@ const JSONDiff: React.FC = () => {
   // 对比JSON
   const handleCompare = () => {
     if (!jsonLeft.trim() || !jsonRight.trim()) {
-      message.warning('请在两侧都输入JSON内容');
+      message.warning(t('tools.jsonDiff.messages.inputBoth'));
       return;
     }
 
     if (isLeftValid !== true || isRightValid !== true) {
-      message.error('请确保两侧的JSON格式正确');
+      message.error(t('tools.jsonDiff.messages.invalidFormat'));
       return;
     }
 
@@ -103,9 +105,9 @@ const JSONDiff: React.FC = () => {
       setDiffLeft(leftDiff);
       setDiffRight(rightDiff);
       setIsCompared(true);
-      message.success('JSON对比完成');
+      message.success(t('tools.jsonDiff.messages.compareSuccess'));
     } catch (error) {
-      message.error(`对比过程中发生错误: ${error instanceof Error ? error.message : '未知错误'}`);
+      message.error(t('tools.jsonDiff.messages.compareError', { error: error instanceof Error ? error.message : '未知错误' }));
     }
   };
 
@@ -170,7 +172,7 @@ const JSONDiff: React.FC = () => {
 
   return (
     <div className="json-diff-container">
-      <Title level={4}>JSON对比工具</Title>
+      <Title level={4}>{t('tools.jsonDiff.title')}</Title>
       
       <div className="json-diff-controls">
         <Button 
@@ -179,34 +181,34 @@ const JSONDiff: React.FC = () => {
           onClick={handleCompare}
           disabled={isLeftValid !== true || isRightValid !== true}
         >
-          对比JSON
+          {t('tools.jsonDiff.controls.compare')}
         </Button>
       </div>
       
       <div className="json-diff-grid">
         {/* 左侧输入区域 */}
         <Card 
-          title="JSON 左侧" 
+          title={t('tools.jsonDiff.left.title')} 
           extra={
             <Space>
               <Button 
                 icon={<ClearOutlined />} 
                 onClick={handleClearLeft}
               >
-                清除
+                {t('common.clear')}
               </Button>
               <Button 
                 icon={<UploadOutlined />}
                 onClick={() => handleUploadClick(leftFileInputRef)}
               >
-                上传
+                {t('common.upload')}
               </Button>
               <Button 
                 icon={<DownloadOutlined />} 
                 onClick={() => handleDownload(jsonLeft, 'left.json')}
                 disabled={!jsonLeft}
               >
-                下载
+                {t('common.download')}
               </Button>
               <input 
                 ref={leftFileInputRef}
@@ -223,12 +225,12 @@ const JSONDiff: React.FC = () => {
             ref={leftInputRef}
             value={jsonLeft}
             onChange={(e) => setJsonLeft(e.target.value)}
-            placeholder="请在此粘贴左侧JSON内容..."
+            placeholder={t('tools.jsonDiff.left.placeholder')}
             className="json-input"
           />
           {isLeftValid === false && (
             <div className="error-message">
-              JSON格式错误，请检查输入内容
+              {t('tools.jsonDiff.messages.formatError')}
             </div>
           )}
         </Card>
@@ -238,27 +240,27 @@ const JSONDiff: React.FC = () => {
 
         {/* 右侧输入区域 */}
         <Card 
-          title="JSON 右侧" 
+          title={t('tools.jsonDiff.right.title')} 
           extra={
             <Space>
               <Button 
                 icon={<ClearOutlined />} 
                 onClick={handleClearRight}
               >
-                清除
+                {t('common.clear')}
               </Button>
               <Button 
                 icon={<UploadOutlined />}
                 onClick={() => handleUploadClick(rightFileInputRef)}
               >
-                上传
+                {t('common.upload')}
               </Button>
               <Button 
                 icon={<DownloadOutlined />} 
                 onClick={() => handleDownload(jsonRight, 'right.json')}
                 disabled={!jsonRight}
               >
-                下载
+                {t('common.download')}
               </Button>
               <input 
                 ref={rightFileInputRef}
@@ -275,12 +277,12 @@ const JSONDiff: React.FC = () => {
             ref={rightInputRef}
             value={jsonRight}
             onChange={(e) => setJsonRight(e.target.value)}
-            placeholder="请在此粘贴右侧JSON内容..."
+            placeholder={t('tools.jsonDiff.right.placeholder')}
             className="json-input"
           />
           {isRightValid === false && (
             <div className="error-message">
-              JSON格式错误，请检查输入内容
+              {t('tools.jsonDiff.messages.formatError')}
             </div>
           )}
         </Card>
@@ -289,10 +291,10 @@ const JSONDiff: React.FC = () => {
       {/* 对比结果展示 */}
       {isCompared && (
         <div className="json-diff-results">
-          <Title level={5}>对比结果</Title>
+          <Title level={5}>{t('tools.jsonDiff.results.title')}</Title>
           <div className="json-diff-results-grid">
             {/* 左侧对比结果 */}
-            <Card title="左侧对比结果" className="diff-result-card">
+            <Card title={t('tools.jsonDiff.results.leftTitle')} className="diff-result-card">
               <div className="diff-result-content">
                 {diffLeft.map((diffLine, index) => (
                   <div 
@@ -310,7 +312,7 @@ const JSONDiff: React.FC = () => {
             <Divider type="vertical" className="divider" />
 
             {/* 右侧对比结果 */}
-            <Card title="右侧对比结果" className="diff-result-card">
+            <Card title={t('tools.jsonDiff.results.rightTitle')} className="diff-result-card">
               <div className="diff-result-content">
                 {diffRight.map((diffLine, index) => (
                   <div 

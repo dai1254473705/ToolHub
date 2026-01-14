@@ -15,10 +15,12 @@ import {
   HomeOutlined,
 } from '@ant-design/icons';
 import { useLocation, Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import { CATEGORIES } from '@/constants/categories';
 import { TOOLS } from '@/constants/tools';
 import { themeStore } from '@/store';
+import { toCamelCase } from '@/utils/string';
 import './Sidebar.less';
 
 const { Sider } = Layout;
@@ -37,6 +39,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ className }) => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(false);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -69,12 +72,12 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
     {
       key: '/',
       icon: <HomeOutlined />,
-      label: <Link to="/">首页</Link>,
+      label: <Link to="/">{t('nav.home')}</Link>,
     },
     ...CATEGORIES.map((category) => ({
       key: category.id,
       icon: iconMap[category.icon as keyof typeof iconMap] || <SwapOutlined />,
-      label: category.name,
+      label: t(`nav.categories.${category.id}`),
       children: TOOLS.filter((tool) => tool.category === category.id).map((tool) => ({
         key: tool.path,
         label: (
@@ -89,7 +92,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
               }
             }}
           >
-            {tool.name}
+            {t(`tools.${toCamelCase(tool.id)}.title`)}
           </Link>
         ),
         icon: null,
@@ -160,10 +163,11 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
       onCollapse={setCollapsed}
       collapsedWidth={80}
       width={280}
+      trigger={null} // 隐藏默认的触发器，使用自定义的
       theme={themeStore.isDarkMode ? 'dark' : 'light'}
       className={`sidebar ${className} ${themeStore.isDarkMode ? 'dark' : 'light'}`}
       style={{
-        overflow: 'auto',
+        overflow: 'hidden', // 防止滚动条闪烁
         height: '100vh',
         position: 'sticky',
         top: 0,
@@ -174,40 +178,27 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
           : 'rgba(255, 255, 255, 0.95)',
         backdropFilter: 'blur(10px)',
         borderRight: themeStore.isDarkMode ? '1px solid rgba(51, 65, 85, 0.5)' : '1px solid rgba(226, 232, 240, 0.8)',
+        zIndex: 100,
       }}
     >
-      {/* Logo */}
-      <div className="sidebar-logo">
-        <Link to="/" className="logo">
-          {!collapsed ? (
-            <>
-              <span className="logo-icon">⚡</span>
-              <span className="logo-text">ToolHub</span>
-            </>
-          ) : (
-            <span className="logo-icon-collapsed">⚡</span>
-          )}
-        </Link>
-      </div>
+      <div className="sidebar-content">
+        {/* 菜单 - 使用 flex-1 占据剩余空间 */}
+        <div className="sidebar-menu-wrapper">
+          <Menu
+            mode="inline"
+            selectedKeys={[location.pathname]}
+            defaultOpenKeys={CATEGORIES.map((c) => c.id)}
+            style={{ borderRight: 0, background: 'transparent' }}
+            className="sidebar-menu"
+            items={menuItems}
+            inlineCollapsed={collapsed} // 显式传递折叠状态
+          />
+        </div>
 
-      {/* 菜单 */}
-      <Menu
-        mode="inline"
-        selectedKeys={[location.pathname]}
-        defaultOpenKeys={CATEGORIES.map((c) => c.id)}
-        style={{ borderRight: 0 }}
-        className="sidebar-menu"
-        items={menuItems}
-      />
-
-      {/* 折叠按钮 */}
-      <div className="sidebar-collapse-trigger">
-        <Button
-          type="text"
-          icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          onClick={() => setCollapsed(!collapsed)}
-          className="collapse-button"
-        />
+        {/* 折叠按钮 */}
+        <div className="sidebar-collapse-trigger" onClick={() => setCollapsed(!collapsed)}>
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </div>
       </div>
     </Sider>
   );

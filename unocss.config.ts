@@ -5,35 +5,36 @@ import presetIcons from "@unocss/preset-icons";
 export default defineConfig({
   presets: [
     presetAttributify(),
-    presetWind4(),
+    presetWind4(), // 兼容 Tailwind CSS v4
     presetIcons({
-      prefix: "i-", // 设置 icon 的默认前缀，默认就是 i-
+      prefix: "i-",
+      scale: 1.2,
+      extraProperties: {
+        'display': 'inline-block',
+        'vertical-align': 'middle',
+      },
     }),
   ],
   theme: {
     colors: {
-      primary: "#1890ff",
-      secondary: "#52c41a",
-      warning: "#faad14",
-      error: "#f5222d",
-    },
-    fontFamily: {
-      sans: [
-        "-apple-system",
-        "BlinkMacSystemFont",
-        "Segoe UI",
-        "Roboto",
-        "Oxygen",
-      ],
+      primary: {
+        50: '#f5f3ff',
+        100: '#ede9fe',
+        200: '#ddd6fe',
+        300: '#c4b5fd',
+        400: '#a78bfa',
+        500: '#8b5cf6', // 主色
+        600: '#7c3aed',
+        700: '#6d28d9',
+        800: '#5b21b6',
+        900: '#4c1d95',
+        950: '#2e1065',
+      },
     },
   },
   shortcuts: {
-    "btn-primary":
-      "bg-primary hover:bg-primary/90 text-white font-medium rounded-md px-4 py-2 transition-all",
-    "btn-secondary":
-      "bg-white dark:bg-gray-800 text-gray-800 dark:text-white border border-gray-300 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700 font-medium rounded-md px-4 py-2 transition-all",
-    card: "bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 transition-all",
-    input:
-      "w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent",
+    "flex-center": "flex items-center justify-center",
+    "btn-hover": "transition-all duration-300 hover:scale-105 active:scale-95",
+    "glass-card": "bg-white/80 dark:bg-slate-800/80 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl",
   },
 });

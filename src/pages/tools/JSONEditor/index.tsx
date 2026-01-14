@@ -2,11 +2,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Card, Divider, Typography, Button, message, Space } from 'antd';
 import { CopyOutlined, ClearOutlined, DownloadOutlined, UploadOutlined } from '@ant-design/icons';
 import Editor from '@monaco-editor/react';
+import { useTranslation } from 'react-i18next';
 import './index.css';
 
 const { Title } = Typography;
 
 const JSONEditor: React.FC = () => {
+  const { t } = useTranslation();
   const [jsonInput, setJsonInput] = useState<string>('');
   const [formattedJson, setFormattedJson] = useState<string>('');
   const [isValidJson, setIsValidJson] = useState<boolean | null>(null);
@@ -47,7 +49,7 @@ const JSONEditor: React.FC = () => {
   const handleCopy = () => {
     if (formattedJson) {
       navigator.clipboard.writeText(formattedJson).then(() => {
-        message.success('已复制到剪贴板');
+        message.success(t('common.copied'));
       });
     }
   };
@@ -120,11 +122,11 @@ const JSONEditor: React.FC = () => {
 
   return (
     <div className="json-editor-container">
-      <Title level={4}>JSON格式化工具</Title>
+      <Title level={4}>{t('tools.jsonEditor.title')}</Title>
       <div className="json-editor-grid">
         {/* 左侧输入区域 */}
         <Card 
-          title="JSON输入" 
+          title={t('tools.jsonEditor.input.title')} 
           extra={
             <Space>
               <Button 
@@ -132,7 +134,7 @@ const JSONEditor: React.FC = () => {
                 icon={<ClearOutlined />} 
                 onClick={handleClear}
               >
-                清除
+                {t('common.clear')}
               </Button>
               {/* 修改上传按钮的实现方式 */}
               <Button 
@@ -140,7 +142,7 @@ const JSONEditor: React.FC = () => {
                 icon={<UploadOutlined />}
                 onClick={handleUploadClick}
               >
-                上传
+                {t('common.upload')}
               </Button>
               {/* 将文件输入框移到按钮外部 */}
               <input 
@@ -158,12 +160,12 @@ const JSONEditor: React.FC = () => {
             ref={inputRef}
             value={jsonInput}
             onChange={(e) => setJsonInput(e.target.value)}
-            placeholder="请在此粘贴JSON内容..."
+            placeholder={t('tools.jsonEditor.input.placeholder')}
             className="json-input"
           />
           {isValidJson === false && (
             <div className="error-message">
-              JSON格式错误，请检查输入内容
+              {t('tools.jsonEditor.messages.formatError')}
             </div>
           )}
         </Card>
@@ -173,7 +175,7 @@ const JSONEditor: React.FC = () => {
 
         {/* 右侧预览区域 */}
         <Card 
-          title="格式化结果" 
+          title={t('tools.jsonEditor.output.title')} 
           extra={
             <Space>
               <Button 
@@ -181,14 +183,14 @@ const JSONEditor: React.FC = () => {
                 onClick={handleCopy}
                 disabled={!formattedJson}
               >
-                复制
+                {t('common.copy')}
               </Button>
               <Button 
                 icon={<DownloadOutlined />} 
                 onClick={handleDownload}
                 disabled={!formattedJson}
               >
-                下载
+                {t('common.download')}
               </Button>
             </Space>
           }
@@ -210,7 +212,7 @@ const JSONEditor: React.FC = () => {
             />
           ) : (
             <div className="empty-state">
-              格式化后的JSON将显示在这里
+              {t('tools.jsonEditor.output.placeholder')}
             </div>
           )}
         </Card>

@@ -1,24 +1,33 @@
 /**
- * Header 样式 - 玻璃拟态设计
+ * Header 样式
  */
 
-.app-header {
-  background: transparent;
-  padding: 0;
+.app-header.ant-layout-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
   height: 64px;
+  padding: 0 24px;
   line-height: 64px;
-  display: flex;
-  align-items: center;
-  box-shadow: none;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+
+  .dark & {
+    background: rgba(30, 41, 59, 0.8);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
 
   .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-    padding: 0 32px;
-    max-width: 100%;
+    max-width: 1200px;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
   }
 
   .header-left {
@@ -28,28 +37,28 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e293b;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: color 0.3s;
 
-      &:hover {
-        opacity: 0.85;
-        transform: scale(1.02);
+      .dark & {
+        color: #f1f5f9;
       }
 
       .logo-icon {
-        font-size: 28px;
-        line-height: 1;
+        font-size: 24px;
+      }
+      
+      .logo-text {
+        font-family: 'Space Grotesk', sans-serif;
+        letter-spacing: -0.02em;
       }
 
-      .logo-text {
-        font-size: 22px;
-        font-weight: 700;
-        font-family: 'Space Grotesk', sans-serif;
-        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+      &:hover {
+        color: #8b5cf6; // Violet 500
       }
     }
   }
@@ -57,113 +66,23 @@
   .header-right {
     display: flex;
     align-items: center;
-    gap: 8px;
-
-    .theme-toggle,
-    .github-link {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      font-size: 16px;
+    
+    .ant-btn {
       color: #64748b;
-      transition: all 0.2s ease;
-      cursor: pointer;
-
+      
       &:hover {
-        background: rgba(59, 130, 246, 0.1);
-        color: #3b82f6;
-        transform: scale(1.05);
+        color: #8b5cf6;
+        background: rgba(139, 92, 246, 0.1);
       }
-
-      &:active {
-        transform: scale(0.95);
-      }
-    }
-
-    .github-link {
-      &:hover {
-        background: rgba(0, 0, 0, 0.05);
-        color: #0f172a;
-      }
-    }
-  }
-}
-
-// 深色模式
-.dark {
-  .app-header {
-    .header-right {
-      .theme-toggle,
-      .github-link {
+      
+      .dark & {
         color: #94a3b8;
-
+        
         &:hover {
-          background: rgba(59, 130, 246, 0.15);
-          color: #f1f5f9;
+          color: #a78bfa;
+          background: rgba(167, 139, 250, 0.1);
         }
       }
-
-      .github-link {
-        &:hover {
-          background: rgba(255, 255, 255, 0.1);
-        }
-      }
-    }
-  }
-}
-
-// 响应式设计
-@media (max-width: 768px) {
-  .app-header {
-    .header-content {
-      padding: 0 16px;
-    }
-
-    .header-left {
-      .logo {
-        .logo-text {
-          font-size: 18px;
-        }
-
-        .logo-icon {
-          font-size: 24px;
-        }
-      }
-    }
-
-    .header-right {
-      gap: 4px;
-
-      .theme-toggle,
-      .github-link {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
-      }
-    }
-  }
-}
-
-// 动画和过渡
-@media (prefers-reduced-motion: no-preference) {
-  .app-header {
-    .logo,
-    .theme-toggle,
-    .github-link {
-      transition: all 0.2s ease;
-    }
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .app-header {
-    .logo,
-    .theme-toggle,
-    .github-link {
-      transition: none;
     }
   }
 }

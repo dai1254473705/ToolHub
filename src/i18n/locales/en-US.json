@@ -11,24 +11,304 @@
       "code": "Code Processing",
       "convert": "Converters",
       "encrypt": "Encryption",
+      "crypto": "Encryption",
       "image": "Image Processing",
       "text": "Text Processing",
       "color": "Color Tools",
-      "efficiency": "Productivity"
+      "efficiency": "Productivity",
+      "productivity": "Productivity",
+      "desc": {
+        "code": "JSON editor, Regex tester, etc.",
+        "convert": "Base64, URL encode, Timestamp, Unicode, etc.",
+        "crypto": "Hash algorithms, UUID generator, etc.",
+        "image": "Favicon generator, Image to Base64, etc.",
+        "text": "Text diff, dedup, Markdown editor, etc.",
+        "color": "Color format converter, palette, etc.",
+        "productivity": "Todo list, QR code generator, etc."
+      }
     }
   },
   "tools": {
+    "todoList": {
+      "title": "Todo List",
+      "description": "Manage your tasks and todos",
+      "add": "Add Task",
+      "edit": "Edit Task",
+      "update": "Update",
+      "total": "Total",
+      "pending": "Pending",
+      "completed": "Completed",
+      "tabs": {
+        "all": "All Tasks",
+        "pending": "Pending",
+        "completed": "Completed"
+      },
+      "empty": {
+        "all": "No tasks",
+        "pending": "No pending tasks",
+        "completed": "No completed tasks"
+      },
+      "form": {
+        "title": "Task Title",
+        "titlePlaceholder": "Enter task title",
+        "desc": "Description",
+        "descPlaceholder": "Enter description (optional)",
+        "priority": "Priority",
+        "priorityPlaceholder": "Select priority",
+        "priorities": {
+          "high": "High Priority",
+          "medium": "Medium Priority",
+          "low": "Low Priority"
+        },
+        "required": "Please enter task title"
+      },
+      "item": {
+        "deleteConfirm": "Are you sure you want to delete this task?",
+        "markUncomplete": "Mark as incomplete",
+        "markComplete": "Mark as completed",
+        "edit": "Edit task",
+        "delete": "Delete task",
+        "created": "Created: ",
+        "updated": "Updated: "
+      }
+    },
+    "textDedup": {
+      "title": "Text Deduplication",
+      "description": "Remove duplicate lines from text with various options",
+      "options": {
+        "title": "Options",
+        "ignoreCase": "Ignore Case",
+        "trim": "Trim Whitespace",
+        "removeEmpty": "Remove Empty Lines",
+        "sort": {
+          "title": "Sort: ",
+          "none": "None",
+          "asc": "Ascending",
+          "desc": "Descending"
+        }
+      },
+      "input": "Input Text",
+      "result": "Result",
+      "stats": "{{result}} lines remaining, removed {{removed}} duplicates",
+      "placeholder": "Enter text, one per line",
+      "messages": {
+        "copyEmpty": "No content to copy",
+        "copySuccess": "Copied to clipboard"
+      },
+      "info": {
+        "title": "Instructions",
+        "usage": "Use Cases",
+        "list": {
+          "0": "Clean data lists",
+          "1": "Remove duplicate URLs",
+          "2": "Organize keywords",
+          "3": "Clean config files",
+          "4": "Deduplicate email lists"
+        }
+      }
+    },
+    "uuidGenerator": {
+      "title": "UUID Generator",
+      "description": "Generate random UUIDs (Universally Unique Identifiers)",
+      "version": "UUID Version",
+      "count": "Count",
+      "generate": "Generate",
+      "copyAll": "Copy All",
+      "results": "Results",
+      "messages": {
+        "generated": "Generated {{count}} UUIDs",
+        "empty": "Please generate UUIDs first",
+        "copySuccess": "Copied {{count}} UUIDs to clipboard"
+      },
+      "info": {
+        "what": {
+          "title": "What is UUID?",
+          "content": "UUID (Universally Unique Identifier) is a 128-bit identifier. It is commonly used as a unique identifier in software development for database keys, distributed systems, etc."
+        },
+        "versions": {
+          "title": "UUID Versions",
+          "v4": "UUID v4: Randomly generated, most commonly used. Uses 122 random bits and 6 fixed bits, virtually impossible to duplicate.",
+          "v1": "UUID v1: Based on timestamp and MAC address (deprecated due to privacy concerns)."
+        },
+        "usage": {
+          "title": "Use Cases",
+          "list": {
+            "0": "Database primary keys",
+            "1": "Unique IDs in distributed systems",
+            "2": "Session identifiers",
+            "3": "Temporary filenames",
+            "4": "Linking data across systems"
+          }
+        }
+      }
+    },
+    "unicode": {
+      "title": "Unicode Converter",
+      "description": "Convert between text and Unicode escape sequences",
+      "tabs": {
+        "encode": "Encode (Text → Unicode)",
+        "decode": "Decode (Unicode → Text)"
+      },
+      "input": "Input",
+      "result": "Result",
+      "placeholders": {
+        "encode": "Enter text to encode",
+        "decode": "Enter Unicode, e.g., \\u4f60\\u597d",
+        "encodeResult": "Encoded result",
+        "decodeResult": "Decoded result"
+      },
+      "analysis": "Character Analysis:",
+      "messages": {
+        "decodeError": "Decode failed: Invalid Unicode format",
+        "copyEmpty": "No content to copy",
+        "copySuccess": "Copied to clipboard"
+      },
+      "info": {
+        "what": {
+          "title": "What is Unicode?",
+          "content": "Unicode is a character encoding standard that assigns a unique number for every character across languages. Unicode escape sequences typically start with \\u followed by 4 hexadecimal digits."
+        },
+        "examples": {
+          "title": "Examples"
+        },
+        "usage": {
+          "title": "Use Cases",
+          "list": {
+            "0": "Displaying characters in JavaScript strings",
+            "1": "Handling config files with special characters",
+            "2": "Debugging encoding issues",
+            "3": "Data transmission and storage",
+            "4": "Preventing mojibake"
+          }
+        }
+      }
+    },
+    "timestamp": {
+      "title": "Timestamp Converter",
+      "description": "Convert between Unix timestamp and datetime",
+      "current": {
+        "ms": "Current Timestamp (ms)",
+        "s": "Current Timestamp (s)",
+        "datetime": "Current Time",
+        "use": "Use Current Time"
+      },
+      "unit": {
+        "label": "Unit: ",
+        "ms": "Milliseconds (13 digits)",
+        "s": "Seconds (10 digits)"
+      },
+      "toDatetime": {
+        "title": "Timestamp → Datetime",
+        "placeholder": {
+          "ms": "Enter ms timestamp, e.g., 1699999999999",
+          "s": "Enter s timestamp, e.g., 1699999999"
+        },
+        "button": "Convert to Datetime"
+      },
+      "toTimestamp": {
+        "title": "Datetime → Timestamp",
+        "placeholder": "Enter datetime, e.g., 2024-01-01 12:00:00",
+        "button": "Convert to Timestamp"
+      },
+      "messages": {
+        "inputTimestamp": "Please enter timestamp",
+        "invalidTimestamp": "Please enter a valid timestamp",
+        "success": "Converted successfully",
+        "errorTimestamp": "Conversion failed, check timestamp format",
+        "inputDatetime": "Please enter datetime",
+        "invalidDatetime": "Invalid date format",
+        "errorDatetime": "Conversion failed, check date format",
+        "copyEmpty": "No content to copy",
+        "copySuccess": "Copied to clipboard"
+      },
+      "info": {
+        "what": {
+          "title": "What is Timestamp?",
+          "content": "A timestamp is a sequence of characters or encoded information identifying when a certain event occurred, usually giving date and time of day, sometimes accurate to a small fraction of a second."
+        },
+        "formats": {
+          "title": "Common Formats",
+          "list": {
+            "0": "Seconds: 10 digits, e.g., 1699999999",
+            "1": "Milliseconds: 13 digits, e.g., 1699999999999",
+            "2": "JavaScript uses milliseconds",
+            "3": "PHP, Python usually use seconds"
+          }
+        },
+        "supported": {
+          "title": "Supported Date Formats"
+        }
+      }
+    },
     "jsonEditor": {
-      "title": "JSON Editor",
-      "description": "Online JSON editor with formatting, validation, and syntax highlighting"
+      "title": "JSON Formatter",
+      "description": "JSON format, validate and edit",
+      "input": {
+        "title": "JSON Input",
+        "placeholder": "Paste JSON content here..."
+      },
+      "output": {
+        "title": "Formatted Result",
+        "placeholder": "Formatted JSON will appear here"
+      },
+      "messages": {
+        "parseError": "JSON parse error: {{error}}",
+        "formatError": "Invalid JSON format, please check input"
+      }
     },
     "jsonDiff": {
-      "title": "JSON Diff",
-      "description": "Compare differences between two JSON files"
+      "title": "JSON Diff Tool",
+      "description": "Compare differences between two JSON files",
+      "controls": {
+        "compare": "Compare JSON"
+      },
+      "left": {
+        "title": "JSON Left",
+        "placeholder": "Paste left JSON content here..."
+      },
+      "right": {
+        "title": "JSON Right",
+        "placeholder": "Paste right JSON content here..."
+      },
+      "results": {
+        "title": "Comparison Results",
+        "leftTitle": "Left Result",
+        "rightTitle": "Right Result"
+      },
+      "messages": {
+        "inputBoth": "Please enter JSON content on both sides",
+        "invalidFormat": "Please ensure both JSON formats are correct",
+        "compareSuccess": "JSON comparison completed",
+        "compareError": "Error during comparison: {{error}}",
+        "formatError": "Invalid JSON format, please check input"
+      }
     },
     "faviconGenerator": {
       "title": "Favicon Generator",
-      "description": "Generate website favicons online"
+      "description": "Generate website favicons online",
+      "subtitle": "Drag and drop image to generate favicons in different sizes",
+      "upload": {
+        "title": "Image Upload",
+        "dragText": "Click or drag image here to upload",
+        "hint": "Supports PNG, JPG, JPEG, GIF and ICO formats",
+        "preview": "Preview",
+        "remove": "Remove Image",
+        "generate": "Generate Favicons"
+      },
+      "generated": {
+        "title": "Generated Icons",
+        "loading": "Generating icons...",
+        "download": "Download",
+        "downloadAll": "Download All Icons",
+        "empty": "Please upload image and generate icons first"
+      },
+      "messages": {
+        "invalidFormat": "Only PNG, JPG, JPEG, GIF and ICO formats are supported!",
+        "uploadFirst": "Please upload an image first",
+        "success": "Icons generated successfully!",
+        "loadError": "Failed to load image, please try again",
+        "downloadStart": "Starting download of all icons..."
+      }
     },
     "todoList": {
       "title": "Todo List",
@@ -36,7 +316,47 @@
     },
     "base64": {
       "title": "Base64 Encoder/Decoder",
-      "description": "Base64 encoding and decoding tool"
+      "description": "Base64 encode and decode with Unicode support",
+      "encode": "Encode",
+      "decode": "Decode",
+      "input": "Input",
+      "output": "Output",
+      "inputPlaceholder": {
+        "encode": "Enter text to encode",
+        "decode": "Enter Base64 string"
+      },
+      "outputPlaceholder": {
+        "encode": "Encoded result",
+        "decode": "Decoded result"
+      },
+      "messages": {
+        "inputEmpty": {
+          "encode": "Please enter content to encode",
+          "decode": "Please enter content to decode"
+        },
+        "encodeSuccess": "Encoded successfully",
+        "encodeError": "Encoding failed: {{error}}",
+        "decodeSuccess": "Decoded successfully",
+        "decodeError": "Decoding failed: {{error}}",
+        "decodeErrorDefault": "Please ensure input is a valid Base64 string",
+        "copyEmpty": "No content to copy",
+        "copySuccess": "Copied to clipboard"
+      },
+      "info": {
+        "what": {
+          "title": "What is Base64?",
+          "content": "Base64 is a group of binary-to-text encoding schemes that represent binary data in an ASCII string format by translating it into a radix-64 representation. It is commonly used to transfer data over media that are designed to deal with textual data."
+        },
+        "features": {
+          "title": "Features",
+          "list": {
+            "0": "Converts binary data to ASCII strings",
+            "1": "Encoded size is approximately 4/3 of original size",
+            "2": "Safe for transfer in text protocols",
+            "3": "Supports Chinese and Unicode characters"
+          }
+        }
+      }
     },
     "timestamp": {
       "title": "Timestamp Converter",
@@ -44,7 +364,35 @@
     },
     "colorConverter": {
       "title": "Color Converter",
-      "description": "Convert between RGB, HEX, HSL and other color formats"
+      "description": "Convert between HEX, RGB, HSL, and HSV formats",
+      "formats": {
+        "hex": "HEX",
+        "rgb": "RGB",
+        "hsl": "HSL",
+        "hsv": "HSV"
+      },
+      "messages": {
+        "copySuccess": "Copied {{label}}"
+      },
+      "info": {
+        "title": "Color Format Guide",
+        "hex": {
+          "label": "HEX: ",
+          "desc": "Hexadecimal color code, e.g., #1677ff"
+        },
+        "rgb": {
+          "label": "RGB: ",
+          "desc": "Red Green Blue color model, e.g., rgb(22, 119, 255)"
+        },
+        "hsl": {
+          "label": "HSL: ",
+          "desc": "Hue, Saturation, Lightness, e.g., hsl(211, 100%, 54%)"
+        },
+        "hsv": {
+          "label": "HSV: ",
+          "desc": "Hue, Saturation, Value, e.g., hsv(211, 91%, 100%)"
+        }
+      }
     },
     "uuidGenerator": {
       "title": "UUID Generator",
@@ -52,23 +400,246 @@
     },
     "hash": {
       "title": "Hash Calculator",
-      "description": "Calculate MD5, SHA1, SHA256 and other hash values"
+      "description": "Calculate MD5, SHA-1, SHA-256, SHA-512 hashes",
+      "algorithm": "Select Algorithm",
+      "input": "Input",
+      "output": "Hash Result",
+      "inputPlaceholder": "Enter text to calculate hash",
+      "outputPlaceholder": "Hash value will be displayed here",
+      "calculate": "Calculate Hash",
+      "messages": {
+        "inputEmpty": "Please enter content to calculate hash",
+        "success": "Hash calculated successfully",
+        "error": "Calculation failed, please try again",
+        "copyEmpty": "No content to copy",
+        "copySuccess": "Copied to clipboard"
+      },
+      "info": {
+        "what": {
+          "title": "What is Hash?",
+          "content": "A hash function is any function that can be used to map data of arbitrary size to fixed-size values. Hash values have the following characteristics:"
+        },
+        "features": {
+          "0": "Fixed Length: Output length is fixed regardless of input size",
+          "1": "Deterministic: Same input always produces same output",
+          "2": "Fast Computation: Hash calculation is very fast",
+          "3": "One-way: Cannot derive original data from hash value",
+          "4": "Avalanche Effect: Small change in input leads to huge change in output"
+        },
+        "algorithms": {
+          "title": "Common Algorithms",
+          "0": "MD5: 128-bit hash, not recommended for security (collision attacks exist)",
+          "1": "SHA-1: 160-bit hash, also not recommended (collision attacks exist)",
+          "2": "SHA-256: 256-bit hash, widely used secure hash algorithm",
+          "3": "SHA-512: 512-bit hash, higher security, suitable for high security requirements"
+        },
+        "usage": {
+          "title": "Usage Scenarios",
+          "list": {
+            "0": "Password storage (salted hash)",
+            "1": "Data integrity verification",
+            "2": "Digital signatures",
+            "3": "File checksums",
+            "4": "Blockchain technology"
+          }
+        }
+      }
     },
     "urlEncode": {
       "title": "URL Encoder/Decoder",
-      "description": "URL encoding and decoding tool"
+      "description": "URL encoding and decoding tool",
+      "encode": "Encode",
+      "decode": "Decode",
+      "input": "Input",
+      "output": "Output",
+      "inputPlaceholder": {
+        "encode": "Enter text to encode",
+        "decode": "Enter URL encoded string"
+      },
+      "outputPlaceholder": {
+        "encode": "Encoded result",
+        "decode": "Decoded result"
+      },
+      "messages": {
+        "inputEmpty": "Please enter content",
+        "encodeSuccess": "Encoded successfully",
+        "encodeError": "Encoding failed",
+        "decodeSuccess": "Decoded successfully",
+        "decodeError": "Decoding failed, please ensure input is a valid URL encoded string",
+        "copyEmpty": "No content to copy",
+        "copySuccess": "Copied to clipboard"
+      },
+      "info": {
+        "what": {
+          "title": "What is URL Encoding?",
+          "content": "URL Encoding is a mechanism for encoding information in a Uniform Resource Identifier (URI). It uses % followed by two hexadecimal digits to represent special characters."
+        },
+        "why": {
+          "title": "Why is URL Encoding needed?",
+          "list": {
+            "0": "URLs can only contain ASCII characters (0-127)",
+            "1": "Some characters have special meanings in URLs (e.g., ?, &, =)",
+            "2": "Non-ASCII characters like Chinese must be encoded to be transmitted in URLs"
+          }
+        },
+        "examples": {
+          "title": "Common Examples",
+          "list": {
+            "0": "Space → %20 or +",
+            "1": "Chinese \"Hello\" → %E4%BD%A0%E5%A5%BD",
+            "2": "& → %26",
+            "3": "= → %3D",
+            "4": "? → %3F"
+          }
+        },
+        "usage": {
+          "title": "Usage Scenarios",
+          "list": {
+            "0": "URL parameter passing",
+            "1": "Form data submission",
+            "2": "AJAX requests",
+            "3": "Handling filenames with special characters"
+          }
+        }
+      }
     },
-    "qrcodeGenerator": {
+    "markdownEditor": {
+      "title": "Markdown Editor",
+      "description": "Markdown editor with live preview",
+      "modes": {
+        "edit": "Edit Mode",
+        "split": "Split Mode",
+        "preview": "Preview Mode"
+      },
+      "help": {
+        "title": "Markdown Syntax Help",
+        "headers": {
+          "feature": "Feature",
+          "syntax": "Syntax"
+        },
+        "rows": {
+          "header": { "feature": "Header", "syntax": "# H1, ## H2, ..." },
+          "bold": { "feature": "Bold", "syntax": "**Bold**" },
+          "italic": { "feature": "Italic", "syntax": "*Italic*" },
+          "quote": { "feature": "Quote", "syntax": "> Quote" },
+          "codeBlock": { "feature": "Code Block", "syntax": "```lang ... ```" },
+          "inlineCode": { "feature": "Inline Code", "syntax": "`code`" },
+          "link": { "feature": "Link", "syntax": "[Title](url)" },
+          "image": { "feature": "Image", "syntax": "![Alt](url)" },
+          "ul": { "feature": "Unordered List", "syntax": "- Item" },
+          "ol": { "feature": "Ordered List", "syntax": "1. Item" },
+          "task": { "feature": "Task List", "syntax": "- [x] Task" },
+          "table": { "feature": "Table", "syntax": "| Header |..." }
+        }
+      }
+    },
+    "qrCodeGenerator": {
       "title": "QR Code Generator",
-      "description": "Generate QR codes online"
+      "description": "Convert text, URL, etc. to QR code images",
+      "input": {
+        "label": "Input Content",
+        "placeholder": "Enter text or URL"
+      },
+      "size": "Size: {{size}}x{{size}}px",
+      "preview": {
+        "title": "Preview",
+        "placeholder": "Enter content to generate QR code"
+      },
+      "download": "Download QR Code",
+      "messages": {
+        "inputEmpty": "Please enter content to generate QR code",
+        "downloadSuccess": "QR Code downloaded",
+        "downloadError": "Download failed, please try again"
+      },
+      "info": {
+        "what": {
+          "title": "What is QR Code?",
+          "content": "QR Code is a matrix barcode invented by Denso Wave in 1994. It can store more information and has features like fast reading and high fault tolerance."
+        },
+        "features": {
+          "title": "Features",
+          "list": {
+            "0": "High Capacity: Up to 7089 digits or 4296 characters",
+            "1": "Fault Tolerance: Readable even if partially damaged (L/M/Q/H levels)",
+            "2": "Fast Reading: Omni-directional recognition",
+            "3": "Chinese Support: UTF-8 encoding supported"
+          }
+        },
+        "usage": {
+          "title": "Usage Scenarios",
+          "list": {
+            "0": "Product traceability and anti-counterfeiting",
+            "1": "Mobile payment",
+            "2": "E-ticketing",
+            "3": "URL sharing",
+            "4": "Digital business cards",
+            "5": "WiFi connection sharing"
+          }
+        }
+      }
     },
     "regexTester": {
       "title": "Regex Tester",
-      "description": "Test and validate regular expressions"
+      "description": "Test regular expressions in real-time",
+      "pattern": {
+        "label": "Regular Expression",
+        "placeholder": "e.g., \\d+"
+      },
+      "flags": {
+        "label": "Flags",
+        "g": "Global match",
+        "i": "Case insensitive",
+        "m": "Multiline mode",
+        "s": "Dot matches newline"
+      },
+      "testString": {
+        "label": "Test String",
+        "placeholder": "Enter text to test"
+      },
+      "matches": {
+        "title": "Matches ({{count}})",
+        "match": "Match {{index}}",
+        "position": "Pos: {{start}} - {{end}}",
+        "empty": "No matches",
+        "emptyPattern": "Please enter regex"
+      },
+      "highlight": "Highlight Preview",
+      "messages": {
+        "invalidRegex": "Invalid regular expression"
+      },
+      "info": {
+        "common": {
+          "title": "Common Syntax",
+          "list": {
+            "digit": "Match digit",
+            "word": "Match word character",
+            "space": "Match whitespace",
+            "any": "Match any character (except newline)",
+            "zeroOrMore": "Match 0 or more times",
+            "oneOrMore": "Match 1 or more times",
+            "zeroOrOne": "Match 0 or 1 time",
+            "range": "Match a, b, or c",
+            "group": "Match abc or def"
+          }
+        },
+        "examples": {
+          "title": "Examples",
+          "list": {
+            "email": "Email",
+            "phone": "Phone",
+            "ip": "IP Address",
+            "url": "URL"
+          }
+        }
+      }
     },
     "textDedup": {
       "title": "Text Deduplication",
       "description": "Remove duplicate lines from text"
+    },
+    "textDiff": {
+      "title": "Text Diff",
+      "description": "Compare differences between two text segments"
     },
     "unicode": {
       "title": "Unicode Converter",
@@ -76,7 +647,66 @@
     },
     "imageBase64": {
       "title": "Image to Base64",
-      "description": "Convert images to Base64 encoding"
+      "description": "Convert images to Base64 encoding",
+      "upload": {
+        "title": "Select Image",
+        "button": "Select Image",
+        "hint": "Supports PNG, JPG, GIF, WebP formats, max 5MB"
+      },
+      "format": {
+        "title": "Output Format",
+        "dataUrl": "Data URL (Full)",
+        "raw": "Raw Base64 (No Prefix)"
+      },
+      "preview": "Image Preview",
+      "output": "Base64 Result ({{length}} chars)",
+      "messages": {
+        "selectImage": "Please select an image file",
+        "invalidType": "Please select an image file",
+        "sizeLimit": "Image size cannot exceed 5MB",
+        "copyEmpty": "No content to copy",
+        "copySuccess": "Copied to clipboard"
+      },
+      "info": {
+        "what": {
+          "title": "What is Base64 Image?",
+          "content": "Base64 is a binary-to-text encoding scheme. Converting images to Base64 allows embedding them directly into HTML/CSS without additional HTTP requests."
+        },
+        "formats": {
+          "title": "Format Guide",
+          "dataUrl": {
+            "label": "Data URL: ",
+            "desc": "Full format with data:image/png;base64, prefix, ready for <img> tags"
+          },
+          "raw": {
+            "label": "Raw Base64: ",
+            "desc": "Encoded data only, no prefix"
+          }
+        },
+        "example": {
+          "title": "Usage Example"
+        },
+        "prosCons": {
+          "title": "Pros & Cons",
+          "pros": {
+            "label": "Pros: ",
+            "desc": "Reduces HTTP requests, cacheable, simple deployment"
+          },
+          "cons": {
+            "label": "Cons: ",
+            "desc": "File size increases by ~33%, not suitable for large images"
+          }
+        },
+        "usage": {
+          "title": "Use Cases",
+          "list": {
+            "0": "Small icons, Logos",
+            "1": "Loading animations",
+            "2": "Email embedded images",
+            "3": "Single-file applications"
+          }
+        }
+      }
     }
   },
   "common": {
@@ -89,6 +719,9 @@
     "copy": "Copy",
     "copied": "Copied",
     "clear": "Clear",
+    "upload": "Upload",
+    "download": "Download",
+    "swap": "Swap",
     "submit": "Submit",
     "cancel": "Cancel",
     "confirm": "Confirm",
@@ -101,7 +734,9 @@
     "noResults": "No tools found",
     "hot": "Hot Tools",
     "new": "New Tools",
-    "adSpace": "Advertisement"
+    "adSpace": "Advertisement",
+    "toolsCount": "tools",
+    "moreTools": "{{count}} more tools..."
   },
   "footer": {
     "copyright": "© 2025 ToolHub. All rights reserved.",

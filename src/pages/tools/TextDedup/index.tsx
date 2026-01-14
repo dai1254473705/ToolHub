@@ -4,12 +4,14 @@
 import React, { useState, useMemo } from 'react';
 import { Card, Typography, Input, Button, message, Space, Checkbox, Radio } from 'antd';
 import { CopyOutlined, ClearOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import './index.less';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
 const TextDedup: React.FC = () => {
+  const { t } = useTranslation();
   const [input, setInput] = useState('');
   const [ignoreCase, setIgnoreCase] = useState(false);
   const [trimSpaces, setTrimSpaces] = useState(true);
@@ -68,11 +70,11 @@ const TextDedup: React.FC = () => {
 
   const handleCopy = () => {
     if (!result) {
-      message.warning('没有可复制的内容');
+      message.warning(t('tools.textDedup.messages.copyEmpty'));
       return;
     }
     navigator.clipboard.writeText(result);
-    message.success('已复制到剪贴板');
+    message.success(t('tools.textDedup.messages.copySuccess'));
   };
 
   const handleClear = () => {
@@ -81,45 +83,45 @@ const TextDedup: React.FC = () => {
 
   return (
     <div className="text-dedup">
-      <Title level={2}>文本去重</Title>
-      <Text type="secondary">去除文本中的重复行，支持多种选项</Text>
+      <Title level={2}>{t('tools.textDedup.title')}</Title>
+      <Text type="secondary">{t('tools.textDedup.description')}</Text>
 
       <Card className="tool-card" bordered={false}>
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
           <div>
-            <Text strong>选项</Text>
+            <Text strong>{t('tools.textDedup.options.title')}</Text>
             <div className="options-section">
               <Checkbox checked={ignoreCase} onChange={(e) => setIgnoreCase(e.target.checked)}>
-                忽略大小写
+                {t('tools.textDedup.options.ignoreCase')}
               </Checkbox>
               <Checkbox checked={trimSpaces} onChange={(e) => setTrimSpaces(e.target.checked)}>
-                去除首尾空格
+                {t('tools.textDedup.options.trim')}
               </Checkbox>
               <Checkbox checked={removeEmpty} onChange={(e) => setRemoveEmpty(e.target.checked)}>
-                移除空行
+                {t('tools.textDedup.options.removeEmpty')}
               </Checkbox>
             </div>
             <div className="sort-section">
-              <Text strong>排序：</Text>
+              <Text strong>{t('tools.textDedup.options.sort.title')}</Text>
               <Radio.Group value={sortResult} onChange={(e) => setSortResult(e.target.value)}>
-                <Radio value="none">不排序</Radio>
-                <Radio value="asc">升序</Radio>
-                <Radio value="desc">降序</Radio>
+                <Radio value="none">{t('tools.textDedup.options.sort.none')}</Radio>
+                <Radio value="asc">{t('tools.textDedup.options.sort.asc')}</Radio>
+                <Radio value="desc">{t('tools.textDedup.options.sort.desc')}</Radio>
               </Radio.Group>
             </div>
           </div>
 
           <div>
             <div className="section-header">
-              <Text strong>输入文本 ({stats.original} 行)</Text>
+              <Text strong>{t('tools.textDedup.input')} ({stats.original})</Text>
               <Button size="small" icon={<ClearOutlined />} onClick={handleClear}>
-                清空
+                {t('common.clear')}
               </Button>
             </div>
             <TextArea
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="请输入文本，每行一条"
+              placeholder={t('tools.textDedup.placeholder')}
               rows={10}
               allowClear
             />
@@ -128,7 +130,7 @@ const TextDedup: React.FC = () => {
           {input && (
             <div>
               <div className="stats-info">
-                <Text>去重后 <Text strong>{stats.result}</Text> 行，移除了 <Text strong type="danger">{stats.removed}</Text> 行重复内容</Text>
+                <Text>{t('tools.textDedup.stats', { result: stats.result, removed: stats.removed })}</Text>
               </div>
             </div>
           )}
@@ -136,9 +138,9 @@ const TextDedup: React.FC = () => {
           {result && (
             <div>
               <div className="section-header">
-                <Text strong>去重结果 ({stats.result} 行)</Text>
+                <Text strong>{t('tools.textDedup.result')} ({stats.result})</Text>
                 <Button size="small" icon={<CopyOutlined />} onClick={handleCopy}>
-                  复制
+                  {t('common.copy')}
                 </Button>
               </div>
               <TextArea
@@ -153,34 +155,34 @@ const TextDedup: React.FC = () => {
       </Card>
 
       <Card className="info-card" bordered={false}>
-        <Title level={4}>使用说明</Title>
+        <Title level={4}>{t('tools.textDedup.info.title')}</Title>
         <ul>
           <li>
-            <Text strong>忽略大小写：</Text>
+            <Text strong>{t('tools.textDedup.options.ignoreCase')}：</Text>
             开启后，"ABC" 和 "abc" 会被视为相同内容
           </li>
           <li>
-            <Text strong>去除首尾空格：</Text>
+            <Text strong>{t('tools.textDedup.options.trim')}：</Text>
             开启后，比较时会忽略每行首尾的空格
           </li>
           <li>
-            <Text strong>移除空行：</Text>
+            <Text strong>{t('tools.textDedup.options.removeEmpty')}：</Text>
             自动删除所有空白行
           </li>
           <li>
-            <Text strong>排序：</Text>
+            <Text strong>{t('tools.textDedup.options.sort.title')}：</Text>
             可选择升序或降序排列结果
           </li>
         </ul>
         <Title level={4} style={{ marginTop: 16 }}>
-          使用场景
+          {t('tools.textDedup.info.usage')}
         </Title>
         <ul>
-          <li>清洗数据列表</li>
-          <li>去除重复的 URL</li>
-          <li>整理关键词列表</li>
-          <li>清理配置文件</li>
-          <li>去重邮箱列表</li>
+          <li>{t('tools.textDedup.info.list.0')}</li>
+          <li>{t('tools.textDedup.info.list.1')}</li>
+          <li>{t('tools.textDedup.info.list.2')}</li>
+          <li>{t('tools.textDedup.info.list.3')}</li>
+          <li>{t('tools.textDedup.info.list.4')}</li>
         </ul>
       </Card>
     </div>

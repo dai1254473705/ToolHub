@@ -4,6 +4,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Card, Row, Col, Typography, Input, Checkbox, Space } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import './index.less';
 
 const { Title, Text } = Typography;
@@ -17,6 +18,7 @@ interface MatchResult {
 }
 
 const RegexTester: React.FC = () => {
+  const { t } = useTranslation();
   const [pattern, setPattern] = useState('');
   const [flags, setFlags] = useState('g');
   const [testString, setTestString] = useState('');
@@ -68,7 +70,7 @@ const RegexTester: React.FC = () => {
       }
       setError('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : '无效的正则表达式');
+      setError(err instanceof Error ? err.message : t('tools.regexTester.messages.invalidRegex'));
       setMatches([]);
     }
   }, [pattern, flags, testString]);
@@ -103,17 +105,17 @@ const RegexTester: React.FC = () => {
 
   return (
     <div className="regex-tester">
-      <Title level={2}>正则表达式测试</Title>
-      <Text type="secondary">实时测试正则表达式，查看匹配结果</Text>
+      <Title level={2}>{t('tools.regexTester.title')}</Title>
+      <Text type="secondary">{t('tools.regexTester.description')}</Text>
 
       <Card className="tool-card" bordered={false}>
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
           <div>
-            <Text strong>正则表达式</Text>
+            <Text strong>{t('tools.regexTester.pattern.label')}</Text>
             <Input
               value={pattern}
               onChange={(e) => setPattern(e.target.value)}
-              placeholder="例如: \d+"
+              placeholder={t('tools.regexTester.pattern.placeholder')}
               prefix="/"
               suffix={flags ? `/${flags}` : ''}
               style={{ marginTop: 8, fontFamily: 'JetBrains Mono, monospace' }}
@@ -126,19 +128,19 @@ const RegexTester: React.FC = () => {
           </div>
 
           <div>
-            <Text strong>标志位</Text>
+            <Text strong>{t('tools.regexTester.flags.label')}</Text>
             <div className="flags-section">
               <Checkbox checked={flags.includes('g')} onChange={() => toggleFlag('g')}>
-                <Text code>g</Text> - 全局匹配
+                <Text code>g</Text> - {t('tools.regexTester.flags.g')}
               </Checkbox>
               <Checkbox checked={flags.includes('i')} onChange={() => toggleFlag('i')}>
-                <Text code>i</Text> - 忽略大小写
+                <Text code>i</Text> - {t('tools.regexTester.flags.i')}
               </Checkbox>
               <Checkbox checked={flags.includes('m')} onChange={() => toggleFlag('m')}>
-                <Text code>m</Text> - 多行模式
+                <Text code>m</Text> - {t('tools.regexTester.flags.m')}
               </Checkbox>
               <Checkbox checked={flags.includes('s')} onChange={() => toggleFlag('s')}>
-                <Text code>s</Text> - 点号匹配换行符
+                <Text code>s</Text> - {t('tools.regexTester.flags.s')}
               </Checkbox>
             </div>
           </div>
@@ -146,11 +148,11 @@ const RegexTester: React.FC = () => {
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <div>
-                <Text strong>测试文本</Text>
+                <Text strong>{t('tools.regexTester.testString.label')}</Text>
                 <TextArea
                   value={testString}
                   onChange={(e) => setTestString(e.target.value)}
-                  placeholder="输入要测试的文本"
+                  placeholder={t('tools.regexTester.testString.placeholder')}
                   rows={10}
                   style={{ marginTop: 8 }}
                 />
@@ -159,15 +161,15 @@ const RegexTester: React.FC = () => {
 
             <Col xs={24} md={12}>
               <div>
-                <Text strong>匹配结果 ({matches.length})</Text>
+                <Text strong>{t('tools.regexTester.matches.title', { count: matches.length })}</Text>
                 {matches.length > 0 ? (
                   <div className="matches-list">
                     {matches.map(({ index, match, start, end }) => (
                       <div key={index} className="match-item">
                         <div className="match-header">
                           <CheckCircleOutlined style={{ color: '#10b981' }} />
-                          <Text strong>匹配 {index + 1}</Text>
-                          <Text type="secondary">位置: {start} - {end}</Text>
+                          <Text strong>{t('tools.regexTester.matches.match', { index: index + 1 })}</Text>
+                          <Text type="secondary">{t('tools.regexTester.matches.position', { start, end })}</Text>
                         </div>
                         <div className="match-content">
                           <Text code>{match}</Text>
@@ -177,7 +179,7 @@ const RegexTester: React.FC = () => {
                   </div>
                 ) : (
                   <div className="no-matches">
-                    {pattern ? '无匹配结果' : '请输入正则表达式'}
+                    {pattern ? t('tools.regexTester.matches.empty') : t('tools.regexTester.matches.emptyPattern')}
                   </div>
                 )}
               </div>
@@ -186,7 +188,7 @@ const RegexTester: React.FC = () => {
 
           {matches.length > 0 && (
             <div>
-              <Text strong>高亮预览</Text>
+              <Text strong>{t('tools.regexTester.highlight')}</Text>
               <div
                 className="highlight-preview"
                 dangerouslySetInnerHTML={{ __html: highlightedText }}
@@ -197,26 +199,26 @@ const RegexTester: React.FC = () => {
       </Card>
 
       <Card className="info-card" bordered={false}>
-        <Title level={4}>常用正则表达式</Title>
+        <Title level={4}>{t('tools.regexTester.info.common.title')}</Title>
         <ul>
-          <li><Text code>\d</Text> - 匹配数字</li>
-          <li><Text code>\w</Text> - 匹配字母、数字、下划线</li>
-          <li><Text code>\s</Text> - 匹配空白字符</li>
-          <li><Text code>.</Text> - 匹配任意字符（除换行符）</li>
-          <li><Text code>*</Text> - 匹配 0 次或多次</li>
-          <li><Text code>+</Text> - 匹配 1 次或多次</li>
-          <li><Text code>?</Text> - 匹配 0 次或 1 次</li>
-          <li><Text code>[abc]</Text> - 匹配 a、b 或 c</li>
-          <li><Text code>(abc|def)</Text> - 匹配 abc 或 def</li>
+          <li><Text code>\d</Text> - {t('tools.regexTester.info.common.list.digit')}</li>
+          <li><Text code>\w</Text> - {t('tools.regexTester.info.common.list.word')}</li>
+          <li><Text code>\s</Text> - {t('tools.regexTester.info.common.list.space')}</li>
+          <li><Text code>.</Text> - {t('tools.regexTester.info.common.list.any')}</li>
+          <li><Text code>*</Text> - {t('tools.regexTester.info.common.list.zeroOrMore')}</li>
+          <li><Text code>+</Text> - {t('tools.regexTester.info.common.list.oneOrMore')}</li>
+          <li><Text code>?</Text> - {t('tools.regexTester.info.common.list.zeroOrOne')}</li>
+          <li><Text code>[abc]</Text> - {t('tools.regexTester.info.common.list.range')}</li>
+          <li><Text code>(abc|def)</Text> - {t('tools.regexTester.info.common.list.group')}</li>
         </ul>
         <Title level={4} style={{ marginTop: 16 }}>
-          实用示例
+          {t('tools.regexTester.info.examples.title')}
         </Title>
         <ul>
-          <li>邮箱: <Text code>{`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$`}</Text></li>
-          <li>手机号: <Text code>{`^1[3-9]\\d{9}$`}</Text></li>
-          <li>IP地址: <Text code>{`^(\\d{1,3}\\.){3}\\d{1,3}$`}</Text></li>
-          <li>URL: <Text code>{`^https?://[^\\s]+$`}</Text></li>
+          <li>{t('tools.regexTester.info.examples.list.email')}: <Text code>{`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$`}</Text></li>
+          <li>{t('tools.regexTester.info.examples.list.phone')}: <Text code>{`^1[3-9]\\d{9}$`}</Text></li>
+          <li>{t('tools.regexTester.info.examples.list.ip')}: <Text code>{`^(\\d{1,3}\\.){3}\\d{1,3}$`}</Text></li>
+          <li>{t('tools.regexTester.info.examples.list.url')}: <Text code>{`^https?://[^\\s]+$`}</Text></li>
         </ul>
       </Card>
     </div>

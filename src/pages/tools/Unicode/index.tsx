@@ -4,12 +4,14 @@
 import React, { useState, useMemo } from 'react';
 import { Card, Row, Col, Typography, Input, Button, message, Space, Tabs } from 'antd';
 import { CopyOutlined, SwapOutlined, ClearOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import './index.less';
 
 const { Title, Text } = Typography;
 const { TextArea } = Input;
 
 const Unicode: React.FC = () => {
+  const { t } = useTranslation();
   const [input, setInput] = useState('');
   const [mode, setMode] = useState<'encode' | 'decode'>('encode');
 
@@ -34,19 +36,19 @@ const Unicode: React.FC = () => {
         return String.fromCodePoint(code);
       });
     } catch {
-      return '解码失败：无效的 Unicode 格式';
+      return t('tools.unicode.messages.decodeError');
     }
-  }, [input]);
+  }, [input, t]);
 
   const output = mode === 'encode' ? encoded : decoded;
 
   const handleCopy = () => {
     if (!output) {
-      message.warning('没有可复制的内容');
+      message.warning(t('tools.unicode.messages.copyEmpty'));
       return;
     }
     navigator.clipboard.writeText(output);
-    message.success('已复制到剪贴板');
+    message.success(t('tools.unicode.messages.copySuccess'));
   };
 
   const handleClear = () => {
@@ -60,8 +62,8 @@ const Unicode: React.FC = () => {
 
   return (
     <div className="unicode-tool">
-      <Title level={2}>Unicode 转换</Title>
-      <Text type="secondary">中文和 Unicode 编码互相转换</Text>
+      <Title level={2}>{t('tools.unicode.title')}</Title>
+      <Text type="secondary">{t('tools.unicode.description')}</Text>
 
       <Card className="tool-card" bordered={false}>
         <Tabs
@@ -70,11 +72,11 @@ const Unicode: React.FC = () => {
           items={[
             {
               key: 'encode',
-              label: '编码（中文 → Unicode）',
+              label: t('tools.unicode.tabs.encode'),
             },
             {
               key: 'decode',
-              label: '解码（Unicode → 中文）',
+              label: t('tools.unicode.tabs.decode'),
             },
           ]}
         />
@@ -83,9 +85,9 @@ const Unicode: React.FC = () => {
           <Col xs={24} md={12}>
             <div className="input-section">
               <div className="section-header">
-                <Text strong>输入内容</Text>
+                <Text strong>{t('tools.unicode.input')}</Text>
                 <Button size="small" icon={<ClearOutlined />} onClick={handleClear}>
-                  清空
+                  {t('common.clear')}
                 </Button>
               </div>
               <TextArea
@@ -93,8 +95,8 @@ const Unicode: React.FC = () => {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder={
                   mode === 'encode'
-                    ? '请输入要编码的中文或文本'
-                    : '请输入 Unicode 编码，如：\\u4f60\\u597d'
+                    ? t('tools.unicode.placeholders.encode')
+                    : t('tools.unicode.placeholders.decode')
                 }
                 rows={10}
                 allowClear
@@ -105,20 +107,20 @@ const Unicode: React.FC = () => {
           <Col xs={24} md={12}>
             <div className="output-section">
               <div className="section-header">
-                <Text strong>转换结果</Text>
+                <Text strong>{t('tools.unicode.result')}</Text>
                 <Space>
                   <Button size="small" icon={<SwapOutlined />} onClick={handleSwap}>
-                    交换
+                    {t('common.swap')}
                   </Button>
                   <Button size="small" icon={<CopyOutlined />} onClick={handleCopy}>
-                    复制
+                    {t('common.copy')}
                   </Button>
                 </Space>
               </div>
               <TextArea
                 value={output}
                 readOnly
-                placeholder={mode === 'encode' ? 'Unicode 编码结果' : '解码结果'}
+                placeholder={mode === 'encode' ? t('tools.unicode.placeholders.encodeResult') : t('tools.unicode.placeholders.decodeResult')}
                 rows={10}
                 className="unicode-output"
               />
@@ -128,7 +130,7 @@ const Unicode: React.FC = () => {
 
         {input && mode === 'encode' && (
           <div className="char-info">
-            <Text strong>字符分析：</Text>
+            <Text strong>{t('tools.unicode.analysis')}</Text>
             {input.split('').map((char, index) => (
               <span key={index} className="char-item">
                 "{char}" = \\u{(char.codePointAt(0) || 0).toString(16).padStart(4, '0')} (十进制: {char.codePointAt(0) || 0})
@@ -139,13 +141,12 @@ const Unicode: React.FC = () => {
       </Card>
 
       <Card className="info-card" bordered={false}>
-        <Title level={4}>什么是 Unicode？</Title>
+        <Title level={4}>{t('tools.unicode.info.what.title')}</Title>
         <Text>
-          Unicode 是一种字符编码标准，为世界上的每种语言中的每个字符都设定了统一并且唯一的二进制编码。
-          Unicode 编码通常使用 \u 开头，后跟 4 位十六进制数。
+          {t('tools.unicode.info.what.content')}
         </Text>
         <Title level={4} style={{ marginTop: 16 }}>
-          编码示例
+          {t('tools.unicode.info.examples.title')}
         </Title>
         <ul>
           <li>"你" → \u4f60</li>
@@ -154,14 +155,14 @@ const Unicode: React.FC = () => {
           <li>"😊" → \ud83d\ude0a</li>
         </ul>
         <Title level={4} style={{ marginTop: 16 }}>
-          使用场景
+          {t('tools.unicode.info.usage.title')}
         </Title>
         <ul>
-          <li>JavaScript 字符串中显示中文</li>
-          <li>处理包含中文的配置文件</li>
-          <li>调试编码问题</li>
-          <li>数据传输和存储</li>
-          <li>防止乱码</li>
+          <li>{t('tools.unicode.info.usage.list.0')}</li>
+          <li>{t('tools.unicode.info.usage.list.1')}</li>
+          <li>{t('tools.unicode.info.usage.list.2')}</li>
+          <li>{t('tools.unicode.info.usage.list.3')}</li>
+          <li>{t('tools.unicode.info.usage.list.4')}</li>
         </ul>
       </Card>
     </div>
