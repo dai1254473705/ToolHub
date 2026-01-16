@@ -2,7 +2,7 @@
  * 正则表达式测试器
  */
 import React, { useState, useMemo, useEffect } from 'react';
-import { Card, Row, Col, Typography, Input, Checkbox, Space } from 'antd';
+import { Card, Row, Col, Typography, Input, Checkbox, Space, Button } from 'antd';
 import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import './index.less';
@@ -17,6 +17,13 @@ interface MatchResult {
   end: number;
 }
 
+interface RegexExample {
+  name: string;
+  pattern: string;
+  flags: string;
+  testString: string;
+}
+
 const RegexTester: React.FC = () => {
   const { t } = useTranslation();
   const [pattern, setPattern] = useState('');
@@ -24,6 +31,16 @@ const RegexTester: React.FC = () => {
   const [testString, setTestString] = useState('');
   const [error, setError] = useState('');
   const [matches, setMatches] = useState<MatchResult[]>([]);
+
+  const regexExamples: RegexExample[] = useMemo(() => {
+    const examples = t('tools.regexTester.info.examples.list', { returnObjects: true }) as Record<string, RegexExample>;
+    return Object.values(examples).map((value) => ({
+      name: value.name,
+      pattern: value.pattern,
+      flags: value.flags,
+      testString: value.testString,
+    }));
+  }, [t]);
 
   // 测试正则表达式
   useEffect(() => {
@@ -82,6 +99,13 @@ const RegexTester: React.FC = () => {
     } else {
       setFlags(flags + flag);
     }
+  };
+
+  // 应用示例
+  const applyExample = (example: RegexExample) => {
+    setPattern(example.pattern);
+    setFlags(example.flags);
+    setTestString(example.testString);
   };
 
   // 高亮显示匹配结果
@@ -153,8 +177,8 @@ const RegexTester: React.FC = () => {
                   value={testString}
                   onChange={(e) => setTestString(e.target.value)}
                   placeholder={t('tools.regexTester.testString.placeholder')}
-                  rows={10}
-                  style={{ marginTop: 8 }}
+                  rows={5}
+                  style={{ marginTop: 8, resize: 'vertical' }}
                 />
               </div>
             </Col>
@@ -211,15 +235,30 @@ const RegexTester: React.FC = () => {
           <li><Text code>[abc]</Text> - {t('tools.regexTester.info.common.list.range')}</li>
           <li><Text code>(abc|def)</Text> - {t('tools.regexTester.info.common.list.group')}</li>
         </ul>
-        <Title level={4} style={{ marginTop: 16 }}>
+        <Title level={4} style={{ marginTop: 24 }}>
           {t('tools.regexTester.info.examples.title')}
         </Title>
-        <ul>
-          <li>{t('tools.regexTester.info.examples.list.email')}: <Text code>{`^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$`}</Text></li>
-          <li>{t('tools.regexTester.info.examples.list.phone')}: <Text code>{`^1[3-9]\\d{9}$`}</Text></li>
-          <li>{t('tools.regexTester.info.examples.list.ip')}: <Text code>{`^(\\d{1,3}\\.){3}\\d{1,3}$`}</Text></li>
-          <li>{t('tools.regexTester.info.examples.list.url')}: <Text code>{`^https?://[^\\s]+$`}</Text></li>
-        </ul>
+        <div className="examples-grid">
+          {regexExamples.map((example, index) => (
+            <div key={index} className="example-item">
+              <div className="example-header">
+                <Text strong>{example.name}</Text>
+                <Button
+                  type="primary"
+                  size="small"
+                  onClick={() => applyExample(example)}
+                >
+                  {t('tools.regexTester.info.examples.apply')}
+                </Button>
+              </div>
+              <div className="example-content">
+                <Text code style={{ fontSize: '12px' }}>
+                  /{example.pattern}/{example.flags}
+                </Text>
+              </div>
+            </div>
+          ))}
+        </div>
       </Card>
     </div>
   );

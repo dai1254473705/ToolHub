@@ -127,5 +127,51 @@
         }
       }
     }
+
+    .examples-grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+
+      .example-item {
+        padding: 12px;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        transition: all 0.2s;
+
+        .dark & {
+          background: #1e293b;
+          border-color: #334155;
+        }
+
+        &:hover {
+          border-color: #3b82f6;
+          box-shadow: 0 2px 8px rgba(59, 130, 246, 0.1);
+        }
+
+        .example-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 8px;
+          gap: 12px;
+        }
+
+        .example-content {
+          display: flex;
+          align-items: center;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 12px;
+          word-break: break-all;
+          color: #64748b;
+
+          .dark & {
+            color: #94a3b8;
+          }
+        }
+      }
+    }
   }
 }

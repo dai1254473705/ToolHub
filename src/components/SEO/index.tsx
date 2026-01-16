@@ -24,18 +24,27 @@ const SEO: React.FC<SEOProps> = ({
   type = 'website',
   noindex = false,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const siteTitle = t('app.name');
   const siteDescription = t('app.description');
   const fullTitle = title ? `${title} - ${siteTitle}` : siteTitle;
   const finalDescription = description || siteDescription;
 
-  // 默认关键词
-  const defaultKeywords = '开发工具,在线工具,JSON工具,Base64,UUID,二维码,正则表达式,时间戳,颜色转换';
+  // 根据语言设置关键词和 locale
+  const currentLang = i18n.language;
+  const isZhCN = currentLang === 'zh-CN';
+  const defaultKeywords = isZhCN
+    ? '开发工具,在线工具,JSON工具,Base64,UUID,二维码,正则表达式,时间戳,颜色转换'
+    : 'developer tools,online tools,JSON editor,Base64,UUID,QR code,regex,timestamp,color converter';
   const finalKeywords = keywords || defaultKeywords;
+  const ogLocale = isZhCN ? 'zh_CN' : 'en_US';
+  const htmlLang = isZhCN ? 'zh-CN' : 'en';
 
   return (
     <Helmet>
+      {/* 设置 html lang 属性 */}
+      <html lang={htmlLang} />
+
       {/* 基础 Meta 标签 */}
       <title>{fullTitle}</title>
       <meta name="description" content={finalDescription} />
@@ -49,7 +58,7 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:description" content={finalDescription} />
       <meta property="og:image" content={image} />
       <meta property="og:site_name" content={siteTitle} />
-      <meta property="og:locale" content="zh_CN" />
+      <meta property="og:locale" content={ogLocale} />
 
       {/* Twitter */}
       <meta name="twitter:card" content="summary_large_image" />
